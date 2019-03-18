@@ -1,0 +1,27 @@
+{
+  "name": "haria_emulator",
+  "version": "1.0.0",
+  "description": "Haria Home Interface Emulator",
+  "main": "app/main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "Haria",
+    "Emulator"
+  ],
+  "author": "Kelvys B.",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.26.3",
+    "electron": "^4.1.0",
+    "gulp": "^4.0.0",
+    "gulp-exec": "^3.0.2",
+    "gulp-sass": "^4.0.2",
+    "node-sass": "^4.11.0"
+  },
+  "dependencies": {
+    "electron-reload": "^1.4.0",
+    "gulp-livereload": "^4.0.1"
+  }
+}
