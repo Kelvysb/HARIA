@@ -1,0 +1,21 @@
+{
+  "name": "haria",
+  "version": "1.0.0",
+  "description": "HARIA",
+  "main": "app/main.js",
+  "scripts": {
+    "start": "electron app/main.js"
+  },
+  "author": "Kelvys B.",
+  "license": "GNU",
+  "dependencies": {
+    "benja": "latest"
+  },
+  "devDependencies": {
+    "electron": "latest",
+    "gulp": "^4.0.0",
+    "gulp-sass": "^4.0.2",
+    "node-sass": "^4.11.0",
+    "tiny-cdn": "latest"
+  }
+}
