@@ -11,7 +11,7 @@
     "Emulator"
   ],
   "author": "Kelvys B.",
-  "license": "ISC",
+  "license": "GNU",
   "devDependencies": {
     "browser-sync": "^2.26.3",
     "electron": "3.0.13",

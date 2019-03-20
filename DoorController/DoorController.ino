@@ -1,6 +1,8 @@
 #include <Wiegand.h>
 #include <EEPROM.h>
 
+#define DEVICE_ID "1"
+#define DEVICE_NAME "DOORCTRL"
 #define LEDVERDE_PIN A0
 #define LEDVERMELHO_PIN A1
 #define BTN_SET 8
@@ -16,6 +18,7 @@ WIEGAND wg;
 int trava, posicao, menu, ultok, doorFlag;
 long token_atual, ultimotoken;
 String serialInput;
+
 
 void setup() {
   Serial.begin(9600);  
@@ -73,6 +76,9 @@ void loop() {
     }
     if(serialInput.startsWith("STA")){
       sbStatus();
+    }
+     if(serialInput.startsWith("ACK")){
+      sbAck();
     }
   }
   
@@ -299,6 +305,13 @@ void sbLer(){
     
   token_atual = EEPROMReadlong(endereco);
   
+}
+
+void sbAck(){
+  String response = DEVICE_NAME;
+  response.concat("-");
+  response.concat(DEVICE_ID);
+  Serial.println(response);
 }
 
 

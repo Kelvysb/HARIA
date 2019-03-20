@@ -1,7 +1,22 @@
+
+#Set Code at position
 SET {POS(00)} {CODE}
+
+#Open Door
 OPN
+
+#Lock Door (Deactivate Card Reading)
 LOK
+
+#Unlock Door (Activate Card Reading)
 ULK
+
+#List all registered Cards
 LST
+
+#Check Status
 STA
+
+#Verify device (Return DOORCRTL-{Id})
+ACK
  
