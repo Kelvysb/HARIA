@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HARIA.Domain", "HARIA.Domain\HARIA.Domain.csproj", "{EABDCC6B-F24B-42F2-A7FD-77EE1A0D2B92}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HARIA.Front", "HARIA.Front\HARIA.Front.csproj", "{97DB0CBC-F272-417A-81A0-5B3F937C27AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HARIA.Back", "HARIA.Back\HARIA.Back.csproj", "{87662CCB-6632-42EE-9D99-797C9B48E962}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HARIA.API", "HARIA.API\HARIA.API.csproj", "{6ABFA0F5-3A0D-4B6E-B89E-1B9B7432A972}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HARIA.Tests", "HARIA.Tests\HARIA.Tests.csproj", "{E7DF3FFD-A053-43C0-A16D-C8DD699A4AD4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HARIA.CLI", "HARIA.CLI\HARIA.CLI.csproj", "{0F820D03-E3ED-4B6B-8903-7D7891852F7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HARIA.Emulator", "HARIA.Emulator\HARIA.Emulator.csproj", "{038C7D67-6E1B-4E47-877C-B7B67445ABED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EABDCC6B-F24B-42F2-A7FD-77EE1A0D2B92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EABDCC6B-F24B-42F2-A7FD-77EE1A0D2B92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EABDCC6B-F24B-42F2-A7FD-77EE1A0D2B92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EABDCC6B-F24B-42F2-A7FD-77EE1A0D2B92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97DB0CBC-F272-417A-81A0-5B3F937C27AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97DB0CBC-F272-417A-81A0-5B3F937C27AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97DB0CBC-F272-417A-81A0-5B3F937C27AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97DB0CBC-F272-417A-81A0-5B3F937C27AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87662CCB-6632-42EE-9D99-797C9B48E962}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87662CCB-6632-42EE-9D99-797C9B48E962}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87662CCB-6632-42EE-9D99-797C9B48E962}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87662CCB-6632-42EE-9D99-797C9B48E962}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6ABFA0F5-3A0D-4B6E-B89E-1B9B7432A972}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ABFA0F5-3A0D-4B6E-B89E-1B9B7432A972}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ABFA0F5-3A0D-4B6E-B89E-1B9B7432A972}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ABFA0F5-3A0D-4B6E-B89E-1B9B7432A972}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7DF3FFD-A053-43C0-A16D-C8DD699A4AD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7DF3FFD-A053-43C0-A16D-C8DD699A4AD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7DF3FFD-A053-43C0-A16D-C8DD699A4AD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7DF3FFD-A053-43C0-A16D-C8DD699A4AD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F820D03-E3ED-4B6B-8903-7D7891852F7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F820D03-E3ED-4B6B-8903-7D7891852F7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F820D03-E3ED-4B6B-8903-7D7891852F7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F820D03-E3ED-4B6B-8903-7D7891852F7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{038C7D67-6E1B-4E47-877C-B7B67445ABED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{038C7D67-6E1B-4E47-877C-B7B67445ABED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{038C7D67-6E1B-4E47-877C-B7B67445ABED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{038C7D67-6E1B-4E47-877C-B7B67445ABED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E7016579-FE3A-4C01-9218-343BA973CE03}
+	EndGlobalSection
+EndGlobal
