@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HARIA.CLI", "HARIA.CLI\HARI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HARIA.Emulator", "HARIA.Emulator\HARIA.Emulator.csproj", "{038C7D67-6E1B-4E47-877C-B7B67445ABED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HARIA.Service", "HARIA.Service\HARIA.Service.csproj", "{CC80EE12-35BE-4B06-80A0-5A4AAB0917A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{038C7D67-6E1B-4E47-877C-B7B67445ABED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{038C7D67-6E1B-4E47-877C-B7B67445ABED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{038C7D67-6E1B-4E47-877C-B7B67445ABED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC80EE12-35BE-4B06-80A0-5A4AAB0917A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC80EE12-35BE-4B06-80A0-5A4AAB0917A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC80EE12-35BE-4B06-80A0-5A4AAB0917A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC80EE12-35BE-4B06-80A0-5A4AAB0917A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
