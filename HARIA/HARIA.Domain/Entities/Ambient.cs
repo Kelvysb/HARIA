@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using HARIA.Domain.Abstractions.Entities;
 
 namespace HARIA.Domain.Entities
 {
-    public class Ambient
+    public class Ambient : IEntity
     {
         public int Id { get; set; }
 

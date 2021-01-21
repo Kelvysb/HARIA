@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using HARIA.Domain.Abstractions.Entities;
 using HARIA.Domain.Enums;
 
 namespace HARIA.Domain.Entities
 {
-    public class Action
+    public class Action : IEntity
     {
         public int Id { get; set; }
 

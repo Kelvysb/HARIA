@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using HARIA.Domain.Abstractions.Entities;
 
 namespace HARIA.Domain.Entities
 {
-    public class ExternalSensor
+    public class ExternalSensor : IEntity
     {
         public int Id { get; set; }
 
@@ -17,5 +19,7 @@ namespace HARIA.Domain.Entities
         public string Script { get; set; }
 
         public DateTime LastStateChange { get; set; }
+
+        public List<Action> Actions { get; set; }
     }
 }

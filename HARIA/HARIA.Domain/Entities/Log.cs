@@ -1,8 +1,9 @@
 ﻿using System;
+using HARIA.Domain.Abstractions.Entities;
 
 namespace HARIA.Domain.Entities
 {
-    public class Log
+    public class Log : IEntity
     {
         public int Id { get; set; }
 

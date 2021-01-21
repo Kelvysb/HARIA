@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using HARIA.Domain.Abstractions.Entities;
 
 namespace HARIA.Domain.Entities
 {
-    public class Actuator
+    public class Actuator : IEntity
     {
         public int Id { get; set; }
 
         public int DeviceId { get; set; }
+
+        public int AmbientId { get; set; }
 
         public string Code { get; set; }
 
@@ -21,5 +25,7 @@ namespace HARIA.Domain.Entities
         public DateTime DeactivationTime { get; set; }
 
         public DateTime LastStateChange { get; set; }
+
+        public List<Action> Actions { get; set; }
     }
 }

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using HARIA.Domain.Abstractions.Entities;
 
 namespace HARIA.Domain.Entities
 {
-    public class Device
+    public class Device : IEntity
     {
         public int Id { get; set; }
 

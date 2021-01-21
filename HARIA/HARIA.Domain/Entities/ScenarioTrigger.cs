@@ -1,9 +1,10 @@
 ﻿using System;
+using HARIA.Domain.Abstractions.Entities;
 using HARIA.Domain.Enums;
 
 namespace HARIA.Domain.Entities
 {
-    public class ScenarioTrigger
+    public class ScenarioTrigger : IEntity
     {
         public int Id { get; set; }
 
