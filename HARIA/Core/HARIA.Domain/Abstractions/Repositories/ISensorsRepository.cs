@@ -2,7 +2,7 @@
 
 namespace HARIA.Domain.Abstractions.Repositories
 {
-    public interface ISensorsRepository : IRepositoryBase<Sensor>
+    public interface ISensorsRepository : IRepositoryBase<SensorEntity>
     {
     }
 }

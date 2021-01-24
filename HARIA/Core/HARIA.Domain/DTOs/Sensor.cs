@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using HARIA.Domain.Abstractions.Entities;
+using HARIA.Domain.Abstractions.DTOs;
 
-namespace HARIA.Domain.Entities
+namespace HARIA.Domain.DTOs
 {
-    public class Sensor : IEntity
+    public class Sensor : IDTO
     {
         public int Id { get; set; }
 
@@ -25,9 +24,5 @@ namespace HARIA.Domain.Entities
         public bool Active { get; set; }
 
         public DateTime LastStateChange { get; set; }
-
-        public List<Action> Actions { get; set; }
-
-        public List<ScenarioTrigger> ScenarioTriggers { get; set; }
     }
 }

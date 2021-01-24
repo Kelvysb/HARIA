@@ -24,109 +24,109 @@ namespace HARIA.DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Device>()
+            modelBuilder.Entity<DeviceEntity>()
                 .ToTable("Devices")
                 .HasKey(t => t.Id);
 
-            modelBuilder.Entity<Device>()
+            modelBuilder.Entity<DeviceEntity>()
                 .HasMany(t => t.Sensors);
 
-            modelBuilder.Entity<Device>()
+            modelBuilder.Entity<DeviceEntity>()
                 .HasMany(t => t.Actuators);
 
-            modelBuilder.Entity<Sensor>()
+            modelBuilder.Entity<SensorEntity>()
                 .ToTable("Sensors")
                 .HasKey(t => t.Id);
 
-            modelBuilder.Entity<Actuator>()
+            modelBuilder.Entity<ActuatorEntity>()
                 .ToTable("Actuators")
                 .HasKey(t => t.Id);
 
-            modelBuilder.Entity<Ambient>()
+            modelBuilder.Entity<AmbientEntity>()
                 .ToTable("Ambients")
                 .HasKey(t => t.Id);
 
-            modelBuilder.Entity<Ambient>()
+            modelBuilder.Entity<AmbientEntity>()
                 .HasMany(t => t.Actuators);
 
-            modelBuilder.Entity<Ambient>()
+            modelBuilder.Entity<AmbientEntity>()
                 .HasMany(t => t.Sensors);
 
-            modelBuilder.Entity<ExternalSensor>()
+            modelBuilder.Entity<ExternalSensorEntity>()
                 .ToTable("ExternalSensors")
                 .HasKey(t => t.Id);
 
-            modelBuilder.Entity<ExternalActuator>()
+            modelBuilder.Entity<ExternalActuatorEntity>()
                 .ToTable("ExternalActuators")
                 .HasKey(t => t.Id);
 
-            modelBuilder.Entity<Action>()
-                .ToTable("Actions")
+            modelBuilder.Entity<ActionEventEntity>()
+                .ToTable("ActionEvents")
                 .HasKey(t => t.Id);
 
-            modelBuilder.Entity<Action>()
+            modelBuilder.Entity<ActionEventEntity>()
                 .HasMany(t => t.Sensors)
                 .WithMany(t => t.Actions)
-                .UsingEntity(r => r.ToTable("ActionsSensors"));
+                .UsingEntity(r => r.ToTable("ActionEventsSensors"));
 
-            modelBuilder.Entity<Action>()
+            modelBuilder.Entity<ActionEventEntity>()
                 .HasMany(t => t.Actuators)
                 .WithMany(t => t.Actions)
-                .UsingEntity(r => r.ToTable("ActionsActuators"));
+                .UsingEntity(r => r.ToTable("ActionEventsActuators"));
 
-            modelBuilder.Entity<Action>()
+            modelBuilder.Entity<ActionEventEntity>()
                 .HasMany(t => t.ExternalSensors)
                 .WithMany(t => t.Actions)
-                .UsingEntity(r => r.ToTable("ActionsExternalSensors"));
+                .UsingEntity(r => r.ToTable("ActionEventsExternalSensors"));
 
-            modelBuilder.Entity<Action>()
+            modelBuilder.Entity<ActionEventEntity>()
                 .HasMany(t => t.ExternalActuators)
                 .WithMany(t => t.Actions)
-                .UsingEntity(r => r.ToTable("ActionsExternalActuators"));
+                .UsingEntity(r => r.ToTable("ActionEventsExternalActuators"));
 
-            modelBuilder.Entity<Action>()
+            modelBuilder.Entity<ActionEventEntity>()
                 .HasMany(t => t.ActionPeriods);
 
-            modelBuilder.Entity<ActionPeriod>()
-                .ToTable("ActionPeriods")
+            modelBuilder.Entity<ActionEventPeriodEntity>()
+                .ToTable("ActionEventPeriods")
                 .HasKey(t => t.Id);
 
-            modelBuilder.Entity<Scenario>()
+            modelBuilder.Entity<ScenarioEntity>()
                 .ToTable("Scenarios")
                 .HasKey(t => t.Id);
 
-            modelBuilder.Entity<Scenario>()
+            modelBuilder.Entity<ScenarioEntity>()
                 .HasMany(t => t.Actions)
                 .WithMany(t => t.Scenarios)
-                .UsingEntity(r => r.ToTable("ScenarioActions"));
+                .UsingEntity(r => r.ToTable("ScenarioActionEvents"));
 
-            modelBuilder.Entity<Scenario>()
+            modelBuilder.Entity<ScenarioEntity>()
                 .HasMany(t => t.Triggers);
 
-            modelBuilder.Entity<ScenarioTrigger>()
+            modelBuilder.Entity<ScenarioTriggerEntity>()
                 .ToTable("ScenarioTriggers")
                 .HasKey(t => t.Id);
 
-            modelBuilder.Entity<ScenarioTrigger>()
+            modelBuilder.Entity<ScenarioTriggerEntity>()
                 .HasMany(t => t.Sensors)
                 .WithMany(t => t.ScenarioTriggers)
                 .UsingEntity(r => r.ToTable("ScenarioTriggersSensors"));
 
-            modelBuilder.Entity<ScenarioTrigger>()
+            modelBuilder.Entity<ScenarioTriggerEntity>()
                 .HasMany(t => t.ExternalSensors)
                 .WithMany(t => t.ScenarioTriggers)
                 .UsingEntity(r => r.ToTable("ScenarioTriggersExternalSensors"));
 
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<UserEntity>()
                 .ToTable("Users")
                 .HasKey(t => t.Id);
 
-            modelBuilder.Entity<Log>()
+            modelBuilder.Entity<LogEntity>()
                 .ToTable("Logs")
                 .HasKey(t => t.Id);
 
-            modelBuilder.Entity<User>()
-                .HasData(new User() { Id = 1, Name = "admin", PasswordHash = AuthHelper.GetMd5Hash("admin") });
+            modelBuilder.Entity<UserEntity>()
+                .HasData(new UserEntity() { Id = 1, Name = "admin", PasswordHash = AuthHelper.GetMd5Hash("admin") });
 
             base.OnModelCreating(modelBuilder);
         }

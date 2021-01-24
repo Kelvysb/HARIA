@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HARIA.Back\HARIA.DataAccess.csproj" />
+    <ProjectReference Include="..\HARIA.DataAccess\HARIA.DataAccess.csproj" />
     <ProjectReference Include="..\HARIA.Domain\HARIA.Domain.csproj" />
     <ProjectReference Include="..\HARIA.Services\HARIA.Services.csproj" />
   </ItemGroup>

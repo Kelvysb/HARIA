@@ -2,7 +2,7 @@
 
 namespace HARIA.Domain.Entities
 {
-    public class User : IEntity
+    public class UserEntity : IEntity
     {
         public int Id { get; set; }
 

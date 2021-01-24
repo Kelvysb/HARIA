@@ -2,7 +2,7 @@
 
 namespace HARIA.Domain.Abstractions.Repositories
 {
-    public interface IScenariosRepository : IRepositoryBase<Scenario>
+    public interface IScenariosRepository : IRepositoryBase<ScenarioEntity>
     {
     }
 }

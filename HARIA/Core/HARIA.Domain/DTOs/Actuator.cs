@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using HARIA.Domain.Abstractions.Entities;
+using HARIA.Domain.Abstractions.DTOs;
 
-namespace HARIA.Domain.Entities
+namespace HARIA.Domain.DTOs
 {
-    public class Actuator : IEntity
+    public class Actuator : IDTO
     {
         public int Id { get; set; }
 
@@ -25,7 +24,5 @@ namespace HARIA.Domain.Entities
         public DateTime DeactivationTime { get; set; }
 
         public DateTime LastStateChange { get; set; }
-
-        public List<Action> Actions { get; set; }
     }
 }

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using HARIA.Domain.Abstractions.Entities;
+using HARIA.Domain.Abstractions.DTOs;
 using HARIA.Domain.Enums;
 
-namespace HARIA.Domain.Entities
+namespace HARIA.Domain.DTOs
 {
-    public class Action : IEntity
+    public class ActionEvent : IDTO
     {
         public int Id { get; set; }
 
@@ -18,7 +18,7 @@ namespace HARIA.Domain.Entities
 
         public bool StaticState { get; set; }
 
-        public List<ActionPeriod> ActionPeriods { get; set; }
+        public List<ActionEventPeriod> ActionPeriods { get; set; }
 
         public List<Actuator> Actuators { get; set; }
 

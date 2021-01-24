@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using HARIA.Domain.Abstractions.DTOs;
 using HARIA.Domain.Abstractions.Entities;
 using HARIA.Domain.Abstractions.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -9,21 +10,23 @@ namespace HARIA.API.Controllers
     //[Authorize]
     [Produces("application/json")]
     [Route("/[controller]")]
-    public abstract class ControllerBase<TEntity> : Controller where TEntity : class, IEntity, new()
+    public abstract class ControllerBase<TEntity, TDTO> : Controller
+        where TEntity : class, IEntity, new()
+        where TDTO : class, IDTO, new()
     {
-        protected IServiceBase<TEntity> service;
+        protected IServiceBase<TEntity, TDTO> service;
 
-        protected ControllerBase(IServiceBase<TEntity> service)
+        protected ControllerBase(IServiceBase<TEntity, TDTO> service)
         {
             this.service = service;
         }
 
         [HttpPost]
-        public virtual async Task<IActionResult> Add(TEntity entity)
+        public virtual async Task<IActionResult> Add(TDTO dto)
         {
             try
             {
-                var result = await service.Add(entity);
+                var result = await service.Add(dto);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -75,11 +78,11 @@ namespace HARIA.API.Controllers
         }
 
         [HttpPut]
-        public virtual async Task<IActionResult> Update(TEntity entity)
+        public virtual async Task<IActionResult> Update(TDTO dto)
         {
             try
             {
-                var result = await service.Update(entity);
+                var result = await service.Update(dto);
                 return Ok(result);
             }
             catch (Exception ex)

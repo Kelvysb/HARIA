@@ -1,8 +1,9 @@
-﻿using HARIA.Domain.Entities;
+﻿using HARIA.Domain.DTOs;
+using HARIA.Domain.Entities;
 
 namespace HARIA.Domain.Abstractions.Services
 {
-    public interface IExternalSensorsService : IServiceBase<ExternalSensor>
+    public interface IExternalSensorsService : IServiceBase<ExternalSensorEntity, ExternalSensor>
     {
     }
 }

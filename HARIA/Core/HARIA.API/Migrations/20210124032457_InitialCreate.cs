@@ -8,7 +8,7 @@ namespace HARIA.API.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Actions",
+                name: "ActionEvents",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -21,7 +21,7 @@ namespace HARIA.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Actions", x => x.Id);
+                    table.PrimaryKey("PK_ActionEvents", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -134,24 +134,25 @@ namespace HARIA.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ActionPeriods",
+                name: "ActionEventPeriods",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     ActionId = table.Column<int>(type: "INTEGER", nullable: false),
                     InitialTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    FinalTime = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    FinalTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ActionEventEntityId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ActionPeriods", x => x.Id);
+                    table.PrimaryKey("PK_ActionEventPeriods", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ActionPeriods_Actions_ActionId",
-                        column: x => x.ActionId,
-                        principalTable: "Actions",
+                        name: "FK_ActionEventPeriods_ActionEvents_ActionEventEntityId",
+                        column: x => x.ActionEventEntityId,
+                        principalTable: "ActionEvents",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -168,23 +169,25 @@ namespace HARIA.API.Migrations
                     LockState = table.Column<bool>(type: "INTEGER", nullable: false),
                     DefaultActiveTime = table.Column<int>(type: "INTEGER", nullable: false),
                     DeactivationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    LastStateChange = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    LastStateChange = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    AmbientEntityId = table.Column<int>(type: "INTEGER", nullable: true),
+                    DeviceEntityId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Actuators", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Actuators_Ambients_AmbientId",
-                        column: x => x.AmbientId,
+                        name: "FK_Actuators_Ambients_AmbientEntityId",
+                        column: x => x.AmbientEntityId,
                         principalTable: "Ambients",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Actuators_Devices_DeviceId",
-                        column: x => x.DeviceId,
+                        name: "FK_Actuators_Devices_DeviceEntityId",
+                        column: x => x.DeviceEntityId,
                         principalTable: "Devices",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -201,27 +204,29 @@ namespace HARIA.API.Migrations
                     ActiveLowerBound = table.Column<int>(type: "INTEGER", nullable: false),
                     ActiveUpperBound = table.Column<int>(type: "INTEGER", nullable: false),
                     Active = table.Column<bool>(type: "INTEGER", nullable: false),
-                    LastStateChange = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    LastStateChange = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    AmbientEntityId = table.Column<int>(type: "INTEGER", nullable: true),
+                    DeviceEntityId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Sensors", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Sensors_Ambients_AmbientId",
-                        column: x => x.AmbientId,
+                        name: "FK_Sensors_Ambients_AmbientEntityId",
+                        column: x => x.AmbientEntityId,
                         principalTable: "Ambients",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Sensors_Devices_DeviceId",
-                        column: x => x.DeviceId,
+                        name: "FK_Sensors_Devices_DeviceEntityId",
+                        column: x => x.DeviceEntityId,
                         principalTable: "Devices",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ActionsExternalActuators",
+                name: "ActionEventsExternalActuators",
                 columns: table => new
                 {
                     ActionsId = table.Column<int>(type: "INTEGER", nullable: false),
@@ -229,15 +234,15 @@ namespace HARIA.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ActionsExternalActuators", x => new { x.ActionsId, x.ExternalActuatorsId });
+                    table.PrimaryKey("PK_ActionEventsExternalActuators", x => new { x.ActionsId, x.ExternalActuatorsId });
                     table.ForeignKey(
-                        name: "FK_ActionsExternalActuators_Actions_ActionsId",
+                        name: "FK_ActionEventsExternalActuators_ActionEvents_ActionsId",
                         column: x => x.ActionsId,
-                        principalTable: "Actions",
+                        principalTable: "ActionEvents",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ActionsExternalActuators_ExternalActuators_ExternalActuatorsId",
+                        name: "FK_ActionEventsExternalActuators_ExternalActuators_ExternalActuatorsId",
                         column: x => x.ExternalActuatorsId,
                         principalTable: "ExternalActuators",
                         principalColumn: "Id",
@@ -245,7 +250,7 @@ namespace HARIA.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ActionsExternalSensors",
+                name: "ActionEventsExternalSensors",
                 columns: table => new
                 {
                     ActionsId = table.Column<int>(type: "INTEGER", nullable: false),
@@ -253,15 +258,15 @@ namespace HARIA.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ActionsExternalSensors", x => new { x.ActionsId, x.ExternalSensorsId });
+                    table.PrimaryKey("PK_ActionEventsExternalSensors", x => new { x.ActionsId, x.ExternalSensorsId });
                     table.ForeignKey(
-                        name: "FK_ActionsExternalSensors_Actions_ActionsId",
+                        name: "FK_ActionEventsExternalSensors_ActionEvents_ActionsId",
                         column: x => x.ActionsId,
-                        principalTable: "Actions",
+                        principalTable: "ActionEvents",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ActionsExternalSensors_ExternalSensors_ExternalSensorsId",
+                        name: "FK_ActionEventsExternalSensors_ExternalSensors_ExternalSensorsId",
                         column: x => x.ExternalSensorsId,
                         principalTable: "ExternalSensors",
                         principalColumn: "Id",
@@ -269,7 +274,7 @@ namespace HARIA.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ScenarioActions",
+                name: "ScenarioActionEvents",
                 columns: table => new
                 {
                     ActionsId = table.Column<int>(type: "INTEGER", nullable: false),
@@ -277,15 +282,15 @@ namespace HARIA.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ScenarioActions", x => new { x.ActionsId, x.ScenariosId });
+                    table.PrimaryKey("PK_ScenarioActionEvents", x => new { x.ActionsId, x.ScenariosId });
                     table.ForeignKey(
-                        name: "FK_ScenarioActions_Actions_ActionsId",
+                        name: "FK_ScenarioActionEvents_ActionEvents_ActionsId",
                         column: x => x.ActionsId,
-                        principalTable: "Actions",
+                        principalTable: "ActionEvents",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ScenarioActions_Scenarios_ScenariosId",
+                        name: "FK_ScenarioActionEvents_Scenarios_ScenariosId",
                         column: x => x.ScenariosId,
                         principalTable: "Scenarios",
                         principalColumn: "Id",
@@ -302,21 +307,22 @@ namespace HARIA.API.Migrations
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     Type = table.Column<int>(type: "INTEGER", nullable: false),
                     InitialTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    FinalTime = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    FinalTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ScenarioEntityId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ScenarioTriggers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ScenarioTriggers_Scenarios_ScenarioId",
-                        column: x => x.ScenarioId,
+                        name: "FK_ScenarioTriggers_Scenarios_ScenarioEntityId",
+                        column: x => x.ScenarioEntityId,
                         principalTable: "Scenarios",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ActionsActuators",
+                name: "ActionEventsActuators",
                 columns: table => new
                 {
                     ActionsId = table.Column<int>(type: "INTEGER", nullable: false),
@@ -324,15 +330,15 @@ namespace HARIA.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ActionsActuators", x => new { x.ActionsId, x.ActuatorsId });
+                    table.PrimaryKey("PK_ActionEventsActuators", x => new { x.ActionsId, x.ActuatorsId });
                     table.ForeignKey(
-                        name: "FK_ActionsActuators_Actions_ActionsId",
+                        name: "FK_ActionEventsActuators_ActionEvents_ActionsId",
                         column: x => x.ActionsId,
-                        principalTable: "Actions",
+                        principalTable: "ActionEvents",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ActionsActuators_Actuators_ActuatorsId",
+                        name: "FK_ActionEventsActuators_Actuators_ActuatorsId",
                         column: x => x.ActuatorsId,
                         principalTable: "Actuators",
                         principalColumn: "Id",
@@ -340,7 +346,7 @@ namespace HARIA.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ActionsSensors",
+                name: "ActionEventsSensors",
                 columns: table => new
                 {
                     ActionsId = table.Column<int>(type: "INTEGER", nullable: false),
@@ -348,15 +354,15 @@ namespace HARIA.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ActionsSensors", x => new { x.ActionsId, x.SensorsId });
+                    table.PrimaryKey("PK_ActionEventsSensors", x => new { x.ActionsId, x.SensorsId });
                     table.ForeignKey(
-                        name: "FK_ActionsSensors_Actions_ActionsId",
+                        name: "FK_ActionEventsSensors_ActionEvents_ActionsId",
                         column: x => x.ActionsId,
-                        principalTable: "Actions",
+                        principalTable: "ActionEvents",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ActionsSensors_Sensors_SensorsId",
+                        name: "FK_ActionEventsSensors_Sensors_SensorsId",
                         column: x => x.SensorsId,
                         principalTable: "Sensors",
                         principalColumn: "Id",
@@ -417,49 +423,49 @@ namespace HARIA.API.Migrations
                 values: new object[] { 1, "admin", "21232f297a57a5a743894a0e4a801fc3" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ActionPeriods_ActionId",
-                table: "ActionPeriods",
-                column: "ActionId");
+                name: "IX_ActionEventPeriods_ActionEventEntityId",
+                table: "ActionEventPeriods",
+                column: "ActionEventEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ActionsActuators_ActuatorsId",
-                table: "ActionsActuators",
+                name: "IX_ActionEventsActuators_ActuatorsId",
+                table: "ActionEventsActuators",
                 column: "ActuatorsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ActionsExternalActuators_ExternalActuatorsId",
-                table: "ActionsExternalActuators",
+                name: "IX_ActionEventsExternalActuators_ExternalActuatorsId",
+                table: "ActionEventsExternalActuators",
                 column: "ExternalActuatorsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ActionsExternalSensors_ExternalSensorsId",
-                table: "ActionsExternalSensors",
+                name: "IX_ActionEventsExternalSensors_ExternalSensorsId",
+                table: "ActionEventsExternalSensors",
                 column: "ExternalSensorsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ActionsSensors_SensorsId",
-                table: "ActionsSensors",
+                name: "IX_ActionEventsSensors_SensorsId",
+                table: "ActionEventsSensors",
                 column: "SensorsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Actuators_AmbientId",
+                name: "IX_Actuators_AmbientEntityId",
                 table: "Actuators",
-                column: "AmbientId");
+                column: "AmbientEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Actuators_DeviceId",
+                name: "IX_Actuators_DeviceEntityId",
                 table: "Actuators",
-                column: "DeviceId");
+                column: "DeviceEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ScenarioActions_ScenariosId",
-                table: "ScenarioActions",
+                name: "IX_ScenarioActionEvents_ScenariosId",
+                table: "ScenarioActionEvents",
                 column: "ScenariosId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ScenarioTriggers_ScenarioId",
+                name: "IX_ScenarioTriggers_ScenarioEntityId",
                 table: "ScenarioTriggers",
-                column: "ScenarioId");
+                column: "ScenarioEntityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ScenarioTriggersExternalSensors_ScenarioTriggersId",
@@ -472,38 +478,38 @@ namespace HARIA.API.Migrations
                 column: "SensorsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sensors_AmbientId",
+                name: "IX_Sensors_AmbientEntityId",
                 table: "Sensors",
-                column: "AmbientId");
+                column: "AmbientEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sensors_DeviceId",
+                name: "IX_Sensors_DeviceEntityId",
                 table: "Sensors",
-                column: "DeviceId");
+                column: "DeviceEntityId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ActionPeriods");
+                name: "ActionEventPeriods");
 
             migrationBuilder.DropTable(
-                name: "ActionsActuators");
+                name: "ActionEventsActuators");
 
             migrationBuilder.DropTable(
-                name: "ActionsExternalActuators");
+                name: "ActionEventsExternalActuators");
 
             migrationBuilder.DropTable(
-                name: "ActionsExternalSensors");
+                name: "ActionEventsExternalSensors");
 
             migrationBuilder.DropTable(
-                name: "ActionsSensors");
+                name: "ActionEventsSensors");
 
             migrationBuilder.DropTable(
                 name: "Logs");
 
             migrationBuilder.DropTable(
-                name: "ScenarioActions");
+                name: "ScenarioActionEvents");
 
             migrationBuilder.DropTable(
                 name: "ScenarioTriggersExternalSensors");
@@ -521,7 +527,7 @@ namespace HARIA.API.Migrations
                 name: "ExternalActuators");
 
             migrationBuilder.DropTable(
-                name: "Actions");
+                name: "ActionEvents");
 
             migrationBuilder.DropTable(
                 name: "ExternalSensors");

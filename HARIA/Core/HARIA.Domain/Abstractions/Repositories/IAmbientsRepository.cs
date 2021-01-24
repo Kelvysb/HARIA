@@ -2,7 +2,7 @@
 
 namespace HARIA.Domain.Abstractions.Repositories
 {
-    public interface IAmbientsRepository : IRepositoryBase<Ambient>
+    public interface IAmbientsRepository : IRepositoryBase<AmbientEntity>
     {
     }
 }

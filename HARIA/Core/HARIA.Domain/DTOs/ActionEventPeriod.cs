@@ -1,9 +1,9 @@
 ﻿using System;
-using HARIA.Domain.Abstractions.Entities;
+using HARIA.Domain.Abstractions.DTOs;
 
-namespace HARIA.Domain.Entities
+namespace HARIA.Domain.DTOs
 {
-    public class ActionPeriod : IEntity
+    public class ActionEventPeriod : IDTO
     {
         public int Id { get; set; }
 

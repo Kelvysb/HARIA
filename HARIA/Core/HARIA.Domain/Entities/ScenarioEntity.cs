@@ -3,7 +3,7 @@ using HARIA.Domain.Abstractions.Entities;
 
 namespace HARIA.Domain.Entities
 {
-    public class Scenario : IEntity
+    public class ScenarioEntity : IEntity
     {
         public int Id { get; set; }
 
@@ -17,8 +17,8 @@ namespace HARIA.Domain.Entities
 
         public string Color { get; set; }
 
-        public List<Action> Actions { get; set; }
+        public List<ActionEventEntity> Actions { get; set; }
 
-        public List<ScenarioTrigger> Triggers { get; set; }
+        public List<ScenarioTriggerEntity> Triggers { get; set; }
     }
 }

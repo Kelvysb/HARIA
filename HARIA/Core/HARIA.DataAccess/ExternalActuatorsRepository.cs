@@ -3,7 +3,7 @@ using HARIA.Domain.Entities;
 
 namespace HARIA.DataAccess
 {
-    public class ExternalActuatorsRepository : RepositoryBase<ExternalActuator>, IExternalActuatorsRepository
+    public class ExternalActuatorsRepository : RepositoryBase<ExternalActuatorEntity>, IExternalActuatorsRepository
     {
         public ExternalActuatorsRepository(IContext context) : base(context)
         {

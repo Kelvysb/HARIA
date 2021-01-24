@@ -2,7 +2,7 @@
 
 namespace HARIA.Domain.Abstractions.Repositories
 {
-    public interface IActuatorsRepository : IRepositoryBase<Actuator>
+    public interface IActuatorsRepository : IRepositoryBase<ActuatorEntity>
     {
     }
 }

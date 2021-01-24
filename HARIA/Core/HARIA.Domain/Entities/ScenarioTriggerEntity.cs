@@ -5,7 +5,7 @@ using HARIA.Domain.Enums;
 
 namespace HARIA.Domain.Entities
 {
-    public class ScenarioTrigger : IEntity
+    public class ScenarioTriggerEntity : IEntity
     {
         public int Id { get; set; }
 
@@ -19,8 +19,8 @@ namespace HARIA.Domain.Entities
 
         public DateTime FinalTime { get; set; }
 
-        public List<ExternalSensor> ExternalSensors { get; set; }
+        public List<ExternalSensorEntity> ExternalSensors { get; set; }
 
-        public List<Sensor> Sensors { get; set; }
+        public List<SensorEntity> Sensors { get; set; }
     }
 }

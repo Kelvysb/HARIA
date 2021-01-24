@@ -2,7 +2,7 @@
 
 namespace HARIA.Domain.Abstractions.Repositories
 {
-    public interface IActionsRepository : IRepositoryBase<Action>
+    public interface IActionEventPeriodsRepository : IRepositoryBase<ActionEventPeriodEntity>
     {
     }
 }

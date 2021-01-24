@@ -1,8 +1,9 @@
-﻿using HARIA.Domain.Entities;
+﻿using HARIA.Domain.DTOs;
+using HARIA.Domain.Entities;
 
 namespace HARIA.Domain.Abstractions.Services
 {
-    public interface IUsersService : IServiceBase<User>
+    public interface IUsersService : IServiceBase<UserEntity, User>
     {
     }
 }

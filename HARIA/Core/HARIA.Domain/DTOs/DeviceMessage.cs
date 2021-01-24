@@ -1,4 +1,4 @@
-﻿namespace HARIA.Domain.DAO
+﻿namespace HARIA.Domain.DTOs
 {
     public class DeviceMessage
     {

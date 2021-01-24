@@ -3,7 +3,7 @@ using HARIA.Domain.Abstractions.Entities;
 
 namespace HARIA.Domain.Entities
 {
-    public class Log : IEntity
+    public class LogEntity : IEntity
     {
         public int Id { get; set; }
 

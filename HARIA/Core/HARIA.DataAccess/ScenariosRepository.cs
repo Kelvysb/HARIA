@@ -3,7 +3,7 @@ using HARIA.Domain.Entities;
 
 namespace HARIA.DataAccess
 {
-    public class ScenariosRepository : RepositoryBase<Scenario>, IScenariosRepository
+    public class ScenariosRepository : RepositoryBase<ScenarioEntity>, IScenariosRepository
     {
         public ScenariosRepository(IContext context) : base(context)
         {

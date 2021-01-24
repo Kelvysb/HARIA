@@ -4,7 +4,7 @@ using HARIA.Domain.Abstractions.Entities;
 
 namespace HARIA.Domain.Entities
 {
-    public class ExternalActuator : IEntity
+    public class ExternalActuatorEntity : IEntity
     {
         public int Id { get; set; }
 
@@ -14,6 +14,6 @@ namespace HARIA.Domain.Entities
 
         public DateTime LastExecution { get; set; }
 
-        public List<Action> Actions { get; set; }
+        public List<ActionEventEntity> Actions { get; set; }
     }
 }

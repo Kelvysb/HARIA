@@ -2,7 +2,7 @@
 
 namespace HARIA.Domain.Abstractions.Repositories
 {
-    public interface IUsersRepository : IRepositoryBase<User>
+    public interface IUsersRepository : IRepositoryBase<UserEntity>
     {
     }
 }

@@ -1,6 +1,8 @@
+using AutoMapper;
 using HARIA.DataAccess;
 using HARIA.Domain.Abstractions.Repositories;
 using HARIA.Domain.Abstractions.Services;
+using HARIA.Domain.Mappers;
 using HARIA.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,8 +32,8 @@ namespace HARIA.API
             });
 
             services.AddTransient<IContext, Context>();
-            services.AddTransient<IActionsRepository, ActionsRepository>();
-            services.AddTransient<IActionPeriodsRepository, ActionPeriodsRepository>();
+            services.AddTransient<IActionEventsRepository, ActionEventsRepository>();
+            services.AddTransient<IActionEventPeriodsRepository, ActionEventPeriodsRepository>();
             services.AddTransient<IActuatorsRepository, ActuatorsRepository>();
             services.AddTransient<IAmbientsRepository, AmbientsRepository>();
             services.AddTransient<IDevicesRepository, DevicesRepository>();
@@ -43,8 +45,8 @@ namespace HARIA.API
             services.AddTransient<ISensorsRepository, SensorsRepository>();
             services.AddTransient<IUsersRepository, UsersRepository>();
 
-            services.AddTransient<IActionsService, ActionsService>();
-            services.AddTransient<IActionPeriodsService, ActionPeriodsService>();
+            services.AddTransient<IActionEventsService, ActionEventsService>();
+            services.AddTransient<IActionEventPeriodsService, ActionEventPeriodsService>();
             services.AddTransient<IActuatorsService, ActuatorsService>();
             services.AddTransient<IAmbientsService, AmbientsService>();
             services.AddTransient<IDevicesService, DevicesService>();
@@ -55,6 +57,8 @@ namespace HARIA.API
             services.AddTransient<IScenarioTriggersService, ScenarioTriggersService>();
             services.AddTransient<ISensorsService, SensorsService>();
             services.AddTransient<IUsersService, UsersService>();
+
+            services.AddAutoMapper(typeof(MapperConfig));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

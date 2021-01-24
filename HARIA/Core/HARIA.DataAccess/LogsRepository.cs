@@ -3,7 +3,7 @@ using HARIA.Domain.Entities;
 
 namespace HARIA.DataAccess
 {
-    public class LogsRepository : RepositoryBase<Log>, ILogsRepository
+    public class LogsRepository : RepositoryBase<LogEntity>, ILogsRepository
     {
         public LogsRepository(IContext context) : base(context)
         {

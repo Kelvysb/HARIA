@@ -2,7 +2,7 @@
 
 namespace HARIA.Domain.Abstractions.Repositories
 {
-    public interface ILogsRepository : IRepositoryBase<Log>
+    public interface ILogsRepository : IRepositoryBase<LogEntity>
     {
     }
 }

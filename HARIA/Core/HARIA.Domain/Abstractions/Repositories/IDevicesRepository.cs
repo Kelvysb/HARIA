@@ -2,7 +2,7 @@
 
 namespace HARIA.Domain.Abstractions.Repositories
 {
-    public interface IDevicesRepository : IRepositoryBase<Device>
+    public interface IDevicesRepository : IRepositoryBase<DeviceEntity>
     {
     }
 }
