@@ -9,11 +9,11 @@ namespace HARIA.DataAccess
 {
     public abstract class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : class, IEntity, new()
     {
-        protected Context context;
+        protected IContext context;
 
         protected DbSet<TEntity> dbSet;
 
-        public RepositoryBase(Context context)
+        public RepositoryBase(IContext context)
         {
             this.context = context;
             dbSet = context.GetSet<TEntity>();

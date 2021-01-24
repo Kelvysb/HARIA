@@ -16,15 +16,17 @@ namespace HARIA.Domain.Entities
 
         public List<Sensor> Sensors { get; set; }
 
+        public List<ExternalSensor> External { get; set; }
+
         public bool StaticState { get; set; }
 
         public List<ActionPeriod> ActionPeriods { get; set; }
 
         public List<Actuator> Actuators { get; set; }
 
-        public ExternalSensor External { get; set; }
-
         public string ActuatorMessage { get; set; }
+
+        public string Script { get; set; }
 
         public bool Invert { get; set; }
     }

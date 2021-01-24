@@ -5,7 +5,7 @@ namespace HARIA.API.Controllers
 {
     public class ActuatorsController : ControllerBase<Actuator>
     {
-        public ActuatorsController(IServiceBase<Actuator> service) : base(service)
+        public ActuatorsController(IActuatorsService service) : base(service)
         {
         }
     }

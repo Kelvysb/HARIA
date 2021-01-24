@@ -5,7 +5,7 @@ namespace HARIA.API.Controllers
 {
     public class ExternalSensorsController : ControllerBase<ExternalSensor>
     {
-        public ExternalSensorsController(IServiceBase<ExternalSensor> service) : base(service)
+        public ExternalSensorsController(IExternalSensorsService service) : base(service)
         {
         }
     }

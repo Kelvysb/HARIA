@@ -5,7 +5,7 @@ namespace HARIA.API.Controllers
 {
     public class ActionPeriodsController : ControllerBase<ActionPeriod>
     {
-        public ActionPeriodsController(IServiceBase<ActionPeriod> service) : base(service)
+        public ActionPeriodsController(IActionPeriodsService service) : base(service)
         {
         }
     }

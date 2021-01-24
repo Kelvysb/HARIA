@@ -5,7 +5,7 @@ namespace HARIA.DataAccess
 {
     public class AmbientsRepository : RepositoryBase<Ambient>, IAmbientsRepository
     {
-        public AmbientsRepository(Context context) : base(context)
+        public AmbientsRepository(IContext context) : base(context)
         {
         }
     }

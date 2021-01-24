@@ -5,7 +5,7 @@ namespace HARIA.API.Controllers
 {
     public class DevicesController : ControllerBase<Device>
     {
-        public DevicesController(IServiceBase<Device> service) : base(service)
+        public DevicesController(IDevicesService service) : base(service)
         {
         }
     }

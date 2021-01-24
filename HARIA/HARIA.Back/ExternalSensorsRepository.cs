@@ -5,7 +5,7 @@ namespace HARIA.DataAccess
 {
     public class ExternalSensorsRepository : RepositoryBase<ExternalSensor>, IExternalSensorsRepository
     {
-        public ExternalSensorsRepository(Context context) : base(context)
+        public ExternalSensorsRepository(IContext context) : base(context)
         {
         }
     }

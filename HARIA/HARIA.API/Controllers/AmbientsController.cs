@@ -5,7 +5,7 @@ namespace HARIA.API.Controllers
 {
     public class AmbientsController : ControllerBase<Ambient>
     {
-        public AmbientsController(IServiceBase<Ambient> service) : base(service)
+        public AmbientsController(IAmbientsService service) : base(service)
         {
         }
     }

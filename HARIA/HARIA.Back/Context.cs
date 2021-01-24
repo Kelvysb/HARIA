@@ -16,10 +16,6 @@ namespace HARIA.DataAccess
             this.config = config;
         }
 
-        protected Context()
-        {
-        }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite($"Data Source={config.GetSection("DataBase")["Server"]}", b => b.MigrationsAssembly("HARIA.API"));
@@ -69,15 +65,13 @@ namespace HARIA.DataAccess
                 .HasKey(t => t.Id);
 
             modelBuilder.Entity<Action>()
-                .HasMany(t => t.Sensors)
-                .WithMany(t => t.Actions);
+                .HasMany(t => t.Sensors);
 
             modelBuilder.Entity<Action>()
-                .HasMany(t => t.Actuators)
-                .WithMany(t => t.Actions);
+                .HasMany(t => t.Actuators);
 
             modelBuilder.Entity<Action>()
-                .HasOne(t => t.External);
+                .HasMany(t => t.External);
 
             modelBuilder.Entity<Action>()
                 .HasMany(t => t.ActionPeriods);

@@ -5,7 +5,7 @@ namespace HARIA.API.Controllers
 {
     public class SensorsController : ControllerBase<Sensor>
     {
-        public SensorsController(IServiceBase<Sensor> service) : base(service)
+        public SensorsController(ISensorsService service) : base(service)
         {
         }
     }

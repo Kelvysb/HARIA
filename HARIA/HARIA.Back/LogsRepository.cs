@@ -5,7 +5,7 @@ namespace HARIA.DataAccess
 {
     public class LogsRepository : RepositoryBase<Log>, ILogsRepository
     {
-        public LogsRepository(Context context) : base(context)
+        public LogsRepository(IContext context) : base(context)
         {
         }
     }

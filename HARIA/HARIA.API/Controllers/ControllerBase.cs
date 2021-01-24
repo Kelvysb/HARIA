@@ -2,12 +2,11 @@
 using System.Threading.Tasks;
 using HARIA.Domain.Abstractions.Entities;
 using HARIA.Domain.Abstractions.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HARIA.API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Produces("application/json")]
     [Route("/[controller]")]
     public abstract class ControllerBase<TEntity> : Controller where TEntity : class, IEntity, new()

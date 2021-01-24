@@ -5,7 +5,7 @@ namespace HARIA.DataAccess
 {
     public class DevicesRepository : RepositoryBase<Device>, IDevicesRepository
     {
-        public DevicesRepository(Context context) : base(context)
+        public DevicesRepository(IContext context) : base(context)
         {
         }
     }

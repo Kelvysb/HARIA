@@ -5,7 +5,7 @@ namespace HARIA.API.Controllers
 {
     public class ActionsController : ControllerBase<Action>
     {
-        public ActionsController(IServiceBase<Action> service) : base(service)
+        public ActionsController(IActionsService service) : base(service)
         {
         }
     }

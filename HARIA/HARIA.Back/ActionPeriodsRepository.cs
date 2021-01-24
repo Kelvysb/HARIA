@@ -5,7 +5,7 @@ namespace HARIA.DataAccess
 {
     public class ActionPeriodsRepository : RepositoryBase<ActionPeriod>, IActionPeriodsRepository
     {
-        public ActionPeriodsRepository(Context context) : base(context)
+        public ActionPeriodsRepository(IContext context) : base(context)
         {
         }
     }

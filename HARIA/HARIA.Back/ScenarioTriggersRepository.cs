@@ -5,7 +5,7 @@ namespace HARIA.DataAccess
 {
     public class ScenarioTriggersRepository : RepositoryBase<ScenarioTrigger>, IScenarioTriggersRepository
     {
-        public ScenarioTriggersRepository(Context context) : base(context)
+        public ScenarioTriggersRepository(IContext context) : base(context)
         {
         }
     }

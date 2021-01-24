@@ -5,7 +5,7 @@ namespace HARIA.DataAccess
 {
     public class UsersRepository : RepositoryBase<User>, IUsersRepository
     {
-        public UsersRepository(Context context) : base(context)
+        public UsersRepository(IContext context) : base(context)
         {
         }
     }

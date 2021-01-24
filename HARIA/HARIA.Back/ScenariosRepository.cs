@@ -5,7 +5,7 @@ namespace HARIA.DataAccess
 {
     public class ScenariosRepository : RepositoryBase<Scenario>, IScenariosRepository
     {
-        public ScenariosRepository(Context context) : base(context)
+        public ScenariosRepository(IContext context) : base(context)
         {
         }
     }

@@ -5,7 +5,7 @@ namespace HARIA.API.Controllers
 {
     public class ScenarioTriggersController : ControllerBase<ScenarioTrigger>
     {
-        public ScenarioTriggersController(IServiceBase<ScenarioTrigger> service) : base(service)
+        public ScenarioTriggersController(IScenarioTriggersService service) : base(service)
         {
         }
     }

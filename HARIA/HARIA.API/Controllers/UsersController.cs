@@ -5,7 +5,7 @@ namespace HARIA.API.Controllers
 {
     public class UsersController : ControllerBase<User>
     {
-        public UsersController(IServiceBase<User> service) : base(service)
+        public UsersController(IUsersService service) : base(service)
         {
         }
     }

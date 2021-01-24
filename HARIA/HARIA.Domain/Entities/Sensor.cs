@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using HARIA.Domain.Abstractions.Entities;
 
 namespace HARIA.Domain.Entities
@@ -25,7 +24,5 @@ namespace HARIA.Domain.Entities
         public bool Active { get; set; }
 
         public DateTime LastStateChange { get; set; }
-
-        public List<Action> Actions { get; set; }
     }
 }
