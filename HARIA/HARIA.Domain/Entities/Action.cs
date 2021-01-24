@@ -8,15 +8,13 @@ namespace HARIA.Domain.Entities
     {
         public int Id { get; set; }
 
-        public int ScenarioId { get; set; }
-
         public string Description { get; set; }
 
         public ActionType Type { get; set; }
 
         public List<Sensor> Sensors { get; set; }
 
-        public List<ExternalSensor> External { get; set; }
+        public List<ExternalSensor> ExternalSensors { get; set; }
 
         public bool StaticState { get; set; }
 
@@ -24,10 +22,12 @@ namespace HARIA.Domain.Entities
 
         public List<Actuator> Actuators { get; set; }
 
+        public List<ExternalActuator> ExternalActuators { get; set; }
+
         public string ActuatorMessage { get; set; }
 
-        public string Script { get; set; }
-
         public bool Invert { get; set; }
+
+        public List<Scenario> Scenarios { get; set; }
     }
 }

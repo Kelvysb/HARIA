@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using HARIA.Domain.Abstractions.Entities;
 using HARIA.Domain.Enums;
 
@@ -8,6 +9,8 @@ namespace HARIA.Domain.Entities
     {
         public int Id { get; set; }
 
+        public int ScenarioId { get; set; }
+
         public string Description { get; set; }
 
         public ScenarioTriggerType Type { get; set; }
@@ -16,6 +19,8 @@ namespace HARIA.Domain.Entities
 
         public DateTime FinalTime { get; set; }
 
-        public ExternalSensor External { get; set; }
+        public List<ExternalSensor> ExternalSensors { get; set; }
+
+        public List<Sensor> Sensors { get; set; }
     }
 }

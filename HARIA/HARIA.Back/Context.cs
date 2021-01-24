@@ -56,8 +56,8 @@ namespace HARIA.DataAccess
                 .ToTable("ExternalSensors")
                 .HasKey(t => t.Id);
 
-            modelBuilder.Entity<ExternalSensor>()
-                .ToTable("ExternalSensors")
+            modelBuilder.Entity<ExternalActuator>()
+                .ToTable("ExternalActuators")
                 .HasKey(t => t.Id);
 
             modelBuilder.Entity<Action>()
@@ -65,13 +65,24 @@ namespace HARIA.DataAccess
                 .HasKey(t => t.Id);
 
             modelBuilder.Entity<Action>()
-                .HasMany(t => t.Sensors);
+                .HasMany(t => t.Sensors)
+                .WithMany(t => t.Actions)
+                .UsingEntity(r => r.ToTable("ActionsSensors"));
 
             modelBuilder.Entity<Action>()
-                .HasMany(t => t.Actuators);
+                .HasMany(t => t.Actuators)
+                .WithMany(t => t.Actions)
+                .UsingEntity(r => r.ToTable("ActionsActuators"));
 
             modelBuilder.Entity<Action>()
-                .HasMany(t => t.External);
+                .HasMany(t => t.ExternalSensors)
+                .WithMany(t => t.Actions)
+                .UsingEntity(r => r.ToTable("ActionsExternalSensors"));
+
+            modelBuilder.Entity<Action>()
+                .HasMany(t => t.ExternalActuators)
+                .WithMany(t => t.Actions)
+                .UsingEntity(r => r.ToTable("ActionsExternalActuators"));
 
             modelBuilder.Entity<Action>()
                 .HasMany(t => t.ActionPeriods);
@@ -85,7 +96,9 @@ namespace HARIA.DataAccess
                 .HasKey(t => t.Id);
 
             modelBuilder.Entity<Scenario>()
-                .HasMany(t => t.Actions);
+                .HasMany(t => t.Actions)
+                .WithMany(t => t.Scenarios)
+                .UsingEntity(r => r.ToTable("ScenarioActions"));
 
             modelBuilder.Entity<Scenario>()
                 .HasMany(t => t.Triggers);
@@ -93,6 +106,16 @@ namespace HARIA.DataAccess
             modelBuilder.Entity<ScenarioTrigger>()
                 .ToTable("ScenarioTriggers")
                 .HasKey(t => t.Id);
+
+            modelBuilder.Entity<ScenarioTrigger>()
+                .HasMany(t => t.Sensors)
+                .WithMany(t => t.ScenarioTriggers)
+                .UsingEntity(r => r.ToTable("ScenarioTriggersSensors"));
+
+            modelBuilder.Entity<ScenarioTrigger>()
+                .HasMany(t => t.ExternalSensors)
+                .WithMany(t => t.ScenarioTriggers)
+                .UsingEntity(r => r.ToTable("ScenarioTriggersExternalSensors"));
 
             modelBuilder.Entity<User>()
                 .ToTable("Users")
