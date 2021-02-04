@@ -1,14 +1,17 @@
+using System.Text;
 using AutoMapper;
 using HARIA.DataAccess;
 using HARIA.Domain.Abstractions.Repositories;
 using HARIA.Domain.Abstractions.Services;
 using HARIA.Domain.Mappers;
 using HARIA.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 namespace HARIA.API
@@ -29,6 +32,32 @@ namespace HARIA.API
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HARIA.API", Version = "v1" });
+                c.AddSecurityDefinition("JWT Token", new OpenApiSecurityScheme
+                {
+                    Description = "JWT Token",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header
+                });
+            });
+
+            var key = Encoding.ASCII.GetBytes(Configuration.GetSection("Auth").GetValue<string>("Secret"));
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
             });
 
             services.AddTransient<IContext, Context>();
@@ -44,6 +73,8 @@ namespace HARIA.API
             services.AddTransient<IScenarioTriggersRepository, ScenarioTriggersRepository>();
             services.AddTransient<ISensorsRepository, SensorsRepository>();
             services.AddTransient<IUsersRepository, UsersRepository>();
+            services.AddTransient<IRolesRepository, RolesRepository>();
+            services.AddTransient<IStatesRepository, StatesRepository>();
 
             services.AddTransient<IActionEventsService, ActionEventsService>();
             services.AddTransient<IActionEventPeriodsService, ActionEventPeriodsService>();
@@ -57,6 +88,8 @@ namespace HARIA.API
             services.AddTransient<IScenarioTriggersService, ScenarioTriggersService>();
             services.AddTransient<ISensorsService, SensorsService>();
             services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient<IRolesService, RolesService>();
+            services.AddTransient<IStatesService, StatesService>();
 
             services.AddAutoMapper(typeof(MapperConfig));
         }
@@ -72,6 +105,8 @@ namespace HARIA.API
             }
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

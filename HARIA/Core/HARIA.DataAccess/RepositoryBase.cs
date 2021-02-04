@@ -9,9 +9,9 @@ namespace HARIA.DataAccess
 {
     public abstract class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : class, IEntity, new()
     {
-        protected IContext context;
-
         protected DbSet<TEntity> dbSet;
+
+        protected IContext context;
 
         public RepositoryBase(IContext context)
         {
@@ -33,13 +33,16 @@ namespace HARIA.DataAccess
 
         public virtual Task<List<TEntity>> GetAll()
         {
-            return dbSet.ToListAsync();
+            return dbSet
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public virtual Task<TEntity> GetById(int id)
         {
             return dbSet
                 .Where(t => t.Id == id)
+                .AsNoTracking()
                 .FirstOrDefaultAsync();
         }
 

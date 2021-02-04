@@ -1,7 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using HARIA.Domain.Abstractions.Repositories;
 using HARIA.Domain.Entities;
-using HARIA.Domain.Helpers.HARIA.Domain.Helpers;
+using HARIA.Domain.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -19,6 +21,7 @@ namespace HARIA.DataAccess
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite($"Data Source={config.GetSection("DataBase")["Server"]}", b => b.MigrationsAssembly("HARIA.API"));
+            optionsBuilder.LogTo(Console.WriteLine);
             base.OnConfiguring(optionsBuilder);
         }
 
@@ -121,12 +124,154 @@ namespace HARIA.DataAccess
                 .ToTable("Users")
                 .HasKey(t => t.Id);
 
+            modelBuilder.Entity<UserEntity>()
+                .HasMany(t => t.Roles)
+                .WithMany(t => t.Users)
+                .UsingEntity<Dictionary<string, object>>(
+                        "UsersRoles",
+                        x => x.HasOne<RoleEntity>()
+                            .WithMany()
+                            .OnDelete(DeleteBehavior.Cascade),
+                        x => x.HasOne<UserEntity>()
+                            .WithMany()
+                            .OnDelete(DeleteBehavior.Cascade));
+
+            modelBuilder.Entity<RoleEntity>()
+                .ToTable("Roles")
+                .HasKey(t => t.Id);
+
+            modelBuilder.Entity<RoleEntity>()
+                .HasMany(t => t.Permissions)
+                .WithMany(t => t.Roles)
+                .UsingEntity<Dictionary<string, object>>(
+                        "RolesPermissions",
+                        x => x.HasOne<PermissionEntity>()
+                            .WithMany()
+                            .OnDelete(DeleteBehavior.Cascade),
+                        x => x.HasOne<RoleEntity>()
+                            .WithMany()
+                            .OnDelete(DeleteBehavior.Cascade));
+
+            modelBuilder.Entity<PermissionEntity>()
+                .ToTable("Permissions")
+                .HasKey(t => t.Id);
+
             modelBuilder.Entity<LogEntity>()
                 .ToTable("Logs")
                 .HasKey(t => t.Id);
 
+            modelBuilder.Entity<StateEntity>()
+                .ToTable("States")
+                .HasKey(t => t.Id);
+
+            modelBuilder.Entity<PermissionEntity>()
+                .HasData(
+                    new PermissionEntity()
+                    {
+                        Id = 1,
+                        Code = "SERVICE",
+                        Description = "Access device service endpoints"
+                    },
+                    new PermissionEntity()
+                    {
+                        Id = 2,
+                        Code = "DASHBOARD",
+                        Description = "View Dashboard"
+                    },
+                    new PermissionEntity()
+                    {
+                        Id = 3,
+                        Code = "CONFIGURE",
+                        Description = "Configure system"
+                    },
+                    new PermissionEntity()
+                    {
+                        Id = 4,
+                        Code = "KIOSK",
+                        Description = "Kiosk mode"
+                    });
+
+            modelBuilder.Entity<RoleEntity>()
+                .HasData(
+                    new RoleEntity()
+                    {
+                        Id = 1,
+                        Name = "Admin",
+                        Description = "System Administrator"
+                    },
+                    new RoleEntity()
+                    {
+                        Id = 2,
+                        Name = "Device",
+                        Description = "Device"
+                    },
+                    new RoleEntity()
+                    {
+                        Id = 3,
+                        Name = "Worker",
+                        Description = "Worker"
+                    },
+                    new RoleEntity()
+                    {
+                        Id = 4,
+                        Name = "Kiosk",
+                        Description = "Kiosk mode"
+                    });
+
             modelBuilder.Entity<UserEntity>()
-                .HasData(new UserEntity() { Id = 1, Name = "admin", PasswordHash = AuthHelper.GetMd5Hash("admin") });
+                .HasData(
+                    new UserEntity()
+                    {
+                        Id = 1,
+                        Name = "admin",
+                        PasswordHash = AuthHelper.GetMd5Hash("admin")
+                    },
+                    new UserEntity()
+                    {
+                        Id = 2,
+                        Name = "device",
+                        PasswordHash = AuthHelper.GetMd5Hash("admin")
+                    },
+                    new UserEntity()
+                    {
+                        Id = 3,
+                        Name = "worker",
+                        PasswordHash = AuthHelper.GetMd5Hash("admin")
+                    },
+                    new UserEntity()
+                    {
+                        Id = 4,
+                        Name = "kiosk",
+                        PasswordHash = AuthHelper.GetMd5Hash("admin")
+                    });
+
+            modelBuilder.Entity("RolesPermissions")
+                .HasData(
+                new { RolesId = 1, PermissionsId = 2 },
+                new { RolesId = 1, PermissionsId = 3 },
+                new { RolesId = 2, PermissionsId = 1 },
+                new { RolesId = 3, PermissionsId = 1 },
+                new { RolesId = 4, PermissionsId = 2 },
+                new { RolesId = 4, PermissionsId = 4 }
+                );
+
+            modelBuilder.Entity("UsersRoles")
+                .HasData(
+                new { UsersId = 1, RolesId = 1 },
+                new { UsersId = 2, RolesId = 2 },
+                new { UsersId = 3, RolesId = 3 },
+                new { UsersId = 4, RolesId = 4 }
+                );
+
+            modelBuilder.Entity<StateEntity>()
+                .HasData(new StateEntity()
+                {
+                    Id = 1,
+                    Key = "SCENARIO_MODE",
+                    Value = "AUTO",
+                    DefaultValue = "AUTO",
+                    IsSystemDefault = true
+                });
 
             base.OnModelCreating(modelBuilder);
         }
@@ -140,6 +285,11 @@ namespace HARIA.DataAccess
             where T : class
         {
             return Set<T>();
+        }
+
+        public void Atach<T>(T entity) where T : class
+        {
+            base.Attach(entity);
         }
     }
 }

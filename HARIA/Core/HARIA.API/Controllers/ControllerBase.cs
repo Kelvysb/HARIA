@@ -3,11 +3,14 @@ using System.Threading.Tasks;
 using HARIA.Domain.Abstractions.DTOs;
 using HARIA.Domain.Abstractions.Entities;
 using HARIA.Domain.Abstractions.Services;
+using HARIA.Domain.Constants;
+using HARIA.Domain.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HARIA.API.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Produces("application/json")]
     [Route("/[controller]")]
     public abstract class ControllerBase<TEntity, TDTO> : Controller
@@ -22,10 +25,11 @@ namespace HARIA.API.Controllers
         }
 
         [HttpPost]
-        public virtual async Task<IActionResult> Add(TDTO dto)
+        public virtual async Task<IActionResult> Add([FromBody] TDTO dto)
         {
             try
             {
+                AuthHelper.CheckPermissions(User, PermissionConstants.CONFIGURE);
                 var result = await service.Add(dto);
                 return Ok(result);
             }
@@ -36,10 +40,11 @@ namespace HARIA.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public virtual async Task<IActionResult> Delete(int id)
+        public virtual async Task<IActionResult> Delete([FromRoute] int id)
         {
             try
             {
+                AuthHelper.CheckPermissions(User, PermissionConstants.CONFIGURE);
                 var result = await service.Delete(id);
                 return Ok(result);
             }
@@ -54,6 +59,7 @@ namespace HARIA.API.Controllers
         {
             try
             {
+                AuthHelper.CheckPermissions(User, PermissionConstants.CONFIGURE, PermissionConstants.DASHBOARD, PermissionConstants.KIOSK);
                 var result = await service.Get();
                 return Ok(result);
             }
@@ -64,10 +70,11 @@ namespace HARIA.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public virtual async Task<IActionResult> Get(int id)
+        public virtual async Task<IActionResult> Get([FromRoute] int id)
         {
             try
             {
+                AuthHelper.CheckPermissions(User, PermissionConstants.CONFIGURE, PermissionConstants.DASHBOARD, PermissionConstants.KIOSK);
                 var result = await service.Get(id);
                 return Ok(result);
             }
@@ -78,10 +85,11 @@ namespace HARIA.API.Controllers
         }
 
         [HttpPut]
-        public virtual async Task<IActionResult> Update(TDTO dto)
+        public virtual async Task<IActionResult> Update([FromBody] TDTO dto)
         {
             try
             {
+                AuthHelper.CheckPermissions(User, PermissionConstants.CONFIGURE);
                 var result = await service.Update(dto);
                 return Ok(result);
             }

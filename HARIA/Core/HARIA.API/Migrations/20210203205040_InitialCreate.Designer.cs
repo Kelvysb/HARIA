@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HARIA.API.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210124032457_InitialCreate")]
+    [Migration("20210203205040_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -316,6 +316,92 @@ namespace HARIA.API.Migrations
                     b.ToTable("Logs");
                 });
 
+            modelBuilder.Entity("HARIA.Domain.Entities.PermissionEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Permissions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Code = "SERVICE",
+                            Description = "Access device service endpoints"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Code = "DASHBOARD",
+                            Description = "View Dashboard"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Code = "CONFIGURE",
+                            Description = "Configure system"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Code = "KIOSK",
+                            Description = "Kiosk mode"
+                        });
+                });
+
+            modelBuilder.Entity("HARIA.Domain.Entities.RoleEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "System Administrator",
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Device",
+                            Name = "Device"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Worker",
+                            Name = "Worker"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "Kiosk mode",
+                            Name = "Kiosk"
+                        });
+                });
+
             modelBuilder.Entity("HARIA.Domain.Entities.ScenarioEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -421,6 +507,39 @@ namespace HARIA.API.Migrations
                     b.ToTable("Sensors");
                 });
 
+            modelBuilder.Entity("HARIA.Domain.Entities.StateEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("DefaultValue")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsSystemDefault")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Key")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("States");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DefaultValue = "AUTO",
+                            IsSystemDefault = true,
+                            Key = "SCENARIO_MODE",
+                            Value = "AUTO"
+                        });
+                });
+
             modelBuilder.Entity("HARIA.Domain.Entities.UserEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -443,6 +562,71 @@ namespace HARIA.API.Migrations
                             Id = 1,
                             Name = "admin",
                             PasswordHash = "21232f297a57a5a743894a0e4a801fc3"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "device",
+                            PasswordHash = "21232f297a57a5a743894a0e4a801fc3"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "worker",
+                            PasswordHash = "21232f297a57a5a743894a0e4a801fc3"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "kiosk",
+                            PasswordHash = "21232f297a57a5a743894a0e4a801fc3"
+                        });
+                });
+
+            modelBuilder.Entity("RolesPermissions", b =>
+                {
+                    b.Property<int>("PermissionsId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("RolesId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("PermissionsId", "RolesId");
+
+                    b.HasIndex("RolesId");
+
+                    b.ToTable("RolesPermissions");
+
+                    b.HasData(
+                        new
+                        {
+                            PermissionsId = 2,
+                            RolesId = 1
+                        },
+                        new
+                        {
+                            PermissionsId = 3,
+                            RolesId = 1
+                        },
+                        new
+                        {
+                            PermissionsId = 1,
+                            RolesId = 2
+                        },
+                        new
+                        {
+                            PermissionsId = 1,
+                            RolesId = 3
+                        },
+                        new
+                        {
+                            PermissionsId = 2,
+                            RolesId = 4
+                        },
+                        new
+                        {
+                            PermissionsId = 4,
+                            RolesId = 4
                         });
                 });
 
@@ -459,6 +643,43 @@ namespace HARIA.API.Migrations
                     b.HasIndex("SensorsId");
 
                     b.ToTable("ScenarioTriggersSensors");
+                });
+
+            modelBuilder.Entity("UsersRoles", b =>
+                {
+                    b.Property<int>("RolesId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UsersId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("RolesId", "UsersId");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("UsersRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            RolesId = 1,
+                            UsersId = 1
+                        },
+                        new
+                        {
+                            RolesId = 2,
+                            UsersId = 2
+                        },
+                        new
+                        {
+                            RolesId = 3,
+                            UsersId = 3
+                        },
+                        new
+                        {
+                            RolesId = 4,
+                            UsersId = 4
+                        });
                 });
 
             modelBuilder.Entity("ActionEventEntityActuatorEntity", b =>
@@ -587,6 +808,21 @@ namespace HARIA.API.Migrations
                         .HasForeignKey("DeviceEntityId");
                 });
 
+            modelBuilder.Entity("RolesPermissions", b =>
+                {
+                    b.HasOne("HARIA.Domain.Entities.PermissionEntity", null)
+                        .WithMany()
+                        .HasForeignKey("PermissionsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HARIA.Domain.Entities.RoleEntity", null)
+                        .WithMany()
+                        .HasForeignKey("RolesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ScenarioTriggerEntitySensorEntity", b =>
                 {
                     b.HasOne("HARIA.Domain.Entities.ScenarioTriggerEntity", null)
@@ -598,6 +834,21 @@ namespace HARIA.API.Migrations
                     b.HasOne("HARIA.Domain.Entities.SensorEntity", null)
                         .WithMany()
                         .HasForeignKey("SensorsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("UsersRoles", b =>
+                {
+                    b.HasOne("HARIA.Domain.Entities.RoleEntity", null)
+                        .WithMany()
+                        .HasForeignKey("RolesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HARIA.Domain.Entities.UserEntity", null)
+                        .WithMany()
+                        .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

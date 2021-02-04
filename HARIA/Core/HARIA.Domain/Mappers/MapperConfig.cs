@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using AutoMapper;
 using HARIA.Domain.DTOs;
 using HARIA.Domain.Entities;
 
@@ -20,6 +21,53 @@ namespace HARIA.Domain.Mappers
             ConfigureScenarioTrigger();
             ConfigureSensor();
             ConfigureUser();
+            ConfigureRole();
+            ConfigurePermission();
+            ConfigureState();
+        }
+
+        private void ConfigureState()
+        {
+            CreateMap<State, RoleEntity>()
+                .ReverseMap();
+
+            CreateMap<State, KeyValuePair<string, string>>()
+                .ConvertUsing(c => new KeyValuePair<string, string>(c.Key, c.Value));
+
+            CreateMap<KeyValuePair<string, string>, State>()
+                .ConvertUsing(c => new State()
+                {
+                    Id = 0,
+                    Key = c.Key,
+                    Value = c.Value,
+                    DefaultValue = string.Empty,
+                    IsSystemDefault = false
+                });
+
+            CreateMap<StateEntity, KeyValuePair<string, string>>()
+                .ConvertUsing(c => new KeyValuePair<string, string>(c.Key, c.Value));
+
+            CreateMap<KeyValuePair<string, string>, StateEntity>()
+                .ConvertUsing(c => new StateEntity()
+                {
+                    Id = 0,
+                    Key = c.Key,
+                    Value = c.Value,
+                    DefaultValue = string.Empty,
+                    IsSystemDefault = false
+                });
+        }
+
+        private void ConfigurePermission()
+        {
+            CreateMap<Permission, PermissionEntity>()
+                .ReverseMap();
+        }
+
+        private void ConfigureRole()
+        {
+            CreateMap<Role, RoleEntity>()
+                .ReverseMap();
         }
 
         private void ConfigureUser()

@@ -1,4 +1,5 @@
-﻿using HARIA.Domain.Abstractions.DTOs;
+﻿using System.Collections.Generic;
+using HARIA.Domain.Abstractions.DTOs;
 
 namespace HARIA.Domain.DTOs
 {
@@ -13,5 +14,7 @@ namespace HARIA.Domain.DTOs
         public string NewPasswordHash { get; set; }
 
         public string Token { get; set; }
+
+        public List<Role> Roles { get; set; }
     }
 }

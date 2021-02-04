@@ -1,4 +1,5 @@
-﻿using HARIA.Domain.Abstractions.Entities;
+﻿using System.Collections.Generic;
+using HARIA.Domain.Abstractions.Entities;
 
 namespace HARIA.Domain.Entities
 {
@@ -9,5 +10,7 @@ namespace HARIA.Domain.Entities
         public string Name { get; set; }
 
         public string PasswordHash { get; set; }
+
+        public List<RoleEntity> Roles { get; set; }
     }
 }

@@ -103,6 +103,34 @@ namespace HARIA.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Permissions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Code = table.Column<string>(type: "TEXT", nullable: true),
+                    Description = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Permissions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Roles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    Description = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Scenarios",
                 columns: table => new
                 {
@@ -117,6 +145,22 @@ namespace HARIA.API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Scenarios", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "States",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Key = table.Column<string>(type: "TEXT", nullable: true),
+                    Value = table.Column<string>(type: "TEXT", nullable: true),
+                    DefaultValue = table.Column<string>(type: "TEXT", nullable: true),
+                    IsSystemDefault = table.Column<bool>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_States", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -274,6 +318,30 @@ namespace HARIA.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RolesPermissions",
+                columns: table => new
+                {
+                    PermissionsId = table.Column<int>(type: "INTEGER", nullable: false),
+                    RolesId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RolesPermissions", x => new { x.PermissionsId, x.RolesId });
+                    table.ForeignKey(
+                        name: "FK_RolesPermissions_Permissions_PermissionsId",
+                        column: x => x.PermissionsId,
+                        principalTable: "Permissions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RolesPermissions_Roles_RolesId",
+                        column: x => x.RolesId,
+                        principalTable: "Roles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ScenarioActionEvents",
                 columns: table => new
                 {
@@ -319,6 +387,30 @@ namespace HARIA.API.Migrations
                         principalTable: "Scenarios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UsersRoles",
+                columns: table => new
+                {
+                    RolesId = table.Column<int>(type: "INTEGER", nullable: false),
+                    UsersId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UsersRoles", x => new { x.RolesId, x.UsersId });
+                    table.ForeignKey(
+                        name: "FK_UsersRoles_Roles_RolesId",
+                        column: x => x.RolesId,
+                        principalTable: "Roles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UsersRoles_Users_UsersId",
+                        column: x => x.UsersId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -418,9 +510,119 @@ namespace HARIA.API.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Permissions",
+                columns: new[] { "Id", "Code", "Description" },
+                values: new object[] { 1, "SERVICE", "Access device service endpoints" });
+
+            migrationBuilder.InsertData(
+                table: "Permissions",
+                columns: new[] { "Id", "Code", "Description" },
+                values: new object[] { 2, "DASHBOARD", "View Dashboard" });
+
+            migrationBuilder.InsertData(
+                table: "Permissions",
+                columns: new[] { "Id", "Code", "Description" },
+                values: new object[] { 3, "CONFIGURE", "Configure system" });
+
+            migrationBuilder.InsertData(
+                table: "Permissions",
+                columns: new[] { "Id", "Code", "Description" },
+                values: new object[] { 4, "KIOSK", "Kiosk mode" });
+
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "Id", "Description", "Name" },
+                values: new object[] { 1, "System Administrator", "Admin" });
+
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "Id", "Description", "Name" },
+                values: new object[] { 2, "Device", "Device" });
+
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "Id", "Description", "Name" },
+                values: new object[] { 3, "Worker", "Worker" });
+
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "Id", "Description", "Name" },
+                values: new object[] { 4, "Kiosk mode", "Kiosk" });
+
+            migrationBuilder.InsertData(
+                table: "States",
+                columns: new[] { "Id", "DefaultValue", "IsSystemDefault", "Key", "Value" },
+                values: new object[] { 1, "AUTO", true, "SCENARIO_MODE", "AUTO" });
+
+            migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Name", "PasswordHash" },
                 values: new object[] { 1, "admin", "21232f297a57a5a743894a0e4a801fc3" });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Name", "PasswordHash" },
+                values: new object[] { 2, "device", "21232f297a57a5a743894a0e4a801fc3" });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Name", "PasswordHash" },
+                values: new object[] { 3, "worker", "21232f297a57a5a743894a0e4a801fc3" });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Name", "PasswordHash" },
+                values: new object[] { 4, "kiosk", "21232f297a57a5a743894a0e4a801fc3" });
+
+            migrationBuilder.InsertData(
+                table: "RolesPermissions",
+                columns: new[] { "PermissionsId", "RolesId" },
+                values: new object[] { 2, 1 });
+
+            migrationBuilder.InsertData(
+                table: "RolesPermissions",
+                columns: new[] { "PermissionsId", "RolesId" },
+                values: new object[] { 3, 1 });
+
+            migrationBuilder.InsertData(
+                table: "RolesPermissions",
+                columns: new[] { "PermissionsId", "RolesId" },
+                values: new object[] { 1, 2 });
+
+            migrationBuilder.InsertData(
+                table: "RolesPermissions",
+                columns: new[] { "PermissionsId", "RolesId" },
+                values: new object[] { 1, 3 });
+
+            migrationBuilder.InsertData(
+                table: "RolesPermissions",
+                columns: new[] { "PermissionsId", "RolesId" },
+                values: new object[] { 2, 4 });
+
+            migrationBuilder.InsertData(
+                table: "RolesPermissions",
+                columns: new[] { "PermissionsId", "RolesId" },
+                values: new object[] { 4, 4 });
+
+            migrationBuilder.InsertData(
+                table: "UsersRoles",
+                columns: new[] { "RolesId", "UsersId" },
+                values: new object[] { 1, 1 });
+
+            migrationBuilder.InsertData(
+                table: "UsersRoles",
+                columns: new[] { "RolesId", "UsersId" },
+                values: new object[] { 2, 2 });
+
+            migrationBuilder.InsertData(
+                table: "UsersRoles",
+                columns: new[] { "RolesId", "UsersId" },
+                values: new object[] { 3, 3 });
+
+            migrationBuilder.InsertData(
+                table: "UsersRoles",
+                columns: new[] { "RolesId", "UsersId" },
+                values: new object[] { 4, 4 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ActionEventPeriods_ActionEventEntityId",
@@ -458,6 +660,11 @@ namespace HARIA.API.Migrations
                 column: "DeviceEntityId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_RolesPermissions_RolesId",
+                table: "RolesPermissions",
+                column: "RolesId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ScenarioActionEvents_ScenariosId",
                 table: "ScenarioActionEvents",
                 column: "ScenariosId");
@@ -486,6 +693,11 @@ namespace HARIA.API.Migrations
                 name: "IX_Sensors_DeviceEntityId",
                 table: "Sensors",
                 column: "DeviceEntityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UsersRoles_UsersId",
+                table: "UsersRoles",
+                column: "UsersId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -509,6 +721,9 @@ namespace HARIA.API.Migrations
                 name: "Logs");
 
             migrationBuilder.DropTable(
+                name: "RolesPermissions");
+
+            migrationBuilder.DropTable(
                 name: "ScenarioActionEvents");
 
             migrationBuilder.DropTable(
@@ -518,13 +733,19 @@ namespace HARIA.API.Migrations
                 name: "ScenarioTriggersSensors");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "States");
+
+            migrationBuilder.DropTable(
+                name: "UsersRoles");
 
             migrationBuilder.DropTable(
                 name: "Actuators");
 
             migrationBuilder.DropTable(
                 name: "ExternalActuators");
+
+            migrationBuilder.DropTable(
+                name: "Permissions");
 
             migrationBuilder.DropTable(
                 name: "ActionEvents");
@@ -537,6 +758,12 @@ namespace HARIA.API.Migrations
 
             migrationBuilder.DropTable(
                 name: "Sensors");
+
+            migrationBuilder.DropTable(
+                name: "Roles");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Scenarios");

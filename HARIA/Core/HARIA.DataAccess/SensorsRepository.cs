@@ -1,5 +1,9 @@
-﻿using HARIA.Domain.Abstractions.Repositories;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using HARIA.Domain.Abstractions.Repositories;
 using HARIA.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace HARIA.DataAccess
 {
@@ -7,6 +11,20 @@ namespace HARIA.DataAccess
     {
         public SensorsRepository(IContext context) : base(context)
         {
+        }
+
+        public Task<SensorEntity> GetByCode(string code)
+        {
+            return dbSet
+                .Where(t => t.Code.Equals(code))
+                .FirstOrDefaultAsync();
+        }
+
+        public Task<List<SensorEntity>> GetByDevice(int id)
+        {
+            return dbSet
+                .Where(t => t.DeviceId == id)
+                .ToListAsync();
         }
     }
 }
