@@ -350,3 +350,4 @@ MigrationBackup/
 .ionide/
 /HARIA/Core/HARIA.API/HARIA.db-shm
 /HARIA/Core/HARIA.API/HARIA.db-wal
+/HARIA/Core/HARIA.API/HARIA.db
