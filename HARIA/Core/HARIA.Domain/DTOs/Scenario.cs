@@ -17,6 +17,8 @@ namespace HARIA.Domain.DTOs
 
         public string Color { get; set; }
 
+        public bool IsDefault { get; set; }
+
         public List<ActionEvent> Actions { get; set; }
 
         public List<ScenarioTrigger> Triggers { get; set; }

@@ -20,6 +20,8 @@ namespace HARIA.Domain.Entities
 
         public bool LockState { get; set; }
 
+        public string Message { get; set; }
+
         public int DefaultActiveTime { get; set; }
 
         public DateTime DeactivationTime { get; set; }

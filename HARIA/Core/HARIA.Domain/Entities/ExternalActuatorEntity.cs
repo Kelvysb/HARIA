@@ -8,9 +8,15 @@ namespace HARIA.Domain.Entities
     {
         public int Id { get; set; }
 
+        public string Code { get; set; }
+
+        public bool Active { get; set; }
+
         public string Description { get; set; }
 
         public string Script { get; set; }
+
+        public string Message { get; set; }
 
         public DateTime LastExecution { get; set; }
 

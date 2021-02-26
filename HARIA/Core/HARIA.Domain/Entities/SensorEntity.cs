@@ -24,6 +24,8 @@ namespace HARIA.Domain.Entities
 
         public bool Active { get; set; }
 
+        public string Message { get; set; }
+
         public DateTime LastStateChange { get; set; }
 
         public List<ActionEventEntity> Actions { get; set; }

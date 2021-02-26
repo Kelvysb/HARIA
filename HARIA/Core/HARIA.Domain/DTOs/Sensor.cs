@@ -23,6 +23,8 @@ namespace HARIA.Domain.DTOs
 
         public bool Active { get; set; }
 
+        public string Message { get; set; }
+
         public DateTime LastStateChange { get; set; }
     }
 }

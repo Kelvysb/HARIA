@@ -1,0 +1,31 @@
+﻿@inherits NavMenuBase;
+
+<div class="top-row pl-4 navbar navbar-dark">
+    <div class="row">
+        <img src="images/Emulator_Logo.svg" class="logo col-4" />
+        <span class="logo-text col-8">@Translate.AppName</span>
+    </div>
+    <button class="navbar-toggler" @onclick="ToggleNavMenu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</div>
+
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <ul class="nav flex-column">
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> @Translate.Dashboard
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="devices">
+                <span class="oi oi-dial" aria-hidden="true"></span> @Translate.Devices
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="config">
+                <span class="oi oi-cog" aria-hidden="true"></span> @Translate.Configurations
+            </NavLink>
+        </li>
+    </ul>
+</div>

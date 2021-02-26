@@ -16,7 +16,7 @@ namespace HARIA.API.Controllers
             sensorsService = service;
         }
 
-        [HttpGet("{code}")]
+        [HttpGet("ByCode/{code}")]
         public async Task<IActionResult> GetByCode([FromRoute] string code)
         {
             try
@@ -30,7 +30,7 @@ namespace HARIA.API.Controllers
             }
         }
 
-        [HttpGet("{deviceId}")]
+        [HttpGet("ByDevice/{deviceId}")]
         public async Task<IActionResult> GetByDevice([FromRoute] int deviceId)
         {
             try

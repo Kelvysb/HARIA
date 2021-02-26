@@ -22,7 +22,7 @@ namespace HARIA.Domain.Helpers
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString(), issuer),
                     new Claim(ClaimTypes.Name, user.Name, issuer),
                     new Claim(ClaimTypes.Role, string.Join(",", user.Roles.Select(r => r.Name)), issuer),
-                    new Claim(Constants.Constants.CLAIMS_PERMISSIONS, string.Join(",", user.Roles.SelectMany(r => r.Permissions.Select(p => p.Code))), issuer)
+                    new Claim(Constants.ClaimsNames.PERMISSIONS, string.Join(",", user.Roles.SelectMany(r => r.Permissions.Select(p => p.Code))), issuer)
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
@@ -53,7 +53,7 @@ namespace HARIA.Domain.Helpers
                 throw new ArgumentNullException(nameof(principal));
             }
 
-            var userPermissions = principal.Claims.First(claim => claim.Type == Constants.Constants.CLAIMS_PERMISSIONS).Value.Split(",");
+            var userPermissions = principal.Claims.First(claim => claim.Type == Constants.ClaimsNames.PERMISSIONS).Value.Split(",");
 
             if (!userPermissions.Any(p => permissions.Contains(p)))
             {

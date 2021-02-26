@@ -17,6 +17,8 @@ namespace HARIA.Domain.Entities
 
         public string Color { get; set; }
 
+        public bool IsDefault { get; set; }
+
         public List<ActionEventEntity> Actions { get; set; }
 
         public List<ScenarioTriggerEntity> Triggers { get; set; }

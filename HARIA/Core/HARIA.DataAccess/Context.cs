@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using HARIA.Domain.Abstractions.Repositories;
+using HARIA.Domain.Constants;
 using HARIA.Domain.Entities;
 using HARIA.Domain.Helpers;
 using Microsoft.EntityFrameworkCore;
@@ -169,25 +170,25 @@ namespace HARIA.DataAccess
                     new PermissionEntity()
                     {
                         Id = 1,
-                        Code = "SERVICE",
+                        Code = Permissions.SERVICE,
                         Description = "Access device service endpoints"
                     },
                     new PermissionEntity()
                     {
                         Id = 2,
-                        Code = "DASHBOARD",
+                        Code = Permissions.DASHBOARD,
                         Description = "View Dashboard"
                     },
                     new PermissionEntity()
                     {
                         Id = 3,
-                        Code = "CONFIGURE",
+                        Code = Permissions.CONFIGURE,
                         Description = "Configure system"
                     },
                     new PermissionEntity()
                     {
                         Id = 4,
-                        Code = "KIOSK",
+                        Code = Permissions.KIOSK,
                         Description = "Kiosk mode"
                     });
 
@@ -264,13 +265,35 @@ namespace HARIA.DataAccess
                 );
 
             modelBuilder.Entity<StateEntity>()
-                .HasData(new StateEntity()
+                .HasData(
+                new StateEntity()
                 {
                     Id = 1,
+                    Key = "ACTIVE_SCENARIO",
+                    Value = "DEFAULT",
+                    DefaultValue = "DEFAULT",
+                    IsSystemDefault = true
+                },
+                new StateEntity()
+                {
+                    Id = 2,
                     Key = "SCENARIO_MODE",
                     Value = "AUTO",
                     DefaultValue = "AUTO",
                     IsSystemDefault = true
+                });
+
+            modelBuilder.Entity<ScenarioEntity>()
+                .HasData(
+                new ScenarioEntity()
+                {
+                    Id = 1,
+                    Name = "Default",
+                    Description = "Default scenario",
+                    Color = "#F2F2F2",
+                    Icon = "default.svg",
+                    Priority = 999,
+                    IsDefault = true
                 });
 
             base.OnModelCreating(modelBuilder);

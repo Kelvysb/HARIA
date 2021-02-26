@@ -21,7 +21,9 @@ namespace HARIA.Domain.DTOs
 
         public int DefaultActiveTime { get; set; }
 
-        public DateTime DeactivationTime { get; set; }
+        public string Message { get; set; }
+
+        public DateTime? DeactivationTime { get; set; }
 
         public DateTime LastStateChange { get; set; }
     }

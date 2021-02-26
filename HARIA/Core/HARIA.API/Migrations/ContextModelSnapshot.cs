@@ -196,6 +196,9 @@ namespace HARIA.API.Migrations
                     b.Property<bool>("LockState")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Message")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AmbientEntityId");
@@ -245,10 +248,19 @@ namespace HARIA.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("Active")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("LastExecution")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Message")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Script")
@@ -267,6 +279,9 @@ namespace HARIA.API.Migrations
 
                     b.Property<bool>("Active")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Condition")
                         .HasColumnType("TEXT");
@@ -415,6 +430,9 @@ namespace HARIA.API.Migrations
                     b.Property<string>("Icon")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("IsDefault")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
@@ -424,6 +442,18 @@ namespace HARIA.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Scenarios");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Color = "#F2F2F2",
+                            Description = "Default scenario",
+                            Icon = "default.svg",
+                            IsDefault = true,
+                            Name = "Default",
+                            Priority = 999
+                        });
                 });
 
             modelBuilder.Entity("HARIA.Domain.Entities.ScenarioTriggerEntity", b =>
@@ -493,6 +523,9 @@ namespace HARIA.API.Migrations
                     b.Property<DateTime>("LastStateChange")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Message")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("Value")
                         .HasColumnType("INTEGER");
 
@@ -531,6 +564,14 @@ namespace HARIA.API.Migrations
                         new
                         {
                             Id = 1,
+                            DefaultValue = "DEFAULT",
+                            IsSystemDefault = true,
+                            Key = "ACTIVE_SCENARIO",
+                            Value = "DEFAULT"
+                        },
+                        new
+                        {
+                            Id = 2,
                             DefaultValue = "AUTO",
                             IsSystemDefault = true,
                             Key = "SCENARIO_MODE",

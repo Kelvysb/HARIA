@@ -1,0 +1,15 @@
+﻿:root {
+    --background: #470464;
+    --font-color: #d3d3d3;
+    --header-background: #470464;
+    --sidebar-background-begin: #56007b;
+    --sidebar-background-end: #290a29;
+    --sidebar-item-color-active: rgba(255,255,255,0.25);
+    --sidebar-item-color-hoover: rgba(255,255,255,0.1);
+    --line-color: #333333;
+    --result-background: #2a2a2c;
+    --modal-filter: rgba(0, 0, 0, 0.55);
+    --scroll-background: #3e3e42;
+    --scroll-thumb: #4c4c4c;
+    --scroll-thumb-hoover: #969696;
+}
