@@ -10,6 +10,9 @@ namespace HARIA.Emulator.I18nText
         /// <summary>"Add"</summary>
         public string Add;
 
+        /// <summary>"Administrator privileges user"</summary>
+        public string AdminOnly;
+
         /// <summary>"HARIA-DE"</summary>
         public string App_name;
 
@@ -22,8 +25,17 @@ namespace HARIA.Emulator.I18nText
         /// <summary>"Dashboard"</summary>
         public string Dashboard;
 
+        /// <summary>"Details"</summary>
+        public string Details;
+
         /// <summary>"Devices"</summary>
         public string Devices;
+
+        /// <summary>"Error"</summary>
+        public string Error;
+
+        /// <summary>"Wrong user or password"</summary>
+        public string LoginFail;
 
         /// <summary>"Off"</summary>
         public string Off;
@@ -31,13 +43,31 @@ namespace HARIA.Emulator.I18nText
         /// <summary>"On"</summary>
         public string On;
 
+        /// <summary>"Password"</summary>
+        public string Password;
+
         /// <summary>"Remove"</summary>
         public string Remove;
+
+        /// <summary>"See logs for more information about this error"</summary>
+        public string SeeLogs;
+
+        /// <summary>"Sign in"</summary>
+        public string SignIn;
+
+        /// <summary>"Sign out"</summary>
+        public string SignOut;
+
+        /// <summary>"Something went wrong"</summary>
+        public string SomethingWrong;
 
         /// <summary>"State"</summary>
         public string State;
 
         /// <summary>"Toggle"</summary>
         public string Toggle;
+
+        /// <summary>"User"</summary>
+        public string User;
     }
 }

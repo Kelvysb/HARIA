@@ -1,5 +1,6 @@
 .logo {
-    height: 3.5rem;
+    height: 2rem;
+    padding-left: 0.7rem;
 }
 
 .logo-text {
@@ -9,15 +10,20 @@
 }
 
 .navbar-toggler {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--navbar-toggler);
 }
 
 .top-row {
     height: 3.5rem;
-}
-
-.navbar-brand {
-    font-size: 1.1rem;
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
 }
 
 .oi {
@@ -30,6 +36,7 @@
 .nav-item {
     font-size: 0.9rem;
     padding-bottom: 0.5rem;
+    padding-left: 0.1rem;
 }
 
     .nav-item:first-of-type {
@@ -41,7 +48,7 @@
     }
 
     .nav-item ::deep a {
-        color: var(--font-color);
+        color: var(--font-color-light);
         border-radius: 4px;
         height: 3rem;
         display: flex;
@@ -49,23 +56,12 @@
         line-height: 3rem;
     }
 
-        .nav-item ::deep a.active {
-            background-color: var(--sidebar-item-color-active);
-            color: var(--font-color);
-        }
-
-        .nav-item ::deep a:hover {
-            background-color: var(--sidebar-item-color-hoover);
-            color: var(--font-color);
-        }
-
 @media (min-width: 641px) {
     .navbar-toggler {
         display: none;
     }
 
     .collapse {
-        /* Never collapse the sidebar for wide screens */
         display: block;
     }
 }

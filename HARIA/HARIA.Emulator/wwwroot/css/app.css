@@ -30,17 +30,64 @@ html, body {
 }
 
 a, .btn-link {
-    color: var(--font-color);
+    color: var(--font-color-light);
 }
 
 .btn-primary {
-    color: var(--font-color);
+    color: var(--font-color-light);
     background-color: var(--background);
     border-color: var(--background);
 }
 
 .content {
     padding-top: 1.1rem;
+}
+
+.input-sm {
+    height: 25px !important;
+    width: 120px !important;
+}
+
+.button {
+    border: none;
+    background-color: transparent;
+    color: var(--fonr-color);
+}
+
+    .button :focus {
+        outline: none;
+    }
+
+.button-solid {
+    border: none;
+    border-radius: 5px;
+    background-color: var(--button-color);
+    color: var(--font-color-light);
+    -moz-box-shadow: var(--button-color-dark) 1px 1px 3px;
+    -webkit-box-shadow: var(--button-color-dark) 1px 1px 3px;
+    box-shadow: var(--button-color-dark) 1px 1px 3px;
+}
+
+    .button-solid :focus {
+        outline: none;
+        -moz-box-shadow: var(--button-color-dark) 2px 2px 3px;
+        -webkit-box-shadow: var(--button-color-dark) 2px 2px 3px;
+        box-shadow: var(--button-color-dark) 2px 2px 3px;
+    }
+
+.label-error {
+    color: var(--font-color-error);
+}
+
+.collapsed {
+    height: 0px;
+    overflow-y: hidden;
+    border-style: none !important;
+}
+
+.expanded {
+    height: 10rem;
+    overflow-y: scroll;
 }
 
 .valid.modified:not([type=checkbox]) {

@@ -8,5 +8,15 @@
   "Toggle": "Toggle",
   "State": "State",
   "On": "On",
-  "Off": "Off"
+  "Off": "Off",
+  "SignIn": "Sign in",
+  "SignOut": "Sign out",
+  "User": "User",
+  "Password": "Password",
+  "AdminOnly": "Administrator privileges user",
+  "LoginFail": "Wrong user or password",
+  "Error": "Error",
+  "SomethingWrong": "Something went wrong",
+  "SeeLogs": "See logs for more information about this error",
+  "Details": "Details"
 }

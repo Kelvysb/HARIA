@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using HARIA.Client;
 using HARIA.Domain.Abstractions.Client;
 using HARIA.Domain.Configuration;
+using HARIA.Emulator.Helpers;
+using HARIA.Emulator.Services;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,6 +40,11 @@ namespace HARIA.Emulator
             services.AddSingleton<IDevicesClient, DevicesClient>();
             services.AddSingleton<IActuatorsClient, ActuatorsClient>();
             services.AddSingleton<ISensorsClient, SensorsClient>();
+            services.AddSingleton<IAmbientsClient, AmbientsClient>();
+            services.AddSingleton<IActionsClient, ActionsClient>();
+            services.AddSingleton<IHashHelper, HashHelper>();
+            services.AddSingleton<ILocalStorageHelper, LocalStorageHelper>();
+            services.AddSingleton<IHariaServices, HariaServices>();
         }
     }
 }

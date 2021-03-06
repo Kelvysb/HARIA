@@ -18,6 +18,8 @@ namespace HARIA.API
 {
     public class Startup
     {
+        private const string CORS_POLICY = "AllowedOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -28,6 +30,18 @@ namespace HARIA.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(CORS_POLICY,
+                                  builder =>
+                                  {
+                                      builder
+                                      .AllowAnyOrigin()
+                                      .AllowAnyHeader()
+                                      .AllowAnyMethod();
+                                  });
+            });
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -105,6 +119,8 @@ namespace HARIA.API
             }
 
             app.UseRouting();
+
+            app.UseCors(CORS_POLICY);
 
             app.UseAuthentication();
 

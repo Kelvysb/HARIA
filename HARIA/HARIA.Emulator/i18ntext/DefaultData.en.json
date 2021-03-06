@@ -1,0 +1,9 @@
+{
+  "Device": "Device",
+  "Sensor": "Sensor",
+  "Actuator": "Actuator",
+  "LivingRoom": "Living Room",
+  "BedRoom": "Bedroom",
+  "Kitchen": "Kitchen",
+  "Action": "Action"
+}

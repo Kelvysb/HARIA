@@ -17,8 +17,7 @@ namespace HARIA.Client.Extenssions
         {
             if (httpResponseMessage.IsSuccessStatusCode)
             {
-                var content = (JsonContent)httpResponseMessage.Content;
-                return await content.ReadFromJsonAsync<T>();
+                return await httpResponseMessage.Content.ReadFromJsonAsync<T>();
             }
             else
             {

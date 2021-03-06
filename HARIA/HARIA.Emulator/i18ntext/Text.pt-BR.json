@@ -8,5 +8,15 @@
   "Toggle": "Alternar",
   "State": "Estado",
   "On": "Ligado",
-  "Off": "Desligado"
+  "Off": "Desligado",
+  "SignIn": "Entrar",
+  "SignOut": "Sair",
+  "User": "Usuário",
+  "Password": "Senha",
+  "AdminOnly": "Usuário com privilégios de administrador",
+  "LoginFail": "Usuário ou senha inválida",
+  "Error": "Erro",
+  "SomethingWrong": "Algo de errado não está certo",
+  "SeeLogs": "Veja os logs para mais informações sobre este erro",
+  "Details": "Detalhes"
 }

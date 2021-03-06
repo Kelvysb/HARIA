@@ -1,0 +1,22 @@
+﻿.login-tip {
+    position: fixed;
+    right: 10rem;
+    top: 4.5rem;
+    width: 10rem;
+}
+
+.login-tip-image {
+    width: 100%;
+}
+
+.devices {
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+}
+
+@media (max-width: 640.98px) {
+    .login-tip {
+        top: 8.5rem;
+    }
+}

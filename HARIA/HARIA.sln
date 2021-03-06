@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HARIA.Worker", "Core\HARIA.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HARIA.Emulator", "HARIA.Emulator\HARIA.Emulator.csproj", "{F55EC3E6-B04B-45E1-891F-04CE4FE44637}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HARIA.Client", "HARIA.Client\HARIA.Client.csproj", "{508E04F8-C399-4508-A4FC-1DDF31DFAEDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HARIA.Client", "HARIA.Client\HARIA.Client.csproj", "{508E04F8-C399-4508-A4FC-1DDF31DFAEDB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

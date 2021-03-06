@@ -1,0 +1,10 @@
+{
+  "Device": "Dispositivo",
+  "Sensor": "Sensor",
+  "Actuator": "Atuador",
+  "LivingRoom": "Sala",
+  "BedRoom": "Quarto",
+  "Kitchen": "Cozinha",
+  "TestScenario": "Cenário de teste",
+  "Action": "Ação"
+}

@@ -1,0 +1,22 @@
+﻿@page "/error"
+@inherits ErrorBase
+
+<div class="container h-100 pt-2">
+    <div class="m-auto row text-center">
+        <img class="col-8 m-auto" src="/images/Error_Purple.svg" />
+    </div>
+    <div class="row mt-2 text-center">
+        <h3 class="m-auto">@Translate.SomethingWrong</h3>
+    </div>
+    <div class="row mt-2 text-center">
+        <button type="button" class="button-solid m-auto" @onclick="ToggleCollapseState">@Translate.Details</button>
+    </div>
+    <div class="row mt-2 collapsible @(Collapsed ? "collapsed" : "expanded")">
+        @if (@hariaServices?.State.CurrentError != null)
+        {
+            <p>@hariaServices?.State.CurrentError.Message</p>
+            <p>@hariaServices?.State.CurrentError.StackTrace</p>
+            <b>@Translate.SeeLogs</b>
+        }
+    </div>
+</div>

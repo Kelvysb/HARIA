@@ -1,3 +1,28 @@
 ﻿@page "/"
+@inherits DashboardBase
 
-<h1>HARIA - Devices Emulator</h1>
+@if (hariaServices.State.LoggedUser != null)
+{
+    if (Devices.Any())
+    {
+        <div class="devices h-100 v-100">
+            @foreach (var device in Devices)
+            {
+                <DeviceView Device="device" />
+            }
+        </div>
+    }
+    else
+    {
+        <span>No Devices</span>
+        <button class="button-solid" @onclick="AddDefaultDevices">Add default test devices</button>
+    }
+}
+else
+{
+    <div class="text-center">
+        <div class="login-tip text-center">
+            <img src="/images/triangle_Purple.svg" class="login-tip-image" />
+        </div>
+    </div>
+}
