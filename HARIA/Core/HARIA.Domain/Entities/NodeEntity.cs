@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using HARIA.Domain.Abstractions.DTOs;
+using HARIA.Domain.Abstractions.Entities;
 
-namespace HARIA.Domain.DTOs
+namespace HARIA.Domain.Entities
 {
-    public class Device : IDTO
+    public class NodeEntity : IEntity
     {
         public int Id { get; set; }
 
@@ -12,9 +12,9 @@ namespace HARIA.Domain.DTOs
 
         public string Description { get; set; }
 
-        public List<Sensor> Sensors { get; set; }
+        public List<SensorEntity> Sensors { get; set; }
 
-        public List<Actuator> Actuators { get; set; }
+        public List<ActuatorEntity> Actuators { get; set; }
 
         public DateTime LastActivity { get; set; }
     }

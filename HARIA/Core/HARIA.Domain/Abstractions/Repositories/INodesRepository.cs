@@ -3,8 +3,8 @@ using HARIA.Domain.Entities;
 
 namespace HARIA.Domain.Abstractions.Repositories
 {
-    public interface IDevicesRepository : IRepositoryBase<DeviceEntity>
+    public interface INodesRepository : IRepositoryBase<NodeEntity>
     {
-        Task<DeviceEntity> GetByCode(string code);
+        Task<NodeEntity> GetByCode(string code);
     }
 }

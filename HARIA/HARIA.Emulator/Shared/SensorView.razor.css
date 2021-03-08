@@ -1,0 +1,6 @@
+﻿.sensor-card {
+    background-color: var(--background-hover);
+    min-height: 10rem;
+    width: 25rem;
+    margin: 0.5rem;
+}

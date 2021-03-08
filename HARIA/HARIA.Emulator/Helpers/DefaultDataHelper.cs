@@ -7,11 +7,11 @@ namespace HARIA.Emulator.Helpers
     {
         private static I18nText.DefaultData translate;
 
-        public static (List<Ambient>, List<Device>, List<ActionEvent>) GetDefaultData(I18nText.DefaultData translate)
+        public static (List<Ambient>, List<Node>, List<ActionEvent>) GetDefaultData(I18nText.DefaultData translate)
         {
             DefaultDataHelper.translate = translate;
             var ambients = CreateAmbients();
-            var devices = CreateDevices();
+            var devices = CreateNodes();
             var actions = new List<ActionEvent>();
             foreach (var device in devices)
             {
@@ -20,7 +20,7 @@ namespace HARIA.Emulator.Helpers
             return (ambients, devices, actions);
         }
 
-        private static List<ActionEvent> CreateActions(Device devices)
+        private static List<ActionEvent> CreateActions(Node devices)
         {
             return new List<ActionEvent>()
             {
@@ -65,16 +65,16 @@ namespace HARIA.Emulator.Helpers
                 };
         }
 
-        private static List<Device> CreateDevices()
+        private static List<Node> CreateNodes()
         {
-            return new List<Device>()
+            return new List<Node>()
             {
-                new Device() {Id = 0, Code = "01", Description = $"{translate.Device} 1", Actuators = CreateDefaultActivators("01", 1), Sensors = CreateDefaultSensors("01", 1)},
-                new Device() {Id = 0, Code = "02", Description = $"{translate.Device} 2", Actuators = CreateDefaultActivators("02", 1), Sensors = CreateDefaultSensors("02", 1)},
-                new Device() {Id = 0, Code = "03", Description = $"{translate.Device} 3", Actuators = CreateDefaultActivators("03", 2), Sensors = CreateDefaultSensors("03", 2)},
-                new Device() {Id = 0, Code = "04", Description = $"{translate.Device} 4", Actuators = CreateDefaultActivators("04", 2), Sensors = CreateDefaultSensors("04", 2)},
-                new Device() {Id = 0, Code = "05", Description = $"{translate.Device} 5", Actuators = CreateDefaultActivators("05", 2), Sensors = CreateDefaultSensors("05", 2)},
-                new Device() {Id = 0, Code = "06", Description = $"{translate.Device} 6", Actuators = CreateDefaultActivators("06", 3), Sensors = CreateDefaultSensors("06", 3)},
+                new Node() {Id = 0, Code = "01", Description = $"{translate.Node} 1", Actuators = CreateDefaultActivators("01", 1), Sensors = CreateDefaultSensors("01", 1)},
+                new Node() {Id = 0, Code = "02", Description = $"{translate.Node} 2", Actuators = CreateDefaultActivators("02", 1), Sensors = CreateDefaultSensors("02", 1)},
+                new Node() {Id = 0, Code = "03", Description = $"{translate.Node} 3", Actuators = CreateDefaultActivators("03", 2), Sensors = CreateDefaultSensors("03", 2)},
+                new Node() {Id = 0, Code = "04", Description = $"{translate.Node} 4", Actuators = CreateDefaultActivators("04", 2), Sensors = CreateDefaultSensors("04", 2)},
+                new Node() {Id = 0, Code = "05", Description = $"{translate.Node} 5", Actuators = CreateDefaultActivators("05", 2), Sensors = CreateDefaultSensors("05", 2)},
+                new Node() {Id = 0, Code = "06", Description = $"{translate.Node} 6", Actuators = CreateDefaultActivators("06", 3), Sensors = CreateDefaultSensors("06", 3)},
             };
         }
 

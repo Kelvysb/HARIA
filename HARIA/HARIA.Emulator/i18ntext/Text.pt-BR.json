@@ -1,7 +1,9 @@
 {
   "AppName": "HARIA-DE",
   "Dashboard": "Painel",
-  "Devices": "Dispositivos",
+  "Nodes": "Nós",
+  "Sensor": "Sensor",
+  "Actuator": "Atuador",
   "Configurations": "Configurações",
   "Add": "Adicionar",
   "Remove": "Remover",
@@ -18,5 +20,7 @@
   "Error": "Erro",
   "SomethingWrong": "Algo de errado não está certo",
   "SeeLogs": "Veja os logs para mais informações sobre este erro",
-  "Details": "Detalhes"
+  "Details": "Detalhes",
+  "NoData": "Sem dados de testes",
+  "AddTestData": "Adicionar dados de teste"
 }

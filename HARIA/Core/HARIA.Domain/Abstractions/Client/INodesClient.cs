@@ -2,7 +2,7 @@
 
 namespace HARIA.Domain.Abstractions.Client
 {
-    public interface ILogsClient : IClientBase<Log>
+    public interface INodesClient : IClientBase<Node>
     {
     }
 }

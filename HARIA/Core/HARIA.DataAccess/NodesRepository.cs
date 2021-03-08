@@ -8,13 +8,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HARIA.DataAccess
 {
-    public class DevicesRepository : RepositoryBase<DeviceEntity>, IDevicesRepository
+    public class NodesRepository : RepositoryBase<NodeEntity>, INodesRepository
     {
-        public DevicesRepository(IContext context) : base(context)
+        public NodesRepository(IContext context) : base(context)
         {
         }
 
-        public override Task<List<DeviceEntity>> GetAll()
+        public override Task<List<NodeEntity>> GetAll()
         {
             return dbSet
                 .Include(t => t.Actuators)
@@ -23,7 +23,7 @@ namespace HARIA.DataAccess
                 .ToListAsync();
         }
 
-        public Task<DeviceEntity> GetByCode(string code)
+        public Task<NodeEntity> GetByCode(string code)
         {
             return dbSet
                 .Where(t => t.Code.Equals(code, StringComparison.InvariantCultureIgnoreCase))
@@ -33,7 +33,7 @@ namespace HARIA.DataAccess
                 .FirstOrDefaultAsync();
         }
 
-        public override Task<DeviceEntity> GetById(int id)
+        public override Task<NodeEntity> GetById(int id)
         {
             return dbSet
                 .Where(t => t.Id == id)

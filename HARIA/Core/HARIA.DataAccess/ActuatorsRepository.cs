@@ -23,7 +23,7 @@ namespace HARIA.DataAccess
         public Task<List<ActuatorEntity>> GetByDevice(int id)
         {
             return dbSet
-                .Where(t => t.DeviceId == id)
+                .Where(t => t.NodeId == id)
                 .ToListAsync();
         }
     }

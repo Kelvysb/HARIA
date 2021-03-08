@@ -90,6 +90,12 @@ a, .btn-link {
     overflow-y: scroll;
 }
 
+.h_divider {
+    height: 2px;
+    width: 100%;
+    background: var(--sidebar-background-begin);
+}
+
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid var(--background);
 }

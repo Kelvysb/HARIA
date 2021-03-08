@@ -7,7 +7,9 @@ namespace HARIA.Domain.Entities
     {
         public int Id { get; set; }
 
-        public int ActionId { get; set; }
+        public int ActionEventId { get; set; }
+
+        public ActionEventEntity ActionEvent { get; set; }
 
         public DateTime InitialTime { get; set; }
 

@@ -1,7 +1,9 @@
 {
-  "App_name": "HARIA-DE",
+  "AppName": "HARIA-DE",
   "Dashboard": "Dashboard",
-  "Devices": "Devices",
+  "Nodes": "Nodes",
+  "Sensor": "Sensor",
+  "Actuator": "Actuator",
   "Configurations": "Configurations",
   "Add": "Add",
   "Remove": "Remove",
@@ -18,5 +20,7 @@
   "Error": "Error",
   "SomethingWrong": "Something went wrong",
   "SeeLogs": "See logs for more information about this error",
-  "Details": "Details"
+  "Details": "Details",
+  "NoData": "No test data",
+  "AddTestData": "Add default test data"
 }

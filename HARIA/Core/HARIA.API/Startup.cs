@@ -79,10 +79,9 @@ namespace HARIA.API
             services.AddTransient<IActionEventPeriodsRepository, ActionEventPeriodsRepository>();
             services.AddTransient<IActuatorsRepository, ActuatorsRepository>();
             services.AddTransient<IAmbientsRepository, AmbientsRepository>();
-            services.AddTransient<IDevicesRepository, DevicesRepository>();
+            services.AddTransient<INodesRepository, NodesRepository>();
             services.AddTransient<IExternalSensorsRepository, ExternalSensorsRepository>();
             services.AddTransient<IExternalActuatorsRepository, ExternalActuatorsRepository>();
-            services.AddTransient<ILogsRepository, LogsRepository>();
             services.AddTransient<IScenariosRepository, ScenariosRepository>();
             services.AddTransient<IScenarioTriggersRepository, ScenarioTriggersRepository>();
             services.AddTransient<ISensorsRepository, SensorsRepository>();
@@ -94,10 +93,9 @@ namespace HARIA.API
             services.AddTransient<IActionEventPeriodsService, ActionEventPeriodsService>();
             services.AddTransient<IActuatorsService, ActuatorsService>();
             services.AddTransient<IAmbientsService, AmbientsService>();
-            services.AddTransient<IDevicesService, DevicesService>();
+            services.AddTransient<INodesService, NodesService>();
             services.AddTransient<IExternalSensorsService, ExternalSensorsService>();
             services.AddTransient<IExternalActuatorsService, ExternalActuatorsService>();
-            services.AddTransient<ILogsService, LogsService>();
             services.AddTransient<IScenariosService, ScenariosService>();
             services.AddTransient<IScenarioTriggersService, ScenarioTriggersService>();
             services.AddTransient<ISensorsService, SensorsService>();

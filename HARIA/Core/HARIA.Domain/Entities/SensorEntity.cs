@@ -8,9 +8,13 @@ namespace HARIA.Domain.Entities
     {
         public int Id { get; set; }
 
-        public int DeviceId { get; set; }
+        public int NodeId { get; set; }
+
+        public NodeEntity Node { get; set; }
 
         public int AmbientId { get; set; }
+
+        public AmbientEntity Ambient { get; set; }
 
         public string Code { get; set; }
 

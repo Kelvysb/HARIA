@@ -16,14 +16,14 @@ namespace HARIA.Emulator.I18nText
         /// <summary>"Bedroom"</summary>
         public string BedRoom;
 
-        /// <summary>"Device"</summary>
-        public string Device;
-
         /// <summary>"Kitchen"</summary>
         public string Kitchen;
 
         /// <summary>"Living Room"</summary>
         public string LivingRoom;
+
+        /// <summary>"Node"</summary>
+        public string Node;
 
         /// <summary>"Sensor"</summary>
         public string Sensor;

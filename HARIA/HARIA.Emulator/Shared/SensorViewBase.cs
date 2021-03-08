@@ -1,11 +1,15 @@
 ﻿using System.Threading.Tasks;
+using HARIA.Domain.DTOs;
 using HARIA.Emulator.Services;
 using Microsoft.AspNetCore.Components;
 
-namespace HARIA.Emulator.Pages
+namespace HARIA.Emulator.Shared
 {
-    public class DevicesBase : ComponentBase
+    public class SensorViewBase : ComponentBase
     {
+        [Parameter]
+        public Sensor Sensor { get; set; }
+
         [Inject]
         public IHariaServices hariaServices { get; set; }
 
@@ -18,7 +22,6 @@ namespace HARIA.Emulator.Pages
         {
             hariaServices.StateChange += ((s, e) => StateHasChanged());
             Translate = await I18nText.GetTextTableAsync<I18nText.Text>(this);
-            hariaServices.State.CurrentLocation = Translate.Devices;
         }
     }
 }

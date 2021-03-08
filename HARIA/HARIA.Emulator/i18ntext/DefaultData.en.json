@@ -1,5 +1,5 @@
 {
-  "Device": "Device",
+  "Node": "Node",
   "Sensor": "Sensor",
   "Actuator": "Actuator",
   "LivingRoom": "Living Room",

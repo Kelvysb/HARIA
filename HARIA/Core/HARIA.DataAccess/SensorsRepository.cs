@@ -24,7 +24,7 @@ namespace HARIA.DataAccess
         public Task<List<SensorEntity>> GetByDevice(int id)
         {
             return dbSet
-                .Where(t => t.DeviceId == id)
+                .Where(t => t.NodeId == id)
                 .AsNoTracking()
                 .ToListAsync();
         }

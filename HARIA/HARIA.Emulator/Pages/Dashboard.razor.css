@@ -15,6 +15,14 @@
     flex-flow: wrap;
 }
 
+.nodata-card {
+    background-color: var(--background-hover);
+    height: 7rem;
+    width: 25rem;
+    margin: 0.5rem;
+    text-align: center;
+}
+
 @media (max-width: 640.98px) {
     .login-tip {
         top: 8.5rem;

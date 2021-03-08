@@ -37,7 +37,7 @@ namespace HARIA.Emulator
             });
             services.AddSingleton<IUsersClient, UsersClient>();
             services.AddSingleton<IEngineClient, EngineClient>();
-            services.AddSingleton<IDevicesClient, DevicesClient>();
+            services.AddSingleton<INodesClient, NodesClient>();
             services.AddSingleton<IActuatorsClient, ActuatorsClient>();
             services.AddSingleton<ISensorsClient, SensorsClient>();
             services.AddSingleton<IAmbientsClient, AmbientsClient>();

@@ -4,9 +4,9 @@ using HARIA.Domain.Entities;
 
 namespace HARIA.API.Controllers
 {
-    public class LogsController : ControllerBase<LogEntity, Log>
+    public class NodesController : ControllerBase<NodeEntity, Node>
     {
-        public LogsController(ILogsService service) : base(service)
+        public NodesController(INodesService service) : base(service)
         {
         }
     }

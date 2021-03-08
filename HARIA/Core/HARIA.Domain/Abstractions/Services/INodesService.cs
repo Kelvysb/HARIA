@@ -4,8 +4,8 @@ using HARIA.Domain.Entities;
 
 namespace HARIA.Domain.Abstractions.Services
 {
-    public interface IDevicesService : IServiceBase<DeviceEntity, Device>
+    public interface INodesService : IServiceBase<NodeEntity, Node>
     {
-        Task<Device> GetByCode(string code);
+        Task<Node> GetByCode(string code);
     }
 }

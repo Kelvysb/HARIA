@@ -7,7 +7,7 @@ namespace HARIA.Domain.DTOs
     {
         public int Id { get; set; }
 
-        public int DeviceId { get; set; }
+        public int NodeId { get; set; }
 
         public int AmbientId { get; set; }
 

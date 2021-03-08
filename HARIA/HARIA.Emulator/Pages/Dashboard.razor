@@ -3,19 +3,44 @@
 
 @if (hariaServices.State.LoggedUser != null)
 {
-    if (Devices.Any())
+
+    @if (Loading)
     {
-        <div class="devices h-100 v-100">
-            @foreach (var device in Devices)
+        <Loading />
+    }
+    else if (Ambients.Any())
+    {
+        <div class="vh-100">
+            @foreach (var ambient in Ambients)
             {
-                <DeviceView Device="device" />
+                <label class="ml-2">@ambient.Description</label>
+                <div class="h_divider mb-2"></div>
+                <div class="devices h-100">
+
+                    @foreach (var sensor in ambient.Sensors)
+                    {
+                        <SensorView Sensor="sensor" />
+                    }
+                    @foreach (var actuator in ambient.Actuators)
+                    {
+                        <ActuatorView Actuator="actuator" />
+                    }
+                </div>
             }
         </div>
     }
     else
     {
-        <span>No Devices</span>
-        <button class="button-solid" @onclick="AddDefaultDevices">Add default test devices</button>
+        <div class="vh-100">
+            <div class="devices h-100">
+                <div class="nodata-card card">
+                    <div class="card-header">@Translate.NoData</div>
+                    <div class="card-body">
+                        <button class="button-solid" @onclick="AddDefaultData">@Translate.AddTestData</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     }
 }
 else

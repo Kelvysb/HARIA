@@ -13,10 +13,9 @@ namespace HARIA.Domain.Mappers
             ConfigureActionPeriod();
             ConfigureActuator();
             ConfigureAmbient();
-            ConfigureDevice();
+            ConfigureNode();
             ConfigureExternalActuator();
             ConfigureExternalSensor();
-            ConfigureLog();
             ConfigureScenario();
             ConfigureScenarioTrigger();
             ConfigureSensor();
@@ -97,12 +96,6 @@ namespace HARIA.Domain.Mappers
                 .ReverseMap();
         }
 
-        private void ConfigureLog()
-        {
-            CreateMap<Log, LogEntity>()
-                .ReverseMap();
-        }
-
         private void ConfigureExternalSensor()
         {
             CreateMap<ExternalSensor, ExternalSensorEntity>()
@@ -115,9 +108,9 @@ namespace HARIA.Domain.Mappers
                 .ReverseMap();
         }
 
-        private void ConfigureDevice()
+        private void ConfigureNode()
         {
-            CreateMap<Device, DeviceEntity>()
+            CreateMap<Node, NodeEntity>()
                 .ReverseMap();
         }
 

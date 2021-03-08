@@ -38,21 +38,6 @@ namespace HARIA.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Devices",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Code = table.Column<string>(type: "TEXT", nullable: true),
-                    Description = table.Column<string>(type: "TEXT", nullable: true),
-                    LastActivity = table.Column<DateTime>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Devices", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ExternalActuators",
                 columns: table => new
                 {
@@ -90,20 +75,18 @@ namespace HARIA.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Logs",
+                name: "Nodes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Time = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Type = table.Column<string>(type: "TEXT", nullable: true),
-                    IsError = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Code = table.Column<string>(type: "TEXT", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
-                    Data = table.Column<string>(type: "TEXT", nullable: true)
+                    LastActivity = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Logs", x => x.Id);
+                    table.PrimaryKey("PK_Nodes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -188,92 +171,19 @@ namespace HARIA.API.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    ActionId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ActionEventId = table.Column<int>(type: "INTEGER", nullable: false),
                     InitialTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    FinalTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    ActionEventEntityId = table.Column<int>(type: "INTEGER", nullable: true)
+                    FinalTime = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ActionEventPeriods", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ActionEventPeriods_ActionEvents_ActionEventEntityId",
-                        column: x => x.ActionEventEntityId,
+                        name: "FK_ActionEventPeriods_ActionEvents_ActionEventId",
+                        column: x => x.ActionEventId,
                         principalTable: "ActionEvents",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Actuators",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    DeviceId = table.Column<int>(type: "INTEGER", nullable: false),
-                    AmbientId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Code = table.Column<string>(type: "TEXT", nullable: true),
-                    Description = table.Column<string>(type: "TEXT", nullable: true),
-                    Active = table.Column<bool>(type: "INTEGER", nullable: false),
-                    LockState = table.Column<bool>(type: "INTEGER", nullable: false),
-                    Message = table.Column<string>(type: "TEXT", nullable: true),
-                    DefaultActiveTime = table.Column<int>(type: "INTEGER", nullable: false),
-                    DeactivationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    LastStateChange = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    AmbientEntityId = table.Column<int>(type: "INTEGER", nullable: true),
-                    DeviceEntityId = table.Column<int>(type: "INTEGER", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Actuators", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Actuators_Ambients_AmbientEntityId",
-                        column: x => x.AmbientEntityId,
-                        principalTable: "Ambients",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Actuators_Devices_DeviceEntityId",
-                        column: x => x.DeviceEntityId,
-                        principalTable: "Devices",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Sensors",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    DeviceId = table.Column<int>(type: "INTEGER", nullable: false),
-                    AmbientId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Code = table.Column<string>(type: "TEXT", nullable: true),
-                    Description = table.Column<string>(type: "TEXT", nullable: true),
-                    Value = table.Column<int>(type: "INTEGER", nullable: false),
-                    ActiveLowerBound = table.Column<int>(type: "INTEGER", nullable: false),
-                    ActiveUpperBound = table.Column<int>(type: "INTEGER", nullable: false),
-                    Active = table.Column<bool>(type: "INTEGER", nullable: false),
-                    Message = table.Column<string>(type: "TEXT", nullable: true),
-                    LastStateChange = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    AmbientEntityId = table.Column<int>(type: "INTEGER", nullable: true),
-                    DeviceEntityId = table.Column<int>(type: "INTEGER", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Sensors", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Sensors_Ambients_AmbientEntityId",
-                        column: x => x.AmbientEntityId,
-                        principalTable: "Ambients",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Sensors_Devices_DeviceEntityId",
-                        column: x => x.DeviceEntityId,
-                        principalTable: "Devices",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -320,6 +230,74 @@ namespace HARIA.API.Migrations
                         name: "FK_ActionEventsExternalSensors_ExternalSensors_ExternalSensorsId",
                         column: x => x.ExternalSensorsId,
                         principalTable: "ExternalSensors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Actuators",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    NodeId = table.Column<int>(type: "INTEGER", nullable: false),
+                    AmbientId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Code = table.Column<string>(type: "TEXT", nullable: true),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    Active = table.Column<bool>(type: "INTEGER", nullable: false),
+                    LockState = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Message = table.Column<string>(type: "TEXT", nullable: true),
+                    DefaultActiveTime = table.Column<int>(type: "INTEGER", nullable: false),
+                    DeactivationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    LastStateChange = table.Column<DateTime>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Actuators", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Actuators_Ambients_AmbientId",
+                        column: x => x.AmbientId,
+                        principalTable: "Ambients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Actuators_Nodes_NodeId",
+                        column: x => x.NodeId,
+                        principalTable: "Nodes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Sensors",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    NodeId = table.Column<int>(type: "INTEGER", nullable: false),
+                    AmbientId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Code = table.Column<string>(type: "TEXT", nullable: true),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    Value = table.Column<int>(type: "INTEGER", nullable: false),
+                    ActiveLowerBound = table.Column<int>(type: "INTEGER", nullable: false),
+                    ActiveUpperBound = table.Column<int>(type: "INTEGER", nullable: false),
+                    Active = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Message = table.Column<string>(type: "TEXT", nullable: true),
+                    LastStateChange = table.Column<DateTime>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sensors", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Sensors_Ambients_AmbientId",
+                        column: x => x.AmbientId,
+                        principalTable: "Ambients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Sensors_Nodes_NodeId",
+                        column: x => x.NodeId,
+                        principalTable: "Nodes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -382,18 +360,17 @@ namespace HARIA.API.Migrations
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     Type = table.Column<int>(type: "INTEGER", nullable: false),
                     InitialTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    FinalTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    ScenarioEntityId = table.Column<int>(type: "INTEGER", nullable: true)
+                    FinalTime = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ScenarioTriggers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ScenarioTriggers_Scenarios_ScenarioEntityId",
-                        column: x => x.ScenarioEntityId,
+                        name: "FK_ScenarioTriggers_Scenarios_ScenarioId",
+                        column: x => x.ScenarioId,
                         principalTable: "Scenarios",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -642,9 +619,9 @@ namespace HARIA.API.Migrations
                 values: new object[] { 4, 4 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ActionEventPeriods_ActionEventEntityId",
+                name: "IX_ActionEventPeriods_ActionEventId",
                 table: "ActionEventPeriods",
-                column: "ActionEventEntityId");
+                column: "ActionEventId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ActionEventsActuators_ActuatorsId",
@@ -667,14 +644,14 @@ namespace HARIA.API.Migrations
                 column: "SensorsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Actuators_AmbientEntityId",
+                name: "IX_Actuators_AmbientId",
                 table: "Actuators",
-                column: "AmbientEntityId");
+                column: "AmbientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Actuators_DeviceEntityId",
+                name: "IX_Actuators_NodeId",
                 table: "Actuators",
-                column: "DeviceEntityId");
+                column: "NodeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RolesPermissions_RolesId",
@@ -687,9 +664,9 @@ namespace HARIA.API.Migrations
                 column: "ScenariosId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ScenarioTriggers_ScenarioEntityId",
+                name: "IX_ScenarioTriggers_ScenarioId",
                 table: "ScenarioTriggers",
-                column: "ScenarioEntityId");
+                column: "ScenarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ScenarioTriggersExternalSensors_ScenarioTriggersId",
@@ -702,14 +679,14 @@ namespace HARIA.API.Migrations
                 column: "SensorsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sensors_AmbientEntityId",
+                name: "IX_Sensors_AmbientId",
                 table: "Sensors",
-                column: "AmbientEntityId");
+                column: "AmbientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sensors_DeviceEntityId",
+                name: "IX_Sensors_NodeId",
                 table: "Sensors",
-                column: "DeviceEntityId");
+                column: "NodeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UsersRoles_UsersId",
@@ -733,9 +710,6 @@ namespace HARIA.API.Migrations
 
             migrationBuilder.DropTable(
                 name: "ActionEventsSensors");
-
-            migrationBuilder.DropTable(
-                name: "Logs");
 
             migrationBuilder.DropTable(
                 name: "RolesPermissions");
@@ -789,7 +763,7 @@ namespace HARIA.API.Migrations
                 name: "Ambients");
 
             migrationBuilder.DropTable(
-                name: "Devices");
+                name: "Nodes");
         }
     }
 }

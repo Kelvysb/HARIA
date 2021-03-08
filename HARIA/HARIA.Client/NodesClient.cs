@@ -4,9 +4,9 @@ using HARIA.Domain.DTOs;
 
 namespace HARIA.Client
 {
-    public class LogsClient : ClientBase<Log>, ILogsClient
+    public class NodesClient : ClientBase<Node>, INodesClient
     {
-        public LogsClient(HariaApiConfig hariaApiConfig) : base(hariaApiConfig, "Logs")
+        public NodesClient(HariaApiConfig hariaApiConfig) : base(hariaApiConfig, "Nodes")
         {
         }
     }

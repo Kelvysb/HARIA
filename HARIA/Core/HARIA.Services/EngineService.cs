@@ -10,7 +10,7 @@ namespace HARIA.Services
 {
     public class EngineService : IEngineService
     {
-        private readonly IDevicesService devicesService;
+        private readonly INodesService nodesService;
         private readonly ISensorsService sensorsService;
         private readonly IActuatorsService actuatorsService;
         private readonly IScenariosService scenariosService;
@@ -20,21 +20,23 @@ namespace HARIA.Services
         private readonly IStatesService statesService;
 
         public EngineService(
-            IDevicesService devicesService,
+            INodesService nodesService,
             ISensorsService sensorsService,
             IActuatorsService actuatorsService,
             IScenariosService scenariosService,
             IScenarioTriggersService scenarioTriggersService,
             IExternalSensorsService externalSensorsService,
-            IExternalActuatorsService externalActuatorsService)
+            IExternalActuatorsService externalActuatorsService,
+            IStatesService statesService)
         {
-            this.devicesService = devicesService;
+            this.nodesService = nodesService;
             this.sensorsService = sensorsService;
             this.actuatorsService = actuatorsService;
             this.scenariosService = scenariosService;
             this.scenarioTriggersService = scenarioTriggersService;
             this.externalSensorsService = externalSensorsService;
             this.externalActuatorsService = externalActuatorsService;
+            this.statesService = statesService;
         }
 
         public async Task<List<DeviceMessage>> StateChange(List<DeviceMessage> deviceMessages)
@@ -56,7 +58,7 @@ namespace HARIA.Services
 
         public async Task<List<DeviceMessage>> GetState(string deviceCode)
         {
-            Device device = await devicesService.GetByCode(deviceCode);
+            Node device = await nodesService.GetByCode(deviceCode);
             List<Actuator> actuators = await actuatorsService.GetByDevice(device.Id);
             return await ProcessActuatorMessasge(actuators, deviceCode);
         }
@@ -66,14 +68,14 @@ namespace HARIA.Services
             var states = await statesService.GetStateDictionary();
             var scenarios = await scenariosService.Get();
             var scenarioTriggers = await scenarioTriggersService.Get();
-            var devicecs = await devicesService.Get();
+            var devicecs = await nodesService.Get();
         }
 
         private async Task UpdateDevieStatus(string deviceCode)
         {
-            Device device = await devicesService.GetByCode(deviceCode);
+            Node device = await nodesService.GetByCode(deviceCode);
             device.LastActivity = DateTime.UtcNow;
-            await devicesService.Update(device);
+            await nodesService.Update(device);
         }
 
         private async Task ProcessSensorMessasge(DeviceMessage deviceMessage)

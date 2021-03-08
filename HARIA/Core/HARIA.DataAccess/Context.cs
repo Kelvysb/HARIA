@@ -28,15 +28,19 @@ namespace HARIA.DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<DeviceEntity>()
-                .ToTable("Devices")
+            modelBuilder.Entity<NodeEntity>()
+                .ToTable("Nodes")
                 .HasKey(t => t.Id);
 
-            modelBuilder.Entity<DeviceEntity>()
-                .HasMany(t => t.Sensors);
+            modelBuilder.Entity<NodeEntity>()
+                .HasMany(t => t.Sensors)
+                .WithOne(s => s.Node)
+                .HasForeignKey(s => s.NodeId);
 
-            modelBuilder.Entity<DeviceEntity>()
-                .HasMany(t => t.Actuators);
+            modelBuilder.Entity<NodeEntity>()
+                .HasMany(t => t.Actuators)
+                .WithOne(a => a.Node)
+                .HasForeignKey(a => a.NodeId);
 
             modelBuilder.Entity<SensorEntity>()
                 .ToTable("Sensors")
@@ -51,10 +55,14 @@ namespace HARIA.DataAccess
                 .HasKey(t => t.Id);
 
             modelBuilder.Entity<AmbientEntity>()
-                .HasMany(t => t.Actuators);
+                .HasMany(t => t.Actuators)
+                .WithOne(a => a.Ambient)
+                .HasForeignKey(a => a.AmbientId);
 
             modelBuilder.Entity<AmbientEntity>()
-                .HasMany(t => t.Sensors);
+                .HasMany(t => t.Sensors)
+                .WithOne(s => s.Ambient)
+                .HasForeignKey(s => s.AmbientId);
 
             modelBuilder.Entity<ExternalSensorEntity>()
                 .ToTable("ExternalSensors")
@@ -89,7 +97,9 @@ namespace HARIA.DataAccess
                 .UsingEntity(r => r.ToTable("ActionEventsExternalActuators"));
 
             modelBuilder.Entity<ActionEventEntity>()
-                .HasMany(t => t.ActionPeriods);
+                .HasMany(t => t.ActionPeriods)
+                .WithOne(p => p.ActionEvent)
+                .HasForeignKey(p => p.ActionEventId);
 
             modelBuilder.Entity<ActionEventPeriodEntity>()
                 .ToTable("ActionEventPeriods")
@@ -105,7 +115,9 @@ namespace HARIA.DataAccess
                 .UsingEntity(r => r.ToTable("ScenarioActionEvents"));
 
             modelBuilder.Entity<ScenarioEntity>()
-                .HasMany(t => t.Triggers);
+                .HasMany(t => t.Triggers)
+                .WithOne(t => t.Scenario)
+                .HasForeignKey(t => t.ScenarioId);
 
             modelBuilder.Entity<ScenarioTriggerEntity>()
                 .ToTable("ScenarioTriggers")
@@ -155,10 +167,6 @@ namespace HARIA.DataAccess
 
             modelBuilder.Entity<PermissionEntity>()
                 .ToTable("Permissions")
-                .HasKey(t => t.Id);
-
-            modelBuilder.Entity<LogEntity>()
-                .ToTable("Logs")
                 .HasKey(t => t.Id);
 
             modelBuilder.Entity<StateEntity>()

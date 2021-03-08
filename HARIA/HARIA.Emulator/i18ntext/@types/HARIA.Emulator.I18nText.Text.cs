@@ -7,14 +7,17 @@ namespace HARIA.Emulator.I18nText
 
         public string this[string key] => global::Toolbelt.Blazor.I18nText.I18nTextExtensions.GetFieldValue(this, key);
 
+        /// <summary>"Actuator"</summary>
+        public string Actuator;
+
         /// <summary>"Add"</summary>
         public string Add;
 
+        /// <summary>"Add default test data"</summary>
+        public string AddTestData;
+
         /// <summary>"Administrator privileges user"</summary>
         public string AdminOnly;
-
-        /// <summary>"HARIA-DE"</summary>
-        public string App_name;
 
         /// <summary>"HARIA-DE"</summary>
         public string AppName;
@@ -28,14 +31,17 @@ namespace HARIA.Emulator.I18nText
         /// <summary>"Details"</summary>
         public string Details;
 
-        /// <summary>"Devices"</summary>
-        public string Devices;
-
         /// <summary>"Error"</summary>
         public string Error;
 
         /// <summary>"Wrong user or password"</summary>
         public string LoginFail;
+
+        /// <summary>"No test data"</summary>
+        public string NoData;
+
+        /// <summary>"Nodes"</summary>
+        public string Nodes;
 
         /// <summary>"Off"</summary>
         public string Off;
@@ -51,6 +57,9 @@ namespace HARIA.Emulator.I18nText
 
         /// <summary>"See logs for more information about this error"</summary>
         public string SeeLogs;
+
+        /// <summary>"Sensor"</summary>
+        public string Sensor;
 
         /// <summary>"Sign in"</summary>
         public string SignIn;

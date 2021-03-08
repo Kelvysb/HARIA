@@ -7,7 +7,7 @@ namespace HARIA.Domain.DTOs
     {
         public int Id { get; set; }
 
-        public int ActionId { get; set; }
+        public int ActionEventId { get; set; }
 
         public DateTime InitialTime { get; set; }
 

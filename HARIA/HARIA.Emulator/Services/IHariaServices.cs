@@ -17,9 +17,11 @@ namespace HARIA.Emulator.Services
 
         Task LogOut();
 
-        Task<List<Device>> GetDevices();
+        Task<List<Ambient>> GetAmbients();
 
-        Task AddDefaultDevices(I18nText.DefaultData translate);
+        Task<List<Node>> GetNodes();
+
+        Task AddDefaultData(I18nText.DefaultData translate);
 
         void HandleError(Exception exception);
     }

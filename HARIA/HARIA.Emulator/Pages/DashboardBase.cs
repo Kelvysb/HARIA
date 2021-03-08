@@ -16,24 +16,28 @@ namespace HARIA.Emulator.Pages
 
         public I18nText.Text Translate { get; set; } = new I18nText.Text();
 
-        public List<Device> Devices { get; set; } = new List<Device>();
+        public List<Ambient> Ambients { get; set; } = new List<Ambient>();
+
+        public bool Loading { get; set; } = true;
 
         protected override async Task OnInitializedAsync()
         {
             hariaServices.StateChange += ((s, e) => StateHasChanged());
-            hariaServices.StateChange += (async (s, e) => await LoadDevices());
+            hariaServices.StateChange += (async (s, e) => await LoadAmbients());
             Translate = await I18nText.GetTextTableAsync<I18nText.Text>(this);
             hariaServices.State.CurrentLocation = Translate.Dashboard;
-            await LoadDevices();
+            await LoadAmbients();
         }
 
-        public async Task LoadDevices()
+        public async Task LoadAmbients()
         {
             try
             {
                 if (hariaServices.State.LoggedUser != null)
                 {
-                    Devices = await hariaServices.GetDevices();
+                    Loading = true;
+                    StateHasChanged();
+                    Ambients = await hariaServices.GetAmbients();
                 }
             }
             catch (System.Exception e)
@@ -42,16 +46,19 @@ namespace HARIA.Emulator.Pages
             }
             finally
             {
+                Loading = false;
                 StateHasChanged();
             }
         }
 
-        public async Task AddDefaultDevices()
+        public async Task AddDefaultData()
         {
             try
             {
-                await hariaServices.AddDefaultDevices(await I18nText.GetTextTableAsync<I18nText.DefaultData>(this));
-                await LoadDevices();
+                Loading = true;
+                StateHasChanged();
+                await hariaServices.AddDefaultData(await I18nText.GetTextTableAsync<I18nText.DefaultData>(this));
+                await LoadAmbients();
             }
             catch (System.Exception e)
             {
@@ -59,6 +66,7 @@ namespace HARIA.Emulator.Pages
             }
             finally
             {
+                Loading = false;
                 StateHasChanged();
             }
         }

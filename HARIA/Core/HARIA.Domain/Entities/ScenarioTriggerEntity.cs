@@ -11,6 +11,8 @@ namespace HARIA.Domain.Entities
 
         public int ScenarioId { get; set; }
 
+        public ScenarioEntity Scenario { get; set; }
+
         public string Description { get; set; }
 
         public ScenarioTriggerType Type { get; set; }

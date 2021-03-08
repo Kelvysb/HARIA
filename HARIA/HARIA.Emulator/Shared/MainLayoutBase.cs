@@ -36,6 +36,8 @@ namespace HARIA.Emulator.Shared
 
         public bool TopRowHover { get; set; } = false;
 
+        public bool Loading { get; set; } = true;
+
         protected override async Task OnInitializedAsync()
         {
             hariaServices.StateChange += ((s, e) => StateHasChanged());
@@ -43,6 +45,8 @@ namespace HARIA.Emulator.Shared
             Theme = "default";
             LoginMessage = Translate.AdminOnly;
             await hariaServices.CheckLoggedUser();
+            Loading = false;
+            StateHasChanged();
         }
 
         public void ExpandSidebar()
@@ -65,6 +69,8 @@ namespace HARIA.Emulator.Shared
         {
             try
             {
+                Loading = false;
+                StateHasChanged();
                 await hariaServices.Login(LoginUser.Name, await hashHelper.GetMD5(LoginUser.PasswordHash));
                 LoginFail = false;
                 LoginMessage = Translate.AdminOnly;
@@ -76,14 +82,29 @@ namespace HARIA.Emulator.Shared
             }
             finally
             {
+                Loading = false;
                 StateHasChanged();
             }
         }
 
         public async Task LogOut()
         {
-            await hariaServices.LogOut();
-            NavManager.NavigateTo("/");
+            try
+            {
+                Loading = false;
+                StateHasChanged();
+                await hariaServices.LogOut();
+                NavManager.NavigateTo("/");
+            }
+            catch (System.Exception e)
+            {
+                hariaServices.HandleError(e);
+            }
+            finally
+            {
+                Loading = false;
+                StateHasChanged();
+            }
         }
     }
 }

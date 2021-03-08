@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HARIA.API.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210215142105_initial")]
+    [Migration("20210307213442_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -140,10 +140,7 @@ namespace HARIA.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ActionEventEntityId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ActionId")
+                    b.Property<int>("ActionEventId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("FinalTime")
@@ -154,7 +151,7 @@ namespace HARIA.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ActionEventEntityId");
+                    b.HasIndex("ActionEventId");
 
                     b.ToTable("ActionEventPeriods");
                 });
@@ -166,9 +163,6 @@ namespace HARIA.API.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("Active")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("AmbientEntityId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("AmbientId")
@@ -186,12 +180,6 @@ namespace HARIA.API.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("DeviceEntityId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("DeviceId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<DateTime>("LastStateChange")
                         .HasColumnType("TEXT");
 
@@ -201,11 +189,14 @@ namespace HARIA.API.Migrations
                     b.Property<string>("Message")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("NodeId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AmbientEntityId");
+                    b.HasIndex("AmbientId");
 
-                    b.HasIndex("DeviceEntityId");
+                    b.HasIndex("NodeId");
 
                     b.ToTable("Actuators");
                 });
@@ -222,26 +213,6 @@ namespace HARIA.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Ambients");
-                });
-
-            modelBuilder.Entity("HARIA.Domain.Entities.DeviceEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Code")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("LastActivity")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Devices");
                 });
 
             modelBuilder.Entity("HARIA.Domain.Entities.ExternalActuatorEntity", b =>
@@ -305,30 +276,24 @@ namespace HARIA.API.Migrations
                     b.ToTable("ExternalSensors");
                 });
 
-            modelBuilder.Entity("HARIA.Domain.Entities.LogEntity", b =>
+            modelBuilder.Entity("HARIA.Domain.Entities.NodeEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Data")
+                    b.Property<string>("Code")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("IsError")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("Time")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Type")
+                    b.Property<DateTime>("LastActivity")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Logs");
+                    b.ToTable("Nodes");
                 });
 
             modelBuilder.Entity("HARIA.Domain.Entities.PermissionEntity", b =>
@@ -473,9 +438,6 @@ namespace HARIA.API.Migrations
                     b.Property<DateTime>("InitialTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("ScenarioEntityId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("ScenarioId")
                         .HasColumnType("INTEGER");
 
@@ -484,7 +446,7 @@ namespace HARIA.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ScenarioEntityId");
+                    b.HasIndex("ScenarioId");
 
                     b.ToTable("ScenarioTriggers");
                 });
@@ -504,9 +466,6 @@ namespace HARIA.API.Migrations
                     b.Property<int>("ActiveUpperBound")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("AmbientEntityId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("AmbientId")
                         .HasColumnType("INTEGER");
 
@@ -516,26 +475,23 @@ namespace HARIA.API.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("DeviceEntityId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("DeviceId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<DateTime>("LastStateChange")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Message")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("NodeId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Value")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AmbientEntityId");
+                    b.HasIndex("AmbientId");
 
-                    b.HasIndex("DeviceEntityId");
+                    b.HasIndex("NodeId");
 
                     b.ToTable("Sensors");
                 });
@@ -815,38 +771,62 @@ namespace HARIA.API.Migrations
 
             modelBuilder.Entity("HARIA.Domain.Entities.ActionEventPeriodEntity", b =>
                 {
-                    b.HasOne("HARIA.Domain.Entities.ActionEventEntity", null)
+                    b.HasOne("HARIA.Domain.Entities.ActionEventEntity", "ActionEvent")
                         .WithMany("ActionPeriods")
-                        .HasForeignKey("ActionEventEntityId");
+                        .HasForeignKey("ActionEventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ActionEvent");
                 });
 
             modelBuilder.Entity("HARIA.Domain.Entities.ActuatorEntity", b =>
                 {
-                    b.HasOne("HARIA.Domain.Entities.AmbientEntity", null)
+                    b.HasOne("HARIA.Domain.Entities.AmbientEntity", "Ambient")
                         .WithMany("Actuators")
-                        .HasForeignKey("AmbientEntityId");
+                        .HasForeignKey("AmbientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("HARIA.Domain.Entities.DeviceEntity", null)
+                    b.HasOne("HARIA.Domain.Entities.NodeEntity", "Node")
                         .WithMany("Actuators")
-                        .HasForeignKey("DeviceEntityId");
+                        .HasForeignKey("NodeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ambient");
+
+                    b.Navigation("Node");
                 });
 
             modelBuilder.Entity("HARIA.Domain.Entities.ScenarioTriggerEntity", b =>
                 {
-                    b.HasOne("HARIA.Domain.Entities.ScenarioEntity", null)
+                    b.HasOne("HARIA.Domain.Entities.ScenarioEntity", "Scenario")
                         .WithMany("Triggers")
-                        .HasForeignKey("ScenarioEntityId");
+                        .HasForeignKey("ScenarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Scenario");
                 });
 
             modelBuilder.Entity("HARIA.Domain.Entities.SensorEntity", b =>
                 {
-                    b.HasOne("HARIA.Domain.Entities.AmbientEntity", null)
+                    b.HasOne("HARIA.Domain.Entities.AmbientEntity", "Ambient")
                         .WithMany("Sensors")
-                        .HasForeignKey("AmbientEntityId");
+                        .HasForeignKey("AmbientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("HARIA.Domain.Entities.DeviceEntity", null)
+                    b.HasOne("HARIA.Domain.Entities.NodeEntity", "Node")
                         .WithMany("Sensors")
-                        .HasForeignKey("DeviceEntityId");
+                        .HasForeignKey("NodeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ambient");
+
+                    b.Navigation("Node");
                 });
 
             modelBuilder.Entity("RolesPermissions", b =>
@@ -906,7 +886,7 @@ namespace HARIA.API.Migrations
                     b.Navigation("Sensors");
                 });
 
-            modelBuilder.Entity("HARIA.Domain.Entities.DeviceEntity", b =>
+            modelBuilder.Entity("HARIA.Domain.Entities.NodeEntity", b =>
                 {
                     b.Navigation("Actuators");
 
