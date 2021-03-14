@@ -29,4 +29,11 @@
 
         public static string KIOSK => "KIOSK";
     }
+
+    public static class StateDefaultKeys
+    {
+        public static string ACTIVE_SCENARIO => "ACTIVE_SCENARIO";
+
+        public static string SCENARIO_MODE => "SCENARIO_MODE";
+    }
 }

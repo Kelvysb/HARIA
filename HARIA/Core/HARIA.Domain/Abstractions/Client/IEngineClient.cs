@@ -6,8 +6,8 @@ namespace HARIA.Domain.Abstractions.Client
 {
     public interface IEngineClient
     {
-        Task<List<DeviceMessage>> StateChange(List<DeviceMessage> deviceMessages, string token);
+        Task<List<NodeMessage>> StateChange(List<NodeMessage> deviceMessages, string token);
 
-        Task<List<DeviceMessage>> GetState(string deviceCode, string token);
+        Task<List<NodeMessage>> GetState(string deviceCode, string token);
     }
 }

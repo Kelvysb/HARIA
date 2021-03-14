@@ -10,5 +10,7 @@ namespace HARIA.Domain.Abstractions.Repositories
         public Task<int> SaveChangesAsync();
 
         public void Atach<T>(T entity) where T : class;
+
+        public void Deatach<T>(T entity) where T : class;
     }
 }

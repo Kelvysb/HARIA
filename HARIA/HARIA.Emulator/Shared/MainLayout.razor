@@ -51,6 +51,9 @@
                 else
                 {
                     <div class="mt-1">
+                        <button class="button my-auto mr-3" @onclick="hariaServices.RequestReload" id="SignOut">
+                            <span class="oi oi-reload" aria-hidden="true"></span>
+                        </button>
                         <span class="oi oi-person ml-4" aria-hidden="true"></span>
                         <label class="my-auto mr-2 ml-2">@hariaServices.State.LoggedUser.Name</label>
                         <button class="button my-auto mr-2" @onclick="LogOut" id="SignOut">
@@ -61,7 +64,7 @@
                 }
             </div>
         </div>
-        <div class="content px-4">
+        <div class="content px-4 @ContentCssClass">
             @if (Loading)
             {
                 <Loading />

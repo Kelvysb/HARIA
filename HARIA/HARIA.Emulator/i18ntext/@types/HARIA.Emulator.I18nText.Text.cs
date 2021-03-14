@@ -7,8 +7,17 @@ namespace HARIA.Emulator.I18nText
 
         public string this[string key] => global::Toolbelt.Blazor.I18nText.I18nTextExtensions.GetFieldValue(this, key);
 
+        /// <summary>"Active"</summary>
+        public string Active;
+
+        /// <summary>"Active from"</summary>
+        public string ActiveFrom;
+
         /// <summary>"Actuator"</summary>
         public string Actuator;
+
+        /// <summary>"Actuators"</summary>
+        public string Actuators;
 
         /// <summary>"Add"</summary>
         public string Add;
@@ -25,14 +34,29 @@ namespace HARIA.Emulator.I18nText
         /// <summary>"Configurations"</summary>
         public string Configurations;
 
+        /// <summary>"Confirm"</summary>
+        public string Confirm;
+
         /// <summary>"Dashboard"</summary>
         public string Dashboard;
+
+        /// <summary>"Deactivation time"</summary>
+        public string Deactivation;
 
         /// <summary>"Details"</summary>
         public string Details;
 
         /// <summary>"Error"</summary>
         public string Error;
+
+        /// <summary>"Inactive"</summary>
+        public string Inactive;
+
+        /// <summary>"Last Message"</summary>
+        public string LastMessage;
+
+        /// <summary>"Last Update"</summary>
+        public string LastUpdate;
 
         /// <summary>"Wrong user or password"</summary>
         public string LoginFail;
@@ -61,6 +85,9 @@ namespace HARIA.Emulator.I18nText
         /// <summary>"Sensor"</summary>
         public string Sensor;
 
+        /// <summary>"Sensors"</summary>
+        public string Sensors;
+
         /// <summary>"Sign in"</summary>
         public string SignIn;
 
@@ -73,10 +100,16 @@ namespace HARIA.Emulator.I18nText
         /// <summary>"State"</summary>
         public string State;
 
+        /// <summary>"to"</summary>
+        public string To;
+
         /// <summary>"Toggle"</summary>
         public string Toggle;
 
         /// <summary>"User"</summary>
         public string User;
+
+        /// <summary>"Value"</summary>
+        public string Value;
     }
 }

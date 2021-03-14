@@ -24,7 +24,9 @@ namespace HARIA.Emulator.Shared
 
         public string Theme { get; set; }
 
-        public string SidebarCssClass => Expanded ? "sidebar-expanded" : "sidebar-collapsed";
+        public string SidebarCssClass => Expanded || hariaServices.State.MenuPinned ? "sidebar-expanded" : "sidebar-collapsed";
+
+        public string ContentCssClass => Expanded || hariaServices.State.MenuPinned ? "content-expanded" : "content-collapsed";
 
         public bool Expanded { get; set; } = false;
 

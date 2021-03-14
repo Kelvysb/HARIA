@@ -11,6 +11,8 @@ namespace HARIA.Domain.DTOs
 
         public int AmbientId { get; set; }
 
+        public Ambient Ambient { get; set; }
+
         public string Code { get; set; }
 
         public string Description { get; set; }

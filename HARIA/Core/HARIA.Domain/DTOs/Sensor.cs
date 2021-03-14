@@ -3,13 +3,15 @@ using HARIA.Domain.Abstractions.DTOs;
 
 namespace HARIA.Domain.DTOs
 {
-    public class Sensor : IDTO
+    public class Sensor : IDTO, IGenericSensor
     {
         public int Id { get; set; }
 
         public int NodeId { get; set; }
 
         public int AmbientId { get; set; }
+
+        public Ambient Ambient { get; set; }
 
         public string Code { get; set; }
 

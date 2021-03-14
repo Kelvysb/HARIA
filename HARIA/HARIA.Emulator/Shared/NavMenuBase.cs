@@ -6,6 +6,8 @@ namespace HARIA.Emulator.Shared
 {
     public class NavMenuBase : ComponentBase
     {
+        private const string MENU_PINNED_KEY = "MENU_PINNED";
+
         [Inject]
         public IHariaServices hariaServices { get; set; }
 
@@ -22,6 +24,7 @@ namespace HARIA.Emulator.Shared
         {
             hariaServices.StateChange += ((s, e) => StateHasChanged());
             Translate = await I18nText.GetTextTableAsync<I18nText.Text>(this);
+            hariaServices.State.MenuPinned = await hariaServices.LocalStorage.GetItem<bool>(MENU_PINNED_KEY);
         }
 
         public void ToggleNavMenu()
@@ -30,6 +33,12 @@ namespace HARIA.Emulator.Shared
             {
                 CollapseNavMenu = !CollapseNavMenu;
             }
+        }
+
+        public async Task ToggleMenuPin()
+        {
+            hariaServices.State.MenuPinned = !hariaServices.State.MenuPinned;
+            await hariaServices.LocalStorage.SetItem(MENU_PINNED_KEY, hariaServices.State.MenuPinned);
         }
     }
 }

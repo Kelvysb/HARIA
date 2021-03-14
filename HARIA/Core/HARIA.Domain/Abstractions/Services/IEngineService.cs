@@ -6,10 +6,12 @@ namespace HARIA.Domain.Abstractions.Services
 {
     public interface IEngineService
     {
-        Task<List<DeviceMessage>> StateChange(List<DeviceMessage> deviceMessages);
+        Task<List<NodeMessage>> StateChange(List<NodeMessage> nodeMessages);
 
-        Task<List<DeviceMessage>> GetState(string deviceCode);
+        Task<List<NodeMessage>> GetState(string nodeCode);
 
         Task ExecuteActions();
+
+        Task<ScriptResult> CheckScript(string script);
     }
 }

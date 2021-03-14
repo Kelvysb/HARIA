@@ -33,6 +33,15 @@
     top: -2px;
 }
 
+.pin-button {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    margin: 1rem;
+    cursor: pointer;
+    display: none;
+}
+
 .nav-item {
     font-size: 0.9rem;
     padding-bottom: 0.5rem;
@@ -62,6 +71,10 @@
     }
 
     .collapse {
+        display: block;
+    }
+
+    .pin-button {
         display: block;
     }
 }

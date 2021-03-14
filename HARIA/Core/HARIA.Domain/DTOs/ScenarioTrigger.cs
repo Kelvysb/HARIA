@@ -15,9 +15,9 @@ namespace HARIA.Domain.DTOs
 
         public ScenarioTriggerType Type { get; set; }
 
-        public DateTime InitialTime { get; set; }
+        public DateTime? InitialTime { get; set; }
 
-        public DateTime FinalTime { get; set; }
+        public DateTime? FinalTime { get; set; }
 
         public List<ExternalSensor> ExternalSensors { get; set; }
 

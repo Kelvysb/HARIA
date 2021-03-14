@@ -3,7 +3,7 @@ using HARIA.Domain.Abstractions.DTOs;
 
 namespace HARIA.Domain.DTOs
 {
-    public class ExternalSensor : IDTO
+    public class ExternalSensor : IDTO, IGenericSensor
     {
         public int Id { get; set; }
 
@@ -18,6 +18,8 @@ namespace HARIA.Domain.DTOs
         public string Condition { get; set; }
 
         public string Script { get; set; }
+
+        public string Message { get; set; }
 
         public DateTime LastStateChange { get; set; }
     }

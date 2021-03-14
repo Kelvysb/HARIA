@@ -3,7 +3,9 @@
   "Dashboard": "Dashboard",
   "Nodes": "Nodes",
   "Sensor": "Sensor",
+  "Sensors": "Sensors",
   "Actuator": "Actuator",
+  "Actuators": "Actuators",
   "Configurations": "Configurations",
   "Add": "Add",
   "Remove": "Remove",
@@ -22,5 +24,14 @@
   "SeeLogs": "See logs for more information about this error",
   "Details": "Details",
   "NoData": "No test data",
-  "AddTestData": "Add default test data"
+  "AddTestData": "Add default test data",
+  "ActiveFrom": "Active from",
+  "To": "to",
+  "Value": "Value",
+  "Active": "Active",
+  "Inactive": "Inactive",
+  "Confirm": "Confirm",
+  "LastUpdate": "Last Update",
+  "LastMessage": "Last Message",
+  "Deactivation": "Deactivation time"
 }

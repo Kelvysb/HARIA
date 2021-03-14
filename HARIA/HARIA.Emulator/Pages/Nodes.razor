@@ -1,4 +1,58 @@
 ﻿@page "/nodes"
 @inherits NodesBase
 
-    <Loading />
+@if (hariaServices.State.LoggedUser != null)
+{
+
+    @if (Loading)
+    {
+        <Loading />
+    }
+    else if (hariaServices.State.NodeGroups.Any())
+    {
+        <div class="vh-100">
+            @foreach (var nodeGroup in hariaServices.State.NodeGroups)
+            {
+                <label class="ml-2">@nodeGroup.Node.Description</label>
+                <div class="h_divider mb-2"></div>
+                <div class="text-center mt-2"><label class="ml-2">@Translate.Sensors</label></div>
+                <div class="devices">
+
+                    @foreach (var sensor in nodeGroup.Node.Sensors)
+                    {
+                        <SensorView Sensor="sensor" NodeGroup="hariaServices.State.NodeGroups.FirstOrDefault(n => n.Node.Sensors.Contains(sensor))" />
+                    }
+                </div>
+                <div class="text-center mt-2"><label class="ml-2">@Translate.Actuators</label></div>
+                <div class="devices">
+
+                    @foreach (var actuator in nodeGroup.Node.Actuators)
+                    {
+                        <ActuatorView Actuator="actuator" NodeGroup="hariaServices.State.NodeGroups.FirstOrDefault(n => n.Node.Actuators.Contains(actuator))" />
+                    }
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="vh-100">
+            <div class="devices">
+                <div class="nodata-card card">
+                    <div class="card-header">@Translate.NoData</div>
+                    <div class="card-body">
+                        <button class="button-solid" @onclick="AddDefaultData">@Translate.AddTestData</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="text-center">
+        <div class="login-tip text-center">
+            <img src="/images/triangle_Purple.svg" class="login-tip-image" />
+        </div>
+    </div>
+}

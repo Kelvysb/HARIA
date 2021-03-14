@@ -28,7 +28,7 @@ namespace HARIA.Domain.Entities
 
         public int DefaultActiveTime { get; set; }
 
-        public DateTime DeactivationTime { get; set; }
+        public DateTime? DeactivationTime { get; set; }
 
         public DateTime LastStateChange { get; set; }
 

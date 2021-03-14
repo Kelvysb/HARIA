@@ -22,14 +22,12 @@
 
             <li class="nav-item">
                 <NavLink class="nav-link" href="nodes">
-                    <span class="oi oi-dial mr-2" aria-hidden="true"></span>@Translate.Nodes
-                </NavLink>
-            </li>
-            <li class="nav-item">
-                <NavLink class="nav-link" href="config">
-                    <span class="oi oi-cog mr-2" aria-hidden="true"></span>@Translate.Configurations
+                    <span class="oi oi-grid-three-up mr-2" aria-hidden="true"></span>@Translate.Nodes
                 </NavLink>
             </li>
         }
     </ul>
+    <div class="pin-button" @onclick="ToggleMenuPin">
+        <span class="oi oi-pin mr-2 pin-icon @(hariaServices.State.MenuPinned ? "pin-icon-active" : "")" aria-hidden="true"></span>
+    </div>
 </div>

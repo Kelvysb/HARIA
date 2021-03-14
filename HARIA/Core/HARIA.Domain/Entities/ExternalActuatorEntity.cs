@@ -16,6 +16,8 @@ namespace HARIA.Domain.Entities
 
         public string Script { get; set; }
 
+        public string StoreOnState { get; set; }
+
         public string Message { get; set; }
 
         public DateTime LastExecution { get; set; }

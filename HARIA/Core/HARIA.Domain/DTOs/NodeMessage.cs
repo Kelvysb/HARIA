@@ -1,8 +1,10 @@
-﻿namespace HARIA.Domain.DTOs
+﻿using System;
+
+namespace HARIA.Domain.DTOs
 {
-    public class DeviceMessage
+    public class NodeMessage
     {
-        public string DeviceCode { get; set; }
+        public string NodeCode { get; set; }
 
         public string Code { get; set; }
 
@@ -11,5 +13,7 @@
         public int Value { get; set; }
 
         public string Message { get; set; }
+
+        public DateTime? Expires { get; set; }
     }
 }

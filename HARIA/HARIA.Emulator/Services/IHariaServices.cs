@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using HARIA.Domain.DTOs;
+using HARIA.Emulator.Helpers;
 
 namespace HARIA.Emulator.Services
 {
@@ -9,7 +10,11 @@ namespace HARIA.Emulator.Services
     {
         event EventHandler<StateChangeEventArgs> StateChange;
 
+        event EventHandler<EventArgs> ReloadData;
+
         public AppState State { get; set; }
+
+        ILocalStorageHelper LocalStorage { get; }
 
         Task CheckLoggedUser();
 
@@ -24,5 +29,13 @@ namespace HARIA.Emulator.Services
         Task AddDefaultData(I18nText.DefaultData translate);
 
         void HandleError(Exception exception);
+
+        Task<List<NodeMessage>> SendNodeMessage(Node node);
+
+        Task<List<NodeMessage>> GetNodeStatus(string code);
+
+        void NotifyChange();
+
+        void RequestReload();
     }
 }

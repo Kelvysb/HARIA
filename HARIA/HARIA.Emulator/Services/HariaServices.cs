@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using HARIA.Domain.Abstractions.Client;
+using HARIA.Domain.Constants;
 using HARIA.Domain.DTOs;
 using HARIA.Emulator.Helpers;
 using Microsoft.AspNetCore.Components;
@@ -19,12 +21,15 @@ namespace HARIA.Emulator.Services
         private readonly ISensorsClient sensorsClient;
         private readonly IAmbientsClient ambientsClient;
         private readonly IActionsClient actionsClient;
-        private readonly ILocalStorageHelper localStorageHelper;
         private readonly NavigationManager navManager;
 
         public event EventHandler<StateChangeEventArgs> StateChange;
 
+        public event EventHandler<EventArgs> ReloadData;
+
         public AppState State { get; set; }
+
+        public ILocalStorageHelper LocalStorage { get; private set; }
 
         public HariaServices(
             IUsersClient usersClient,
@@ -44,7 +49,7 @@ namespace HARIA.Emulator.Services
             this.sensorsClient = sensorsClient;
             this.ambientsClient = ambientsClient;
             this.actionsClient = actionsClient;
-            this.localStorageHelper = localStorageHelper;
+            this.LocalStorage = localStorageHelper;
             this.navManager = navManager;
 
             State = new AppState();
@@ -59,7 +64,7 @@ namespace HARIA.Emulator.Services
                 PasswordHash = passwordHash
             };
             State.LoggedUser = await usersClient.Login(user);
-            await localStorageHelper.SetItem(LOGGED_USER_KEY, State.LoggedUser);
+            await LocalStorage.SetItem(LOGGED_USER_KEY, State.LoggedUser);
         }
 
         public async Task LogOut()
@@ -67,13 +72,13 @@ namespace HARIA.Emulator.Services
             if (State.LoggedUser != null)
             {
                 State.LoggedUser = null;
-                await localStorageHelper.RemoveItem(LOGGED_USER_KEY);
+                await LocalStorage.RemoveItem(LOGGED_USER_KEY);
             }
         }
 
         public async Task CheckLoggedUser()
         {
-            State.LoggedUser = await localStorageHelper.GetItem<User>(LOGGED_USER_KEY);
+            State.LoggedUser = await LocalStorage.GetItem<User>(LOGGED_USER_KEY);
         }
 
         public void HandleError(Exception exception)
@@ -82,7 +87,7 @@ namespace HARIA.Emulator.Services
             navManager.NavigateTo("/error");
         }
 
-        private void NotifyChange()
+        public void NotifyChange()
         {
             RaiseNotifyChange(this, new StateChangeEventArgs("HariaServices", this));
         }
@@ -124,6 +129,33 @@ namespace HARIA.Emulator.Services
             {
                 await actionsClient.Add(action, State.LoggedUser.Token);
             }
+        }
+
+        public async Task<List<NodeMessage>> SendNodeMessage(Node node)
+        {
+            List<NodeMessage> message = node.Sensors.Select(s =>
+            {
+                return new NodeMessage()
+                {
+                    Code = s.Code,
+                    NodeCode = node.Code,
+                    Type = DeviceType.SENSOR,
+                    Message = s.Message,
+                    Value = s.Value
+                };
+            }).ToList();
+            return await engineClient.StateChange(message, State.LoggedUser.Token);
+        }
+
+        public Task<List<NodeMessage>> GetNodeStatus(string code)
+        {
+            return engineClient.GetState(code, State.LoggedUser.Token);
+        }
+
+        public void RequestReload()
+        {
+            EventHandler<EventArgs> handler = ReloadData;
+            handler?.Invoke(this, new EventArgs());
         }
     }
 }

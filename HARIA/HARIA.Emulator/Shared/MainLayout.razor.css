@@ -22,7 +22,7 @@
 
 .top-row-block {
     width: fit-content;
-    margin-right: 0;    
+    margin-right: 0;
     padding: 0.5rem;
     transition-property: transform,all;
     transition-duration: .2s;
@@ -69,6 +69,14 @@
 
     .sidebar-collapsed {
         width: 55px;
+    }
+
+    .content-expanded {
+        width: calc(100% - 200px);
+    }
+
+    .content-collapsed {
+        width: calc(100% - 55px);
     }
 
     .top-row {

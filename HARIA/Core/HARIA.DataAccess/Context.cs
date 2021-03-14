@@ -256,6 +256,7 @@ namespace HARIA.DataAccess
 
             modelBuilder.Entity("RolesPermissions")
                 .HasData(
+                new { RolesId = 1, PermissionsId = 1 },
                 new { RolesId = 1, PermissionsId = 2 },
                 new { RolesId = 1, PermissionsId = 3 },
                 new { RolesId = 2, PermissionsId = 1 },
@@ -278,8 +279,8 @@ namespace HARIA.DataAccess
                 {
                     Id = 1,
                     Key = "ACTIVE_SCENARIO",
-                    Value = "DEFAULT",
-                    DefaultValue = "DEFAULT",
+                    Value = "1",
+                    DefaultValue = "1",
                     IsSystemDefault = true
                 },
                 new StateEntity()
@@ -300,7 +301,7 @@ namespace HARIA.DataAccess
                     Description = "Default scenario",
                     Color = "#F2F2F2",
                     Icon = "default.svg",
-                    Priority = 999,
+                    Priority = int.MaxValue,
                     IsDefault = true
                 });
 
@@ -321,6 +322,11 @@ namespace HARIA.DataAccess
         public void Atach<T>(T entity) where T : class
         {
             base.Attach(entity);
+        }
+
+        public void Deatach<T>(T entity) where T : class
+        {
+            base.Entry(entity).State = EntityState.Detached;
         }
     }
 }

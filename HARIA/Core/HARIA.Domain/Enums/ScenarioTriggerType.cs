@@ -3,7 +3,7 @@
     public enum ScenarioTriggerType
     {
         Manual,
-        Period,
-        External
+        Sensors,
+        Period
     }
 }

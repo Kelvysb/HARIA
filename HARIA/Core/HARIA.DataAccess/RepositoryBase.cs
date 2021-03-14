@@ -19,10 +19,12 @@ namespace HARIA.DataAccess
             dbSet = context.GetSet<TEntity>();
         }
 
-        public virtual Task<int> Add(TEntity entity)
+        public virtual async Task<int> Add(TEntity entity)
         {
             dbSet.Add(entity);
-            return context.SaveChangesAsync();
+            var result = await context.SaveChangesAsync();
+            context.Deatach(entity);
+            return result;
         }
 
         public virtual Task<int> Delete(int id)
@@ -46,10 +48,12 @@ namespace HARIA.DataAccess
                 .FirstOrDefaultAsync();
         }
 
-        public virtual Task<int> Update(TEntity entity)
+        public virtual async Task<int> Update(TEntity entity)
         {
             dbSet.Update(entity);
-            return context.SaveChangesAsync();
+            var result = await context.SaveChangesAsync();
+            context.Deatach(entity);
+            return result;
         }
     }
 }

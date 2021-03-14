@@ -24,7 +24,7 @@ namespace HARIA.Domain.Helpers
                     new Claim(ClaimTypes.Role, string.Join(",", user.Roles.Select(r => r.Name)), issuer),
                     new Claim(Constants.ClaimsNames.PERMISSIONS, string.Join(",", user.Roles.SelectMany(r => r.Permissions.Select(p => p.Code))), issuer)
                 }),
-                Expires = DateTime.UtcNow.AddDays(7),
+                Expires = DateTime.Now.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
                 Issuer = issuer
             };

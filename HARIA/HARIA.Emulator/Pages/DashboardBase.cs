@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using HARIA.Domain.DTOs;
 using HARIA.Emulator.Services;
 using Microsoft.AspNetCore.Components;
 
@@ -16,28 +15,41 @@ namespace HARIA.Emulator.Pages
 
         public I18nText.Text Translate { get; set; } = new I18nText.Text();
 
-        public List<Ambient> Ambients { get; set; } = new List<Ambient>();
-
         public bool Loading { get; set; } = true;
 
         protected override async Task OnInitializedAsync()
         {
             hariaServices.StateChange += ((s, e) => StateHasChanged());
-            hariaServices.StateChange += (async (s, e) => await LoadAmbients());
+            hariaServices.StateChange += (async (s, e) => await HandleStateChangedReload(e.State));
+            hariaServices.ReloadData += (async (s, e) => await LoadNodes(true));
             Translate = await I18nText.GetTextTableAsync<I18nText.Text>(this);
             hariaServices.State.CurrentLocation = Translate.Dashboard;
-            await LoadAmbients();
+            await LoadNodes(false);
         }
 
-        public async Task LoadAmbients()
+        public async Task LoadNodes(bool force)
         {
+            if (!force && hariaServices.State.NodeGroups.Any() && hariaServices.State.Ambients.Any())
+            {
+                Loading = false;
+                StateHasChanged();
+                return;
+            }
+
             try
             {
                 if (hariaServices.State.LoggedUser != null)
                 {
                     Loading = true;
                     StateHasChanged();
-                    Ambients = await hariaServices.GetAmbients();
+                    var nodes = await hariaServices.GetNodes();
+                    hariaServices.State.NodeGroups = nodes.Select(n => new NodeGroup(n, hariaServices)).ToList();
+                    hariaServices.State.Ambients = await hariaServices.GetAmbients();
+                    hariaServices.State.Ambients.ForEach(a =>
+                    {
+                        a.Sensors = nodes.SelectMany(n => n.Sensors).Where(d => d.AmbientId == a.Id).ToList();
+                        a.Actuators = nodes.SelectMany(n => n.Actuators).Where(d => d.AmbientId == a.Id).ToList();
+                    });
                 }
             }
             catch (System.Exception e)
@@ -58,7 +70,7 @@ namespace HARIA.Emulator.Pages
                 Loading = true;
                 StateHasChanged();
                 await hariaServices.AddDefaultData(await I18nText.GetTextTableAsync<I18nText.DefaultData>(this));
-                await LoadAmbients();
+                await LoadNodes(true);
             }
             catch (System.Exception e)
             {
@@ -68,6 +80,14 @@ namespace HARIA.Emulator.Pages
             {
                 Loading = false;
                 StateHasChanged();
+            }
+        }
+
+        private async Task HandleStateChangedReload(string state)
+        {
+            if (state.Equals("LoggedUser"))
+            {
+                await LoadNodes(true);
             }
         }
     }

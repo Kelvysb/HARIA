@@ -169,7 +169,7 @@ namespace HARIA.API.Migrations
                     b.Property<string>("Code")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("DeactivationTime")
+                    b.Property<DateTime?>("DeactivationTime")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("DefaultActiveTime")
@@ -237,6 +237,9 @@ namespace HARIA.API.Migrations
                     b.Property<string>("Script")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("StoreOnState")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.ToTable("ExternalActuators");
@@ -261,6 +264,9 @@ namespace HARIA.API.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("LastStateChange")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Message")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Script")
@@ -417,7 +423,7 @@ namespace HARIA.API.Migrations
                             Icon = "default.svg",
                             IsDefault = true,
                             Name = "Default",
-                            Priority = 999
+                            Priority = 2147483647
                         });
                 });
 
@@ -430,10 +436,10 @@ namespace HARIA.API.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("FinalTime")
+                    b.Property<DateTime?>("FinalTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("InitialTime")
+                    b.Property<DateTime?>("InitialTime")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("ScenarioId")
@@ -520,10 +526,10 @@ namespace HARIA.API.Migrations
                         new
                         {
                             Id = 1,
-                            DefaultValue = "DEFAULT",
+                            DefaultValue = "1",
                             IsSystemDefault = true,
                             Key = "ACTIVE_SCENARIO",
-                            Value = "DEFAULT"
+                            Value = "1"
                         },
                         new
                         {
@@ -593,6 +599,11 @@ namespace HARIA.API.Migrations
                     b.ToTable("RolesPermissions");
 
                     b.HasData(
+                        new
+                        {
+                            PermissionsId = 1,
+                            RolesId = 1
+                        },
                         new
                         {
                             PermissionsId = 2,

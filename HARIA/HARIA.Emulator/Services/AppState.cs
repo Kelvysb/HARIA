@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using HARIA.Domain.DTOs;
 
 namespace HARIA.Emulator.Services
@@ -6,8 +7,11 @@ namespace HARIA.Emulator.Services
     public class AppState
     {
         private string currentLocation = "";
+        private bool menuPinned = false;
         private Exception currentError = null;
         private User loggedUser = null;
+        private List<NodeGroup> nodeGroups = new List<NodeGroup>();
+        private List<Ambient> ambients = new List<Ambient>();
 
         public event EventHandler<StateChangeEventArgs> StateChange;
 
@@ -38,6 +42,36 @@ namespace HARIA.Emulator.Services
             {
                 loggedUser = value;
                 NotifyChange("LoggedUser", loggedUser);
+            }
+        }
+
+        public bool MenuPinned
+        {
+            get => menuPinned;
+            set
+            {
+                menuPinned = value;
+                NotifyChange("MenuPinned", menuPinned);
+            }
+        }
+
+        public List<NodeGroup> NodeGroups
+        {
+            get => nodeGroups;
+            set
+            {
+                nodeGroups = value;
+                NotifyChange("NodeGroups", nodeGroups);
+            }
+        }
+
+        public List<Ambient> Ambients
+        {
+            get => ambients;
+            set
+            {
+                ambients = value;
+                NotifyChange("Ambients", ambients);
             }
         }
 

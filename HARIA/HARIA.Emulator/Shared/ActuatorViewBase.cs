@@ -8,6 +8,9 @@ namespace HARIA.Emulator.Shared
     public class ActuatorViewBase : ComponentBase
     {
         [Parameter]
+        public NodeGroup NodeGroup { get; set; }
+
+        [Parameter]
         public Actuator Actuator { get; set; }
 
         [Inject]

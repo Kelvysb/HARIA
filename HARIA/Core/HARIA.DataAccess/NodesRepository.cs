@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HARIA.Domain.Abstractions.Repositories;
@@ -26,7 +25,7 @@ namespace HARIA.DataAccess
         public Task<NodeEntity> GetByCode(string code)
         {
             return dbSet
-                .Where(t => t.Code.Equals(code, StringComparison.InvariantCultureIgnoreCase))
+                .Where(t => t.Code == code)
                 .Include(t => t.Actuators)
                 .Include(t => t.Sensors)
                 .AsNoTracking()

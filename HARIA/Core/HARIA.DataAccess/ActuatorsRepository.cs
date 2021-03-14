@@ -17,6 +17,7 @@ namespace HARIA.DataAccess
         {
             return dbSet
                 .Where(t => t.Code.Equals(code))
+                .AsNoTracking()
                 .FirstOrDefaultAsync();
         }
 
@@ -24,6 +25,7 @@ namespace HARIA.DataAccess
         {
             return dbSet
                 .Where(t => t.NodeId == id)
+                .AsNoTracking()
                 .ToListAsync();
         }
     }

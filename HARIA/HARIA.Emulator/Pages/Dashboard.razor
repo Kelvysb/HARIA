@@ -8,22 +8,27 @@
     {
         <Loading />
     }
-    else if (Ambients.Any())
+    else if (hariaServices.State.Ambients.Any())
     {
         <div class="vh-100">
-            @foreach (var ambient in Ambients)
+            @foreach (var ambient in hariaServices.State.Ambients)
             {
                 <label class="ml-2">@ambient.Description</label>
                 <div class="h_divider mb-2"></div>
-                <div class="devices h-100">
+                <div class="text-center mt-2"><label class="ml-2">@Translate.Sensors</label></div>
+                <div class="devices">
 
                     @foreach (var sensor in ambient.Sensors)
                     {
-                        <SensorView Sensor="sensor" />
+                        <SensorView Sensor="sensor" NodeGroup="hariaServices.State.NodeGroups.FirstOrDefault(n => n.Node.Sensors.Contains(sensor))" />
                     }
+                </div>
+                <div class="text-center mt-2"><label class="ml-2">@Translate.Actuators</label></div>
+                <div class="devices">
+
                     @foreach (var actuator in ambient.Actuators)
                     {
-                        <ActuatorView Actuator="actuator" />
+                        <ActuatorView Actuator="actuator" NodeGroup="hariaServices.State.NodeGroups.FirstOrDefault(n => n.Node.Actuators.Contains(actuator))" />
                     }
                 </div>
             }
@@ -32,7 +37,7 @@
     else
     {
         <div class="vh-100">
-            <div class="devices h-100">
+            <div class="devices">
                 <div class="nodata-card card">
                     <div class="card-header">@Translate.NoData</div>
                     <div class="card-body">

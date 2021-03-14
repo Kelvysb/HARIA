@@ -47,6 +47,7 @@ namespace HARIA.API.Migrations
                     Active = table.Column<bool>(type: "INTEGER", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     Script = table.Column<string>(type: "TEXT", nullable: true),
+                    StoreOnState = table.Column<string>(type: "TEXT", nullable: true),
                     Message = table.Column<string>(type: "TEXT", nullable: true),
                     LastExecution = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
@@ -67,6 +68,7 @@ namespace HARIA.API.Migrations
                     Active = table.Column<bool>(type: "INTEGER", nullable: false),
                     Condition = table.Column<string>(type: "TEXT", nullable: true),
                     Script = table.Column<string>(type: "TEXT", nullable: true),
+                    Message = table.Column<string>(type: "TEXT", nullable: true),
                     LastStateChange = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -248,7 +250,7 @@ namespace HARIA.API.Migrations
                     LockState = table.Column<bool>(type: "INTEGER", nullable: false),
                     Message = table.Column<string>(type: "TEXT", nullable: true),
                     DefaultActiveTime = table.Column<int>(type: "INTEGER", nullable: false),
-                    DeactivationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    DeactivationTime = table.Column<DateTime>(type: "TEXT", nullable: true),
                     LastStateChange = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -359,8 +361,8 @@ namespace HARIA.API.Migrations
                     ScenarioId = table.Column<int>(type: "INTEGER", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     Type = table.Column<int>(type: "INTEGER", nullable: false),
-                    InitialTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    FinalTime = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    InitialTime = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    FinalTime = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -536,12 +538,12 @@ namespace HARIA.API.Migrations
             migrationBuilder.InsertData(
                 table: "Scenarios",
                 columns: new[] { "Id", "Color", "Description", "Icon", "IsDefault", "Name", "Priority" },
-                values: new object[] { 1, "#F2F2F2", "Default scenario", "default.svg", true, "Default", 999 });
+                values: new object[] { 1, "#F2F2F2", "Default scenario", "default.svg", true, "Default", 2147483647 });
 
             migrationBuilder.InsertData(
                 table: "States",
                 columns: new[] { "Id", "DefaultValue", "IsSystemDefault", "Key", "Value" },
-                values: new object[] { 1, "DEFAULT", true, "ACTIVE_SCENARIO", "DEFAULT" });
+                values: new object[] { 1, "1", true, "ACTIVE_SCENARIO", "1" });
 
             migrationBuilder.InsertData(
                 table: "States",
@@ -567,6 +569,11 @@ namespace HARIA.API.Migrations
                 table: "Users",
                 columns: new[] { "Id", "Name", "PasswordHash" },
                 values: new object[] { 4, "kiosk", "21232f297a57a5a743894a0e4a801fc3" });
+
+            migrationBuilder.InsertData(
+                table: "RolesPermissions",
+                columns: new[] { "PermissionsId", "RolesId" },
+                values: new object[] { 1, 1 });
 
             migrationBuilder.InsertData(
                 table: "RolesPermissions",
