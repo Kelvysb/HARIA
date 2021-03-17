@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.JSInterop;
 
-namespace HARIA.Emulator.Helpers
+namespace HARIA.Common.Helpers
 {
     public class HashHelper : IHashHelper
     {

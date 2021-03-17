@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace HARIA.Emulator.Helpers
+namespace HARIA.Common.Helpers
 {
     public interface ILocalStorageHelper
     {

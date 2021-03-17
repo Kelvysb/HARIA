@@ -1,17 +1,78 @@
-﻿@inherits LayoutComponentBase
+﻿@inherits MainLayoutBase
 
+<link href="css/@(Theme).css" rel="stylesheet" />
 <div class="page">
-    <div class="sidebar">
+    <div class="sidebar @SidebarCssClass" @onmouseover="ExpandSidebar" @onmouseout="CollapseSidebar">
         <NavMenu />
     </div>
 
     <div class="main">
-        <div class="top-row px-4">
-            <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
-        </div>
+        <div class="top-row status-bar">
+            @if (hariaServices.State.LoggedUser != null)
+            {
+                <div class="current-location">
+                    <div class="mt-1">
+                        <label class="my-auto mx-2" id="CurrentLocation">@hariaServices?.State.CurrentLocation</label>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div></div>
+            }
+            <div class="top-row-block @(TopRowHover
+                                        ? (hariaServices.State.LoggedUser != null
+                                            ? "top-row-block-hover-logged"
+                                            : "top-row-block-hover")
+                                        : "")"
+                 @onmouseover="() => TopRowHover = true"
+                 @onmouseout="() => TopRowHover = false">
+                @if (hariaServices.State.LoggedUser == null)
+                {
+                    <EditForm Model="@LoginUser" OnValidSubmit="Login" class="mt-1 mr-0 row">
+                        <span class="d-inline-flex">
+                            <label class="my-auto mr-2 ml-4">@Translate.User</label>
+                            <InputText @bind-Value="LoginUser.Name" class="input-sm my-auto mr-2" id="User" />
+                            <ValidationMessage For="@(() => LoginUser.Name)" />
+                        </span>
+                        <div class="d-inline-flex">
+                            <label class="my-auto mr-2 ml-4">@Translate.Password</label>
+                            <InputText @bind-Value="LoginUser.PasswordHash" type="password" class="input-sm my-auto mr-2" id="Password" />
+                            <ValidationMessage For="@(() => LoginUser.PasswordHash)" />
+                        </div>
+                        <button class="button my-auto mr-2" id="SignIn">
+                            <span class="oi oi-account-login" aria-hidden="true"></span>
+                        </button>
+                    </EditForm>
+                    <div class="row mt-2 text-center mx-auto">
+                        <label class="m-auto @(LoginFail ? "label-error" : "")" id="LoginMessage">@LoginMessage</label>
+                    </div>
+                }
+                else
+                {
+                    <div class="mt-1">
+                        <button class="button my-auto mr-3" @onclick="hariaServices.RequestReload" id="SignOut">
+                            <span class="oi oi-reload" aria-hidden="true"></span>
+                        </button>
+                        <span class="oi oi-person ml-4" aria-hidden="true"></span>
+                        <label class="my-auto mr-2 ml-2">@hariaServices.State.LoggedUser.Name</label>
+                        <button class="button my-auto mr-2" @onclick="LogOut" id="SignOut">
+                            <span class="oi oi-account-logout" aria-hidden="true"></span>
+                        </button>
+                    </div>
 
-        <div class="content px-4">
-            @Body
+                }
+            </div>
+        </div>
+        <div class="content px-4 @ContentCssClass">
+            @if (Loading)
+            {
+                <Loading />
+            }
+            else
+            {
+                @Body
+            }
         </div>
     </div>
 </div>

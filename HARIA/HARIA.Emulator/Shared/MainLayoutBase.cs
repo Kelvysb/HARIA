@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
+using HARIA.Common.Helpers;
 using HARIA.Domain.DTOs;
-using HARIA.Emulator.Helpers;
 using HARIA.Emulator.Services;
 using Microsoft.AspNetCore.Components;
 
@@ -71,7 +71,7 @@ namespace HARIA.Emulator.Shared
         {
             try
             {
-                Loading = false;
+                Loading = true;
                 StateHasChanged();
                 await hariaServices.Login(LoginUser.Name, await hashHelper.GetMD5(LoginUser.PasswordHash));
                 LoginFail = false;
@@ -93,7 +93,7 @@ namespace HARIA.Emulator.Shared
         {
             try
             {
-                Loading = false;
+                Loading = true;
                 StateHasChanged();
                 await hariaServices.LogOut();
                 NavManager.NavigateTo("/");

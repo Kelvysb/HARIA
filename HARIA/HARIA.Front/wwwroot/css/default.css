@@ -1,0 +1,18 @@
+﻿:root {
+    --background: #e4e4e7;
+    --background-hover: #f4f4f5;
+    --font-color: #56007b;
+    --font-color-light: #eeeeee;
+    --font-color-error: #ff4848;
+    --sidebar-background-begin: #56007b;
+    --sidebar-background-end: #290a29;
+    --sidebar-item-color-active: rgba(255,255,255,0.25);
+    --sidebar-item-color-hoover: rgba(255,255,255,0.1);
+    --navbar-toggler: rgba(255,255,255,0.1);
+    --button-color: #56007b;
+    --button-color-dark: #290a29;
+    --line-color: #56007b;
+    --scroll-background: rgba(255,255,255,0.1);
+    --scroll-thumb: #56007b;
+    --scroll-thumb-hoover: #56007b;
+}

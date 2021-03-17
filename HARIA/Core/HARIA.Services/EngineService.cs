@@ -42,14 +42,14 @@ namespace HARIA.Services
             return await Task.FromResult(pythonEngine.CheckScript(script, states));
         }
 
-        public async Task<List<NodeMessage>> StateChange(List<NodeMessage> deviceMessages)
+        public async Task<List<NodeMessage>> StateChange(List<NodeMessage> nodeMessages)
         {
             List<NodeMessage> result = new List<NodeMessage>();
-            if (deviceMessages.Any())
+            if (nodeMessages.Any())
             {
-                string deviceCode = deviceMessages.FirstOrDefault().NodeCode;
+                string deviceCode = nodeMessages.FirstOrDefault().NodeCode;
                 await UpdateNodeStatus(deviceCode);
-                foreach (NodeMessage message in deviceMessages)
+                foreach (NodeMessage message in nodeMessages)
                 {
                     await ProcessSensorMessasge(message);
                 }

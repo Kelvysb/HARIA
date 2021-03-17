@@ -1,13 +1,13 @@
 {
-  "name": "HARIA.Front",
-  "short_name": "HARIA.Front",
+  "name": "HARIA",
+  "short_name": "HARIA",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#03173d",
+  "theme_color": "#e4e4e7",
   "icons": [
     {
-      "src": "icon-512.png",
+      "src": "images/icon.png",
       "type": "image/png",
       "sizes": "512x512"
     }

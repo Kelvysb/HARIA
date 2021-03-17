@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HARIA.Common.Helpers;
 using HARIA.Domain.Abstractions.Client;
 using HARIA.Domain.Constants;
 using HARIA.Domain.DTOs;
@@ -17,8 +18,6 @@ namespace HARIA.Emulator.Services
         private readonly IUsersClient usersClient;
         private readonly IEngineClient engineClient;
         private readonly INodesClient nodesClient;
-        private readonly IActuatorsClient actuatorsClient;
-        private readonly ISensorsClient sensorsClient;
         private readonly IAmbientsClient ambientsClient;
         private readonly IActionsClient actionsClient;
         private readonly NavigationManager navManager;
@@ -35,8 +34,6 @@ namespace HARIA.Emulator.Services
             IUsersClient usersClient,
             IEngineClient engineClient,
             INodesClient devicesClient,
-            IActuatorsClient actuatorsClient,
-            ISensorsClient sensorsClient,
             IAmbientsClient ambientsClient,
             IActionsClient actionsClient,
             ILocalStorageHelper localStorageHelper,
@@ -45,8 +42,6 @@ namespace HARIA.Emulator.Services
             this.usersClient = usersClient;
             this.engineClient = engineClient;
             this.nodesClient = devicesClient;
-            this.actuatorsClient = actuatorsClient;
-            this.sensorsClient = sensorsClient;
             this.ambientsClient = ambientsClient;
             this.actionsClient = actionsClient;
             this.LocalStorage = localStorageHelper;
@@ -71,6 +66,9 @@ namespace HARIA.Emulator.Services
         {
             if (State.LoggedUser != null)
             {
+                State.NodeGroups.ForEach(n => n.Dispose());
+                State.NodeGroups = new List<NodeGroup>();
+                State.Ambients = new List<Ambient>();
                 State.LoggedUser = null;
                 await LocalStorage.RemoveItem(LOGGED_USER_KEY);
             }
@@ -100,16 +98,19 @@ namespace HARIA.Emulator.Services
 
         public Task<List<Ambient>> GetAmbients()
         {
+            if (State.LoggedUser == null) return null;
             return ambientsClient.Get(State.LoggedUser?.Token);
         }
 
         public Task<List<Node>> GetNodes()
         {
+            if (State.LoggedUser == null) return null;
             return nodesClient.Get(State.LoggedUser?.Token);
         }
 
         public async Task AddDefaultData(I18nText.DefaultData translate)
         {
+            if (State.LoggedUser == null) return;
             var defaultData = DefaultDataHelper.GetDefaultData(translate);
             var ambients = defaultData.Item1;
             var devices = defaultData.Item2;
@@ -133,6 +134,7 @@ namespace HARIA.Emulator.Services
 
         public async Task<List<NodeMessage>> SendNodeMessage(Node node)
         {
+            if (State.LoggedUser == null) return null;
             List<NodeMessage> message = node.Sensors.Select(s =>
             {
                 return new NodeMessage()
@@ -149,6 +151,7 @@ namespace HARIA.Emulator.Services
 
         public Task<List<NodeMessage>> GetNodeStatus(string code)
         {
+            if (State.LoggedUser == null) return null;
             return engineClient.GetState(code, State.LoggedUser.Token);
         }
 

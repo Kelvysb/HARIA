@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using HARIA.Common.Helpers;
 using HARIA.Domain.DTOs;
-using HARIA.Emulator.Helpers;
 
 namespace HARIA.Emulator.Services
 {

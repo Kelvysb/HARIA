@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using HARIA.Domain.Constants;
 using HARIA.Domain.DTOs;
 
@@ -19,20 +20,26 @@ namespace HARIA.Emulator.Services
             Node = node;
             this.hariaServices = hariaServices;
             Running = new Timer(
-                async (object stateInfo) => UpdateActuators(await hariaServices.GetNodeStatus(Node.Code)),
-                new AutoResetEvent(false),
-                0,
-                INTERVAL);
+                    async (object stateInfo) => await TimerExecution(stateInfo),
+                    new AutoResetEvent(false),
+                    0,
+                    INTERVAL);
         }
 
-        ~NodeGroup()
+        private async Task TimerExecution(object stateInfo)
         {
-            Dispose();
+            if (hariaServices.State.LoggedUser == null)
+            {
+                Dispose();
+                return;
+            }
+            UpdateActuators(await hariaServices.GetNodeStatus(Node.Code));
         }
 
         public void Dispose()
         {
             Running.Dispose();
+            Running = null;
         }
 
         public Node Node { get; set; }
@@ -45,6 +52,7 @@ namespace HARIA.Emulator.Services
 
         public void UpdateActuators(List<NodeMessage> messages)
         {
+            if (hariaServices.State.LoggedUser == null) return;
             var anyChanges = false;
             foreach (var message in messages)
             {
