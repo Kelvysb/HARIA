@@ -18,6 +18,12 @@ namespace HARIA.Services
             statesRepository = repository;
         }
 
+        public async Task<State> GetState(string key)
+        {
+            StateEntity state = await GetStateByKey(key);
+            return mapper.Map<StateEntity, State>(state);
+        }
+
         public async Task<Dictionary<string, string>> GetStateDictionary()
         {
             Dictionary<string, string> result = new Dictionary<string, string>();
@@ -31,13 +37,19 @@ namespace HARIA.Services
 
         public async Task UpdateState(string key, string value)
         {
-            StateEntity state = await statesRepository.GetByKey(key);
+            StateEntity state = await GetStateByKey(key);
+            state.Value = value;
+            await statesRepository.Update(state);
+        }
+
+        private async Task<StateEntity> GetStateByKey(string key)
+        {
+            var state = await statesRepository.GetByKey(key);
             if (state == null)
             {
                 throw new KeyNotFoundException();
             }
-            state.Value = value;
-            await statesRepository.Update(state);
+            return state;
         }
     }
 }

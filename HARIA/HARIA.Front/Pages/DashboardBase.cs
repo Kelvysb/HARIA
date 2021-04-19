@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using HARIA.Domain.Constants;
 using HARIA.Front.Services;
 using Microsoft.AspNetCore.Components;
 
@@ -29,7 +30,7 @@ namespace HARIA.Front.Pages
 
         public async Task LoadDashboard(bool force)
         {
-            if (!force && hariaServices.State.Ambients.Any())
+            if (!force && hariaServices.State.Scenarios.Any())
             {
                 Loading = false;
                 StateHasChanged();
@@ -42,13 +43,13 @@ namespace HARIA.Front.Pages
                 {
                     Loading = true;
                     StateHasChanged();
-                    var nodes = await hariaServices.GetNodes();
-                    hariaServices.State.Ambients = await hariaServices.GetAmbients();
-                    hariaServices.State.Ambients.ForEach(a =>
+                    hariaServices.State.Scenarios = await hariaServices.GetScenarios();
+                    hariaServices.State.StateTable = await hariaServices.GetStates();
+                    if (int.TryParse(hariaServices.State.GetStateValue(StateDefaultKeys.ACTIVE_SCENARIO), out var currentScenarioId))
                     {
-                        a.Sensors = nodes.SelectMany(n => n.Sensors).Where(d => d.AmbientId == a.Id).ToList();
-                        a.Actuators = nodes.SelectMany(n => n.Actuators).Where(d => d.AmbientId == a.Id).ToList();
-                    });
+                        hariaServices.State.CurrentScenarioId = currentScenarioId;
+                    }
+                    hariaServices.State.ScenarioManual = hariaServices.State.GetStateValue(StateDefaultKeys.SCENARIO_MODE) == ScenarioMode.MANUAL;
                 }
             }
             catch (System.Exception e)

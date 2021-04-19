@@ -40,6 +40,8 @@ namespace HARIA.Front
             services.AddSingleton<INodesClient, NodesClient>();
             services.AddSingleton<IAmbientsClient, AmbientsClient>();
             services.AddSingleton<IActionsClient, ActionsClient>();
+            services.AddSingleton<IScenariosClient, ScenariosClient>();
+            services.AddSingleton<IStatesClient, StatesClient>();
             services.AddSingleton<IHashHelper, HashHelper>();
             services.AddSingleton<ILocalStorageHelper, LocalStorageHelper>();
             services.AddSingleton<IHariaServices, HariaServices>();

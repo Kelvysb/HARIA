@@ -14,7 +14,7 @@ namespace HARIA.Front.Services
 
         public AppState State { get; set; }
 
-        ILocalStorageHelper LocalStorage { get; }
+        ILocalStorageHelper localStorageHelper { get; }
 
         Task CheckLoggedUser();
 
@@ -25,6 +25,10 @@ namespace HARIA.Front.Services
         Task<List<Ambient>> GetAmbients();
 
         Task<List<Node>> GetNodes();
+
+        Task<List<Scenario>> GetScenarios();
+
+        Task<List<State>> GetStates();
 
         void HandleError(Exception exception);
 

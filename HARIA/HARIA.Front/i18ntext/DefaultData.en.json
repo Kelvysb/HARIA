@@ -1,9 +1,0 @@
-{
-  "Node": "Node",
-  "Sensor": "Sensor",
-  "Actuator": "Actuator",
-  "LivingRoom": "Living Room",
-  "BedRoom": "Bedroom",
-  "Kitchen": "Kitchen",
-  "Action": "Action"
-}

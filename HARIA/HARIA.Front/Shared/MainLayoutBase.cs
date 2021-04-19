@@ -45,7 +45,7 @@ namespace HARIA.Front.Shared
             hariaServices.StateChange += ((s, e) => StateHasChanged());
             Translate = await I18nText.GetTextTableAsync<I18nText.Text>(this);
             Theme = "default";
-            LoginMessage = Translate.AdminOnly;
+            LoginMessage = Translate.LoginMessage;
             await hariaServices.CheckLoggedUser();
             Loading = false;
             StateHasChanged();
@@ -75,7 +75,7 @@ namespace HARIA.Front.Shared
                 StateHasChanged();
                 await hariaServices.Login(LoginUser.Name, await hashHelper.GetMD5(LoginUser.PasswordHash));
                 LoginFail = false;
-                LoginMessage = Translate.AdminOnly;
+                LoginMessage = Translate.LoginMessage;
             }
             catch (System.Exception)
             {

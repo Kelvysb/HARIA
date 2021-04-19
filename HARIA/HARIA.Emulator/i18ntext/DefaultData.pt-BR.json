@@ -6,5 +6,6 @@
   "BedRoom": "Quarto",
   "Kitchen": "Cozinha",
   "TestScenario": "Cenário de teste",
-  "Action": "Ação"
+  "Action": "Ação",
+  "Scenario": "Cenário"
 }

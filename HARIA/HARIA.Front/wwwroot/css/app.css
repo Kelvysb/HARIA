@@ -88,7 +88,7 @@ a, .btn-link {
         box-shadow: var(--button-color-dark) 2px 2px 3px;
     }
 
-.pin-icon {    
+.pin-icon {
     transition-property: transform,all;
     transition-duration: .2s;
     transition-timing-function: ease-in-out;
@@ -105,6 +105,21 @@ a, .btn-link {
     -o-transform: rotate(0deg);
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
+}
+
+.scenario {
+    transition-property: transform,all;
+    transition-duration: .2s;
+    transition-timing-function: ease-in-out;
+    overflow: hidden;
+}
+
+.scenario-inactive {
+    height: 3rem;
+}
+
+.scenario-selected {
+    height: 3.5rem;
 }
 
 .label-error {

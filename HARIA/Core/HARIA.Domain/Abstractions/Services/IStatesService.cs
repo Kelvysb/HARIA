@@ -10,5 +10,7 @@ namespace HARIA.Domain.Abstractions.Services
         public Task<Dictionary<string, string>> GetStateDictionary();
 
         public Task UpdateState(string key, string value);
+
+        public Task<State> GetState(string key);
     }
 }

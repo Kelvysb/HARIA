@@ -9,7 +9,7 @@
     width: 100%;
 }
 
-.devices {
+.no-data {
     display: flex;
     justify-content: center;
     flex-flow: wrap;

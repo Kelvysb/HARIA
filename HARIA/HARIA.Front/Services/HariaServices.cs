@@ -19,6 +19,8 @@ namespace HARIA.Front.Services
         private readonly INodesClient nodesClient;
         private readonly IAmbientsClient ambientsClient;
         private readonly IActionsClient actionsClient;
+        private readonly IScenariosClient scenariosClient;
+        private readonly IStatesClient statesClient;
         private readonly NavigationManager navManager;
 
         public event EventHandler<StateChangeEventArgs> StateChange;
@@ -27,24 +29,28 @@ namespace HARIA.Front.Services
 
         public AppState State { get; set; }
 
-        public ILocalStorageHelper LocalStorage { get; private set; }
+        public ILocalStorageHelper localStorageHelper { get; private set; }
 
         public HariaServices(
             IUsersClient usersClient,
             IEngineClient engineClient,
-            INodesClient devicesClient,
+            INodesClient nodesClient,
             IAmbientsClient ambientsClient,
             IActionsClient actionsClient,
             ILocalStorageHelper localStorageHelper,
+            IScenariosClient scenariosClient,
+            IStatesClient statesClient,
             NavigationManager navManager)
         {
             this.usersClient = usersClient;
             this.engineClient = engineClient;
-            this.nodesClient = devicesClient;
+            this.nodesClient = nodesClient;
             this.ambientsClient = ambientsClient;
             this.actionsClient = actionsClient;
-            this.LocalStorage = localStorageHelper;
+            this.localStorageHelper = localStorageHelper;
             this.navManager = navManager;
+            this.scenariosClient = scenariosClient;
+            this.statesClient = statesClient;
 
             State = new AppState();
             State.StateChange += RaiseNotifyChange;
@@ -58,7 +64,7 @@ namespace HARIA.Front.Services
                 PasswordHash = passwordHash
             };
             State.LoggedUser = await usersClient.Login(user);
-            await LocalStorage.SetItem(LOGGED_USER_KEY, State.LoggedUser);
+            await localStorageHelper.SetItem(LOGGED_USER_KEY, State.LoggedUser);
         }
 
         public async Task LogOut()
@@ -66,13 +72,13 @@ namespace HARIA.Front.Services
             if (State.LoggedUser != null)
             {
                 State.LoggedUser = null;
-                await LocalStorage.RemoveItem(LOGGED_USER_KEY);
+                await localStorageHelper.RemoveItem(LOGGED_USER_KEY);
             }
         }
 
         public async Task CheckLoggedUser()
         {
-            State.LoggedUser = await LocalStorage.GetItem<User>(LOGGED_USER_KEY);
+            State.LoggedUser = await localStorageHelper.GetItem<User>(LOGGED_USER_KEY);
         }
 
         public void HandleError(Exception exception)
@@ -102,6 +108,18 @@ namespace HARIA.Front.Services
         {
             if (State.LoggedUser == null) return null;
             return nodesClient.Get(State.LoggedUser?.Token);
+        }
+
+        public Task<List<Scenario>> GetScenarios()
+        {
+            if (State.LoggedUser == null) return null;
+            return scenariosClient.Get(State.LoggedUser?.Token);
+        }
+
+        public Task<List<State>> GetStates()
+        {
+            if (State.LoggedUser == null) return null;
+            return statesClient.Get(State.LoggedUser?.Token);
         }
 
         public async Task<List<NodeMessage>> SendNodeMessage(Node node)

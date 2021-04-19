@@ -103,6 +103,7 @@ namespace HARIA.API
             services.AddTransient<IRolesService, RolesService>();
             services.AddTransient<IStatesService, StatesService>();
             services.AddTransient<IEngineService, EngineService>();
+            services.AddTransient<ITimeService, TimeService>();
             services.AddTransient<IPythonEngine, PythonEngine>();
 
             services.AddAutoMapper(typeof(MapperConfig));

@@ -290,6 +290,22 @@ namespace HARIA.DataAccess
                     Value = "AUTO",
                     DefaultValue = "AUTO",
                     IsSystemDefault = true
+                },
+                new StateEntity()
+                {
+                    Id = 3,
+                    Key = "TIME_MODE",
+                    Value = "REALTIME",
+                    DefaultValue = "REALTIME",
+                    IsSystemDefault = true
+                },
+                new StateEntity()
+                {
+                    Id = 4,
+                    Key = "TIME_OFFSET",
+                    Value = "0",
+                    DefaultValue = "0",
+                    IsSystemDefault = true
                 });
 
             modelBuilder.Entity<ScenarioEntity>()
@@ -303,6 +319,16 @@ namespace HARIA.DataAccess
                     Icon = "default.svg",
                     Priority = int.MaxValue,
                     IsDefault = true
+                },
+                new ScenarioEntity()
+                {
+                    Id = 2,
+                    Name = "Manual",
+                    Description = "Manual scenario",
+                    Color = "#F2F2F2",
+                    Icon = "manual.svg",
+                    Priority = int.MaxValue - 1,
+                    IsDefault = false
                 });
 
             base.OnModelCreating(modelBuilder);

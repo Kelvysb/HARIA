@@ -16,6 +16,7 @@ namespace HARIA.Services
         private readonly IScenariosService scenariosService;
         private readonly IExternalActuatorsService externalActuatorsService;
         private readonly IStatesService statesService;
+        private readonly ITimeService timeService;
         private readonly IPythonEngine pythonEngine;
 
         public EngineService(
@@ -25,6 +26,7 @@ namespace HARIA.Services
             IScenariosService scenariosService,
             IExternalActuatorsService externalActuatorsService,
             IStatesService statesService,
+            ITimeService timeService,
             IPythonEngine pythonEngine)
         {
             this.nodesService = nodesService;
@@ -33,6 +35,7 @@ namespace HARIA.Services
             this.scenariosService = scenariosService;
             this.externalActuatorsService = externalActuatorsService;
             this.statesService = statesService;
+            this.timeService = timeService;
             this.pythonEngine = pythonEngine;
         }
 
@@ -89,9 +92,9 @@ namespace HARIA.Services
                 }
 
                 var periodAffected = false;
-                var periodEnd = DateTime.Now;
+                DateTime periodEnd;
 
-                (periodAffected, value, periodEnd) = VerifyPeriod(action, value);
+                (periodAffected, value, periodEnd) = await VerifyPeriod(action, value);
 
                 value = action.Invert ? !value : value;
 
@@ -103,10 +106,10 @@ namespace HARIA.Services
                     actuator.Active = value;
 
                     actuator.DeactivationTime = !periodAffected
-                        ? DateTime.Now.AddSeconds(actuator.DefaultActiveTime)
+                        ? (await timeService.GetTime()).AddSeconds(actuator.DefaultActiveTime)
                         : periodEnd;
 
-                    actuator.LastStateChange = DateTime.Now;
+                    actuator.LastStateChange = await timeService.GetTime();
                     await actuatorsService.Update(actuator);
                 }
 
@@ -119,12 +122,12 @@ namespace HARIA.Services
             }
         }
 
-        private (bool, bool, DateTime) VerifyPeriod(ActionEvent action, bool actual)
+        private async Task<(bool, bool, DateTime)> VerifyPeriod(ActionEvent action, bool actual)
         {
             var result = actual;
             var pariodAffected = false;
-            var periodEnd = DateTime.Now;
-            var currentTime = new DateTime(1900, 01, 01, DateTime.Now.Hour, DateTime.Now.Minute, 0);
+            var periodEnd = await timeService.GetTime();
+            var currentTime = new DateTime(1900, 01, 01, periodEnd.Hour, periodEnd.Minute, 0);
 
             if (action.ActionPeriods.Any())
             {
@@ -133,6 +136,7 @@ namespace HARIA.Services
                 {
                     if (period.InitialTime >= currentTime && period.FinalTime <= currentTime)
                     {
+                        periodEnd = period.FinalTime;
                         result = true;
                         break;
                     }
@@ -157,7 +161,7 @@ namespace HARIA.Services
             var currentScenario = scenarios.Find(s => s.IsDefault);
             foreach (var scenario in scenarios)
             {
-                if (!scenario.IsDefault && CheckTriggers(scenario.Triggers))
+                if (!scenario.IsDefault && await CheckTriggersAsync(scenario.Triggers))
                 {
                     currentScenario = scenario;
                     break;
@@ -170,7 +174,7 @@ namespace HARIA.Services
             }
         }
 
-        private bool CheckTriggers(List<ScenarioTrigger> triggers)
+        private async Task<bool> CheckTriggersAsync(List<ScenarioTrigger> triggers)
         {
             var result = false;
 
@@ -185,7 +189,8 @@ namespace HARIA.Services
                 }
                 if (trigger.Type == Domain.Enums.ScenarioTriggerType.Period)
                 {
-                    var currentTime = new DateTime(1900, 01, 01, DateTime.Now.Hour, DateTime.Now.Minute, 0);
+                    var time = await timeService.GetTime();
+                    var currentTime = new DateTime(1900, 01, 01, time.Hour, time.Minute, 0);
                     result = trigger.InitialTime <= currentTime && trigger.FinalTime >= currentTime;
                     if (result) break;
                 }
@@ -197,7 +202,7 @@ namespace HARIA.Services
         private async Task UpdateNodeStatus(string deviceCode)
         {
             Node device = await nodesService.GetByCode(deviceCode);
-            device.LastActivity = DateTime.Now;
+            device.LastActivity = await timeService.GetTime();
             await nodesService.Update(device);
         }
 
@@ -210,7 +215,7 @@ namespace HARIA.Services
                 {
                     sensor.Value = nodeMessage.Value;
                     sensor.Active = (sensor.Value >= sensor.ActiveLowerBound && sensor.Value <= sensor.ActiveUpperBound);
-                    sensor.LastStateChange = DateTime.Now;
+                    sensor.LastStateChange = await timeService.GetTime();
                     sensor.Message = nodeMessage.Message;
                     await sensorsService.Update(sensor);
                 }
@@ -226,7 +231,7 @@ namespace HARIA.Services
                 bool expectedState = actuator.Active;
                 if (actuator.DeactivationTime.HasValue)
                 {
-                    expectedState = actuator.DeactivationTime > DateTime.Now;
+                    expectedState = actuator.DeactivationTime > await timeService.GetTime();
                 }
                 if (expectedState != actuator.Active)
                 {

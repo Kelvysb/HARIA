@@ -27,7 +27,7 @@ namespace HARIA.Domain.Mappers
 
         private void ConfigureState()
         {
-            CreateMap<State, RoleEntity>()
+            CreateMap<State, StateEntity>()
                 .ReverseMap();
 
             CreateMap<State, KeyValuePair<string, string>>()

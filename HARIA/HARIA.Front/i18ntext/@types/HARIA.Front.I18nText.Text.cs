@@ -25,9 +25,6 @@ namespace HARIA.Front.I18nText
         /// <summary>"Add default test data"</summary>
         public string AddTestData;
 
-        /// <summary>"Administrator privileges user"</summary>
-        public string AdminOnly;
-
         /// <summary>"HARIA-DE"</summary>
         public string AppName;
 
@@ -61,7 +58,10 @@ namespace HARIA.Front.I18nText
         /// <summary>"Wrong user or password"</summary>
         public string LoginFail;
 
-        /// <summary>"No test data"</summary>
+        /// <summary>"Enter user name and password"</summary>
+        public string LoginMessage;
+
+        /// <summary>"No data"</summary>
         public string NoData;
 
         /// <summary>"Nodes"</summary>

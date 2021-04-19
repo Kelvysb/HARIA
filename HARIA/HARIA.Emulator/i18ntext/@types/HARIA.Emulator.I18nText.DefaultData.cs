@@ -25,6 +25,9 @@ namespace HARIA.Emulator.I18nText
         /// <summary>"Node"</summary>
         public string Node;
 
+        /// <summary>"Scenario"</summary>
+        public string Scenario;
+
         /// <summary>"Sensor"</summary>
         public string Sensor;
 

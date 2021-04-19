@@ -97,5 +97,18 @@ namespace HARIA.Emulator.Helpers
 
             return result;
         }
+
+        private static List<Scenario> CreateScenarios()
+        {
+            return new List<Scenario>()
+                {
+                    new Scenario(){Id = 0, Name = $"{translate.Scenario} - 1", Description = $"{translate.Scenario} - 1", },
+                    new Scenario(){Id = 0, Name = $"{translate.Scenario} - 2", Description = $"{translate.Scenario} - 2"},
+                    new Scenario(){Id = 0, Name = $"{translate.Scenario} - 3", Description = $"{translate.Scenario} - 3"},
+                    new Scenario(){Id = 0, Name = $"{translate.Scenario} - 4", Description = $"{translate.Scenario} - 4"},
+                    new Scenario(){Id = 0, Name = $"{translate.Scenario} - 5", Description = $"{translate.Scenario} - 5"},
+                    new Scenario(){Id = 0, Name = $"{translate.Scenario} - 6", Description = $"{translate.Scenario} - 6"}
+                };
+        }
     }
 }

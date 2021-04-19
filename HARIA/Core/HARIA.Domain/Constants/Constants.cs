@@ -7,6 +7,13 @@
         public static string ACTUATOR => "ACTUATOR";
     }
 
+    public static class TimeMode
+    {
+        public static string REALTIME => "REALTIME";
+
+        public static string SIMULATED => "SIMULATED";
+    }
+
     public static class ScenarioMode
     {
         public static string MANUAL => "MANUAL";
@@ -35,5 +42,9 @@
         public static string ACTIVE_SCENARIO => "ACTIVE_SCENARIO";
 
         public static string SCENARIO_MODE => "SCENARIO_MODE";
+
+        public static string TIME_MODE => "TIME_MODE";
+
+        public static string TIME_OFFSET => "TIME_OFFSET";
     }
 }

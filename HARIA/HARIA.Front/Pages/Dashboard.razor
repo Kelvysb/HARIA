@@ -8,42 +8,23 @@
     {
         <Loading />
     }
-    else if (hariaServices.State.Ambients.Any())
+    else if (hariaServices.State.Scenarios.Any())
     {
         <div class="vh-100">
-            @foreach (var ambient in hariaServices.State.Ambients)
-            {
-                <label class="ml-2">@ambient.Description</label>
-                <div class="h_divider mb-2"></div>
-                <div class="text-center mt-2"><label class="ml-2">@Translate.Sensors</label></div>
-                <div class="devices">
-
-                    @foreach (var sensor in ambient.Sensors)
-                    {
-                        @sensor.Code;
-                    }
+            <div class="row">
+                <div class="col-10">
                 </div>
-                <div class="text-center mt-2"><label class="ml-2">@Translate.Actuators</label></div>
-                <div class="devices">
-
-                    @foreach (var actuator in ambient.Actuators)
-                    {
-                        @actuator.Code;
-                    }
+                <div class="col-2">
+                    <ScenarioList />
                 </div>
-            }
+            </div>
         </div>
     }
     else
     {
         <div class="vh-100">
-            <div class="devices">
-                <div class="nodata-card card">
-                    <div class="card-header">@Translate.NoData</div>
-                    <div class="card-body">
-                        <button class="button-solid" @onclick="NavigateToManagement">@Translate.AddTestData</button>
-                    </div>
-                </div>
+            <div class="no-data">
+                @Translate.NoData
             </div>
         </div>
     }
