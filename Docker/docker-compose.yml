@@ -1,0 +1,30 @@
+version: "3"
+services:
+    hariadiagnostic:
+        build: ../HARIA/HARIA.Diagnostic
+        hostname: HARIA_Diagnostic
+        container_name: HARIA_Diagnostic
+        restart: always
+        expose:
+          - "7010"
+        ports:
+          - "7010:7010"
+        networks:
+          - local
+        environment:
+          - PORT=${DIAGNOSTIC_PORT:-7010}
+          - MQTT_SERVER=${MQTT_SERVER:?env var MQTT_SERVER not found}
+          - MQTT_PORT=${MQTT_PORT:-1883}
+          - MQTT_USER=${MQTT_USER:?env var MQTT_USER not found}
+          - MQTT_PASSWORD=${MQTT_PASSWORD:?env var MQTT_PASSWORD not found}
+          - MQTT_TOPICS_PATTERN=${MQTT_TOPICS_PATTERN:-devices/+/+}
+          - MQTT_DEVICE_ID=${MQTT_DEVICE_ID:-Diagnostic}
+          - MONGODB_CONNECTION_STRING=${MONGODB_CONNECTION_STRING:?env var MONGODB_CONNECTION_STRING not found}
+          - MONGODB_DATABASE_NAME=${MONGODB_DATABASE_NAME:-HARIA}
+          - AUTH_ISSUER=${AUTH_ISSUER:-www.haria.com}
+          - AUTH_SECRET=${AUTH_SECRET:?env var AUTH_SECRET not found}
+          - ADMIN_DEFAULT_PASSWORD=${ADMIN_DEFAULT_PASSWORD:-admin}
+
+networks:
+    local:
+        driver: bridge

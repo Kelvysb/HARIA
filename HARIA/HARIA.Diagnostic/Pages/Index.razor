@@ -1,0 +1,16 @@
+﻿@inherits IndexBase
+@page "/"
+
+@if (Loading)
+{
+    <Loading />
+}
+else
+{
+    <div class="devices-container">
+        @foreach (var Device in Devices)
+        {
+            <Device DeviceData="Device"></Device>
+        }
+    </div>
+}

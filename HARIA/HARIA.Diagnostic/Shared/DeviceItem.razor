@@ -1,0 +1,14 @@
+﻿@inherits DeviceItemBase
+
+<div class="row item-block">
+    <span class="col-2 item-title">@Title</span>
+    <span class="col-7 item-description">@DeviceItem.Description</span>
+    @if (DeviceItemType == IoElementType.Actuator)
+    {
+        <span class="col-3 item-button @(DeviceItem.Value ? "active-item" : "inactive-item" )" @onclick="ChangeState">@(DeviceItem.Value ? Translate.Active : Translate.Inactive )</span>
+    }
+    else
+    {
+        <span class="col-3 item-state @(DeviceItem.Value ? "active-item" : "inactive-item" )">@(DeviceItem.Value ? Translate.Active : Translate.Inactive )</span>
+    }
+</div>

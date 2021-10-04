@@ -1,0 +1,76 @@
+﻿@inherits MainLayoutBase
+
+<div class="page">
+    <div class="main">
+        <div class="top-row status-bar">
+
+            <div class="logoBlock">
+                <img src="/images/Emulator_Logo_Purple.svg" class="logo" />
+                <label class="appName">@Translate.AppName</label>
+            </div>
+
+            <div class="top-row-block @(TopRowHover
+                                        ? (HariaDiagnosticService.State.LoggedUser != null
+                                            ? "top-row-block-hover-logged"
+                                            : "top-row-block-hover")
+                                        : "")"
+                 @onmouseover="() => TopRowHover = true"
+                 @onmouseout="() => TopRowHover = false">
+
+                @if (HariaDiagnosticService.State.LoggedUser == null)
+                {
+                    <EditForm Model="@LoginUser" OnValidSubmit="Login" class="mt-1 mr-0 row">
+                        <span class="d-inline-flex">
+                            <label class="my-auto mr-2 ml-4">@Translate.User</label>
+                            <InputText @bind-Value="LoginUser.Login" class="input-sm my-auto mr-2" id="User" />
+                            <ValidationMessage For="@(() => LoginUser.Login)" />
+                        </span>
+                        <div class="d-inline-flex">
+                            <label class="my-auto mr-2 ml-4">@Translate.Password</label>
+                            <InputText @bind-Value="LoginUser.Password" type="password" class="input-sm my-auto mr-2" id="Password" />
+                            <ValidationMessage For="@(() => LoginUser.Password)" />
+                        </div>
+                        <button class="button my-auto mr-2" id="SignIn">
+                            <span class="oi oi-account-login" aria-hidden="true"></span>
+                        </button>
+                    </EditForm>
+                    <div class="row mt-2 text-center mx-auto">
+                        <label class="m-auto @(LoginFail ? "label-error" : "")" id="LoginMessage">@LoginMessage</label>
+                    </div>
+                }
+                else
+                {
+                    <div class="mt-1">
+                        <span class="oi oi-person ml-4" aria-hidden="true"></span>
+                        <label class="my-auto mr-2 ml-2">@HariaDiagnosticService.State.LoggedUser.Login</label>
+                        <button class="button my-auto mr-2" @onclick="LogOut" id="SignOut">
+                            <span class="oi oi-account-logout" aria-hidden="true"></span>
+                        </button>
+                    </div>
+
+                }
+            </div>
+        </div>
+        <div class="content px-4">
+            @if (Loading)
+            {
+                <Loading />
+            }
+            else
+            {
+                if (HariaDiagnosticService.State.LoggedUser != null)
+                {
+                    @Body
+                }
+                else
+                {
+                    <div class="not-loged-container h-75">
+                        <div class="m-auto">
+                            <img src="/images/Emulator_Logo_Purple.svg" class="not-loged" />
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>

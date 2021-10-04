@@ -1,0 +1,24 @@
+{
+    "config": {
+        "device_id": "SA002",
+        "device_name": "sensor array 2",
+        "wifi_ssid": "<WIFI_SSID>",
+        "wifi_password": "<WIFI_PASSWORD>",
+        "mqtt_user": "<MQTT_USER>",
+        "mqtt_password": "<MQTT_PASSWORD>",
+        "mqtt_server": "<MQTT_SERVER>",
+        "mqtt_port": 1883
+    },
+    "descriptions": {
+        "a0": "Light",
+        "d0": "Office Window",
+        "d1": "Office",
+        "d2": "Bedroom",
+        "d3": "Bathroom",
+        "d4": "Corridor",
+        "d5": "Bedroom Window",
+        "d6": "Office Door",
+        "d7": "Bedroom Door",
+        "d8": "Bathroom Door"
+    }
+}

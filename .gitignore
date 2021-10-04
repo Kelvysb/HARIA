@@ -348,6 +348,6 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
-/HARIA/Core/HARIA.API/HARIA.db-shm
-/HARIA/Core/HARIA.API/HARIA.db-wal
-/HARIA/Core/HARIA.API/HARIA.db
+
+#Evironment variables file
+*.env

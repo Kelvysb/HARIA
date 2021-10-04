@@ -1,0 +1,51 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:62346",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "HARIA.Diagnostic": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "MQTT_TOPICS_PATTERN": "devices/+/+",
+        "MQTT_PORT": "1883",
+        "AUTH_ISSUER": "www.haria.com",
+        "MQTT_DEVICE_ID": "Diagnostic",
+        "MONGODB_DATABASE_NAME": "HARIA",
+        "ADMIN_DEFAULT_PASSWORD": "admin",
+        "DIAGNOSTIC_PORT": "7010"
+      },
+      "dotnetRunMessages": "true",
+      "applicationUrl": "http://localhost:7010"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "MQTT_TOPICS_PATTERN": "devices/+/+",
+        "MQTT_PORT": "1883",
+        "AUTH_ISSUER": "www.haria.com",
+        "MQTT_DEVICE_ID": "Diagnostic",
+        "MONGODB_DATABASE_NAME": "HARIA",
+        "ADMIN_DEFAULT_PASSWORD": "admin",
+        "DIAGNOSTIC_PORT": "7010"
+      },
+      "publishAllPorts": true
+    }
+  }
+}

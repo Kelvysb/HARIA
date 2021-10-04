@@ -1,0 +1,98 @@
+﻿@inherits DeviceBase
+
+<div class="card device-card">
+    <div class="card-header">
+        @DeviceData.DeviceName
+    </div>
+    <div class="card-body device-body">
+        @if (DeviceData.Sensors != null)
+        {
+            <h4>Sensors:</h4>
+            @if (DeviceData.Sensors.D0 != null)
+            {
+                <DeviceItem Title="D0" DeviceItem="DeviceData.Sensors.D0" DeviceItemType="IoElementType.Sensor" OnStateChange="DeviceStateChange"></DeviceItem>
+            }
+            @if (DeviceData.Sensors.D1 != null)
+            {
+                <DeviceItem Title="D1" DeviceItem="DeviceData.Sensors.D1" DeviceItemType="IoElementType.Sensor" OnStateChange="DeviceStateChange"></DeviceItem>
+            }
+            @if (DeviceData.Sensors.D2 != null)
+            {
+                <DeviceItem Title="D2" DeviceItem="DeviceData.Sensors.D2" DeviceItemType="IoElementType.Sensor" OnStateChange="DeviceStateChange"></DeviceItem>
+            }
+            @if (DeviceData.Sensors.D3 != null)
+            {
+                <DeviceItem Title="D3" DeviceItem="DeviceData.Sensors.D3" DeviceItemType="IoElementType.Sensor" OnStateChange="DeviceStateChange"></DeviceItem>
+            }
+            @if (DeviceData.Sensors.D4 != null)
+            {
+                <DeviceItem Title="D4" DeviceItem="DeviceData.Sensors.D4" DeviceItemType="IoElementType.Sensor" OnStateChange="DeviceStateChange"></DeviceItem>
+            }
+            @if (DeviceData.Sensors.D5 != null)
+            {
+                <DeviceItem Title="D5" DeviceItem="DeviceData.Sensors.D5" DeviceItemType="IoElementType.Sensor" OnStateChange="DeviceStateChange"></DeviceItem>
+            }
+            @if (DeviceData.Sensors.D6 != null)
+            {
+                <DeviceItem Title="D6" DeviceItem="DeviceData.Sensors.D6" DeviceItemType="IoElementType.Sensor" OnStateChange="DeviceStateChange"></DeviceItem>
+            }
+            @if (DeviceData.Sensors.D7 != null)
+            {
+                <DeviceItem Title="D7" DeviceItem="DeviceData.Sensors.D7" DeviceItemType="IoElementType.Sensor" OnStateChange="DeviceStateChange"></DeviceItem>
+            }
+            @if (DeviceData.Sensors.D8 != null)
+            {
+                <DeviceItem Title="D8" DeviceItem="DeviceData.Sensors.D8" DeviceItemType="IoElementType.Sensor" OnStateChange="DeviceStateChange"></DeviceItem>
+            }
+            @if (DeviceData.Sensors.A0 != null)
+            {
+                <DeviceItemAnalogSensor DeviceItem="DeviceData.Sensors.A0"></DeviceItemAnalogSensor>
+            }
+        }
+
+        @if (DeviceData.Actuators != null)
+        {
+            <h4>Actuators:</h4>
+            @if (DeviceData.Actuators.D0 != null)
+            {
+                <DeviceItem Title="D0" DeviceItem="DeviceData.Actuators.D0" DeviceItemType="IoElementType.Actuator" OnStateChange="DeviceStateChange"></DeviceItem>
+            }
+            @if (DeviceData.Actuators.D1 != null)
+            {
+                <DeviceItem Title="D1" DeviceItem="DeviceData.Actuators.D1" DeviceItemType="IoElementType.Actuator" OnStateChange="DeviceStateChange"></DeviceItem>
+            }
+            @if (DeviceData.Actuators.D2 != null)
+            {
+                <DeviceItem Title="D2" DeviceItem="DeviceData.Actuators.D2" DeviceItemType="IoElementType.Actuator" OnStateChange="DeviceStateChange"></DeviceItem>
+            }
+            @if (DeviceData.Actuators.D3 != null)
+            {
+                <DeviceItem Title="D3" DeviceItem="DeviceData.Actuators.D3" DeviceItemType="IoElementType.Actuator" OnStateChange="DeviceStateChange"></DeviceItem>
+            }
+            @if (DeviceData.Actuators.D4 != null)
+            {
+                <DeviceItem Title="D4" DeviceItem="DeviceData.Actuators.D4" DeviceItemType="IoElementType.Actuator" OnStateChange="DeviceStateChange"></DeviceItem>
+            }
+            @if (DeviceData.Actuators.D5 != null)
+            {
+                <DeviceItem Title="D5" DeviceItem="DeviceData.Actuators.D5" DeviceItemType="IoElementType.Actuator" OnStateChange="DeviceStateChange"></DeviceItem>
+            }
+            @if (DeviceData.Actuators.D6 != null)
+            {
+                <DeviceItem Title="D6" DeviceItem="DeviceData.Actuators.D6" DeviceItemType="IoElementType.Actuator" OnStateChange="DeviceStateChange"></DeviceItem>
+            }
+            @if (DeviceData.Actuators.D7 != null)
+            {
+                <DeviceItem Title="D7" DeviceItem="DeviceData.Actuators.D7" DeviceItemType="IoElementType.Actuator" OnStateChange="DeviceStateChange"></DeviceItem>
+            }
+            @if (DeviceData.Actuators.D8 != null)
+            {
+                <DeviceItem Title="D8" DeviceItem="DeviceData.Actuators.D8" DeviceItemType="IoElementType.Actuator" OnStateChange="DeviceStateChange"></DeviceItem>
+            }
+            @if (DeviceData.Actuators.A0 != null)
+            {
+                <DeviceItemAnalogSensor DeviceItem="DeviceData.Actuators.A0"></DeviceItemAnalogSensor>
+            }
+        }
+    </div>
+</div>   

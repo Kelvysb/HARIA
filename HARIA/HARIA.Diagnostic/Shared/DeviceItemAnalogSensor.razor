@@ -1,0 +1,7 @@
+﻿@inherits DeviceItemAnalogSensorBase
+
+<div class="row item-block">
+    <span class="col-2 item-title">A0</span>
+    <span class="col-7 item-description">@DeviceItem.Description</span>
+    <span class="col-3 item-state active-item">@(String.Format("{0:0.00}", DeviceItem.Value))</span>
+</div>

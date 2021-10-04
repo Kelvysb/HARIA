@@ -1,0 +1,80 @@
+.page {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+.main {
+    flex: 1;
+}
+
+.status-bar {
+    text-align: end;
+    margin: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.top-row-block {
+    width: fit-content;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    transition-property: transform,all;
+    transition-duration: .2s;
+    transition-timing-function: ease-in-out;
+    overflow: hidden;
+    background-color: var(--background-hover);
+}
+
+.top-row-block-hover {
+    background-color: var(--background);
+    height: 5.5rem !important;
+}
+
+.top-row-block-hover-logged {
+    background-color: var(--background);
+}
+
+.current-location {
+    width: fit-content;
+    height: 3.0rem;
+    padding: 0.5rem;
+}
+
+.logoBlock {
+}
+
+.logo {
+    margin: 3px;
+    height: 3.5rem;
+}
+
+.appName {
+    font-size: 15pt;
+    font-weight: bold;
+    margin-left: 0.5rem;
+}
+
+.content {
+    width: 100%;
+}
+
+.top-row {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    height: 4rem;
+    background-color: var(--background-hover);
+}
+
+.not-loged-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.not-loged {
+    height: 20rem;
+}

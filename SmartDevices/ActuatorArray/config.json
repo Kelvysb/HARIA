@@ -1,0 +1,24 @@
+{
+    "config": {
+        "device_id": "AA001",
+        "device_name": "actuator array 1",
+        "wifi_ssid": "<WIFI_SSID>",
+        "wifi_password": "<WIFI_PASSWORD>",
+        "mqtt_user": "<MQTT_USER>",
+        "mqtt_password": "<MQTT_PASSWORD>",
+        "mqtt_server": "<MQTT_SERVER>",
+        "mqtt_port": 1883
+    },
+    "descriptions": {
+        "a0": "Light",
+        "d0": "Hall",
+        "d1": "Kitchen",
+        "d2": "Dinner",
+        "d3": "Tv",
+        "d4": "Service",
+        "d5": "Balcony",
+        "d6": "Kitchen Night Light",
+        "d7": "Hall Night Light",
+        "d8": "Undefined"
+    }
+}
