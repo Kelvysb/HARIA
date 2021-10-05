@@ -1,7 +1,7 @@
 version: "3"
 services:
     hariadiagnostic:
-        image: kelvysb/hariadiagnostic:latest
+        build: ../HARIA/HARIA.Diagnostic
         hostname: HARIA_Diagnostic
         container_name: HARIA_Diagnostic
         restart: always
