@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HARIA.Diagnostic", "HARIA.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HARIA.Domain", "HARIA.Domain\HARIA.Domain.csproj", "{DCAB930C-F1A2-4E4C-B3F2-5327F9E68ACA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HARIA.Data", "HARIA.Data\HARIA.Data.csproj", "{95A5F60C-4752-430D-A5A7-56F607974962}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HARIA.Data", "HARIA.Data\HARIA.Data.csproj", "{95A5F60C-4752-430D-A5A7-56F607974962}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HARIA.Services", "HARIA.Services\HARIA.Services.csproj", "{12526ACD-21F6-4D9C-9AB6-0918EBCA436F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HARIA.Services", "HARIA.Services\HARIA.Services.csproj", "{12526ACD-21F6-4D9C-9AB6-0918EBCA436F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HARIA.Common", "HARIA.Common\HARIA.Common.csproj", "{21BACC53-F42D-4089-86CA-9C00F995BAFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{12526ACD-21F6-4D9C-9AB6-0918EBCA436F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12526ACD-21F6-4D9C-9AB6-0918EBCA436F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12526ACD-21F6-4D9C-9AB6-0918EBCA436F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21BACC53-F42D-4089-86CA-9C00F995BAFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21BACC53-F42D-4089-86CA-9C00F995BAFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21BACC53-F42D-4089-86CA-9C00F995BAFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21BACC53-F42D-4089-86CA-9C00F995BAFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

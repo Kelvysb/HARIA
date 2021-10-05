@@ -31,6 +31,9 @@ namespace HARIA.Diagnostic.I18nText
         /// <summary>"HARIA - Diagnostic"</summary>
         public string AppName;
 
+        /// <summary>"Clock"</summary>
+        public string Clock;
+
         /// <summary>"Configurations"</summary>
         public string Configurations;
 
