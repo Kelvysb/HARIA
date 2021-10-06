@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
+using HARIA.Common.Abstractions;
 using HARIA.Diagnostic.Abstractions;
-using HARIA.Domain.Abstractions;
 using HARIA.Domain.Models;
 using Microsoft.AspNetCore.Components;
 

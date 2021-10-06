@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace HARIA.Domain.Abstractions
+namespace HARIA.Common.Abstractions
 {
     public interface ILocalStorageHelper
     {

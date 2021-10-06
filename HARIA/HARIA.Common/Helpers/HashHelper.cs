@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using HARIA.Domain.Abstractions;
+using HARIA.Common.Abstractions;
 using Microsoft.JSInterop;
 
-namespace HARIA.Domain.Helpers
+namespace HARIA.Common.Helpers
 {
     public class HashHelper : IHashHelper
     {

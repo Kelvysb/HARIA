@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HARIA.Diagnostic.Services
+namespace HARIA.Domain.Events
 {
     public class StateChangeEventArgs : EventArgs
     {

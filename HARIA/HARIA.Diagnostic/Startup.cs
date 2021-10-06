@@ -1,3 +1,4 @@
+using HARIA.Common.DependencyInjection;
 using HARIA.Data.DependencyInjection;
 using HARIA.Diagnostic.Abstractions;
 using HARIA.Diagnostic.Services;
@@ -28,6 +29,7 @@ namespace HARIA.Diagnostic
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddHariaCommon();
             services.AddHariaServices();
             services.AddHariaDomain();
             services.AddHariaData();

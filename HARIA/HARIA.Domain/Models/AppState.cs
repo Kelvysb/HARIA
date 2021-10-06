@@ -1,7 +1,7 @@
 ﻿using System;
-using HARIA.Domain.Models;
+using HARIA.Domain.Events;
 
-namespace HARIA.Diagnostic.Services
+namespace HARIA.Domain.Models
 {
     public class AppState
     {
