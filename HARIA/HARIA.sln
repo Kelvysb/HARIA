@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31129.286
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31717.71
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HARIA.Diagnostic", "HARIA.Diagnostic\HARIA.Diagnostic.csproj", "{9C945003-32B5-44C6-874A-6BF6173B6A5F}"
 EndProject
@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HARIA.Data", "HARIA.Data\HA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HARIA.Services", "HARIA.Services\HARIA.Services.csproj", "{12526ACD-21F6-4D9C-9AB6-0918EBCA436F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HARIA.Common", "HARIA.Common\HARIA.Common.csproj", "{21BACC53-F42D-4089-86CA-9C00F995BAFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HARIA.Common", "HARIA.Common\HARIA.Common.csproj", "{21BACC53-F42D-4089-86CA-9C00F995BAFC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HARIA.Script", "HARIA.Script\HARIA.Script.csproj", "{6DE82DEF-9245-4AA6-886C-0621F57F3FD7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{21BACC53-F42D-4089-86CA-9C00F995BAFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21BACC53-F42D-4089-86CA-9C00F995BAFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21BACC53-F42D-4089-86CA-9C00F995BAFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DE82DEF-9245-4AA6-886C-0621F57F3FD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DE82DEF-9245-4AA6-886C-0621F57F3FD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DE82DEF-9245-4AA6-886C-0621F57F3FD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DE82DEF-9245-4AA6-886C-0621F57F3FD7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
