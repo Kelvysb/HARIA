@@ -1,0 +1,81 @@
+SET object.field : True;
+
+SET SCENARIO: name|id RETURN: AUTO|MANUAL;
+
+SET SCENARIO MODE: AUTO|MANUAL;
+
+GET object.field;
+
+GET SCENARIO;
+
+GET SCENARIO MODE;
+
+SCHEDULE "id" IN 10 SEC : SET object.value : False;
+
+EXEC : function;
+
+true IF condition ELSE False END;
+
+CASE WHEN condition : true WHEN condition : true WHEN condition : true ELSE false END;
+
+NOW
+NOW(DATE)
+NOW(DAY)
+
+Attribution:
+=
+
+Equality:
+==
+!=
+>
+<
+=>
+=<
+
+Logical operators:
+AND
+OR
+NOT
+XOR
+
+math operators:
++
+-
+*
+/
+%
+//
+^
+
+KEY WORDS:
+SET
+GET
+SCENARIO
+RETURN
+MODE
+AUTO
+MANUAL
+SCHEDULE
+IN
+SEC
+MIN 
+HOUR
+EXEC
+IF
+ELSE
+END
+CASE
+WHEN
+AND
+OR
+XOR
+NOT
+NOW
+DATE
+DAY
+:
+;
+
+
+
