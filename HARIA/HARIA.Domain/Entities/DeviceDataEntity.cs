@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HARIA.Domain.Attributes;
+using System;
 using System.Text.Json.Serialization;
 
 namespace HARIA.Domain.Entities
@@ -54,6 +55,7 @@ namespace HARIA.Domain.Entities
         public AnalogElementEntity A0 { get; set; }
     }
 
+    [Collection("Devices")]
     public class DeviceDataEntity : EntityBase
     {
         [JsonPropertyName("device_name")]

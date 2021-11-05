@@ -18,6 +18,10 @@ true IF condition ELSE False END;
 
 CASE WHEN condition : true WHEN condition : true WHEN condition : true ELSE false END;
 
+Multi statment agregator:
+
+{}
+
 NOW
 NOW(DATE)
 NOW(DAY)
