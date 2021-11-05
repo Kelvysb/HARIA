@@ -1,4 +1,5 @@
 from umqtt.simple import MQTTClient
+from log import Log
 import ubinascii
 import network
 import machine
@@ -13,6 +14,7 @@ import gc
 gc.enable()
 gc.threshold(0)
 gc.collect()
+
 
 f = open('config.json',)
 config_file = json.load(f)
@@ -30,7 +32,10 @@ mqtt_port = config['mqtt_port']
 mqtt_topic_state = 'devices/' + device_id + '/state'
 mqtt_topic_set = 'devices/' + device_id + '/set'
 mqtt_topic_deadletter = 'devices/' + device_id + '/deadletter'
+log_url = config['log_url']
 client_id = ubinascii.hexlify(machine.unique_id())
+
+logger = Log(log_url, device_id)
 
 station = network.WLAN(network.STA_IF)
 
@@ -40,8 +45,10 @@ station.connect(ssid, password)
 while station.isconnected() == False:
   pass
 
+logger.info('Initializing device', device_id)
 print('Connection successful')
 print(station.ifconfig())
+logger.info('Connection successful', station.ifconfig()[0])
 
 client = MQTTClient(client_id, mqtt_server, port=mqtt_port, user=mqtt_user, password=mqtt_password, keepalive=60)
 
@@ -82,4 +89,6 @@ d5.value(1)
 d6.value(1)
 d7.value(1)
 d8.value(1)
+
+logger.info('Device initialized', device_id)
 

@@ -22,13 +22,13 @@ def get_Values():
     global digital_8
     
     new_digital_0 = 'true' if d0.value() == 1 else 'false'
-    new_digital_1 = 'true' if d1.value() == 0 else 'false'
-    new_digital_2 = 'true' if d2.value() == 0 else 'false'
-    new_digital_3 = 'true' if d3.value() == 0 else 'false'
-    new_digital_4 = 'true' if d4.value() == 0 else 'false'
-    new_digital_5 = 'true' if d5.value() == 0 else 'false'
-    new_digital_6 = 'true' if d6.value() == 0 else 'false'
-    new_digital_7 = 'true' if d7.value() == 0 else 'false'
+    new_digital_1 = 'true' if d1.value() == 1 else 'false'
+    new_digital_2 = 'true' if d2.value() == 1 else 'false'
+    new_digital_3 = 'true' if d3.value() == 1 else 'false'
+    new_digital_4 = 'true' if d4.value() == 1 else 'false'
+    new_digital_5 = 'true' if d5.value() == 1 else 'false'
+    new_digital_6 = 'true' if d6.value() == 1 else 'false'
+    new_digital_7 = 'true' if d7.value() == 1 else 'false'
     new_digital_8 = 'true' if d8.value() == 1 else 'false'
     
     result = (digital_0 != new_digital_0 or
@@ -87,9 +87,11 @@ def connect():
     global client_id, mqtt_server, mqtt_topic_set
     client.connect()
     print('Connected to %s MQTT broker' % (mqtt_server))
+    logger.info('Connected to MQTT broker', 'Connected to %s MQTT broker' % (mqtt_server))
 
 def restart_and_reconnect():
     print('Failed to connect to MQTT broker. Reconnecting...')
+    logger.warning('Failed to connect to MQTT broker. Reconnecting...', device_id)
     time.sleep(10)
     machine.reset()
  
@@ -110,6 +112,7 @@ while True:
             last_ack = time.ticks_ms()
     except Exception as e:
         print('Error: '+ str(e))
+        logger.error('Error: during loop', str(e))
         restart_and_reconnect()
                 
     gc.collect()

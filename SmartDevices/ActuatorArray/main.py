@@ -114,15 +114,18 @@ def connect_and_subscribe():
     client.subscribe(mqtt_topic_set)
     client.publish(mqtt_topic_set, "", retain=True)
     print('Connected to %s MQTT broker, subscribed to %s topic' % (mqtt_server, mqtt_topic_set))
+    logger.info('Connected to MQTT broker', 'Connected to %s MQTT broker, subscribed to %s topic' % (mqtt_server, mqtt_topic_set))
 
 def restart_and_reconnect():
     print('Failed to connect to MQTT broker. Reconnecting...')
+    logger.warning('Failed to connect to MQTT broker. Reconnecting...', device_id)
     time.sleep(10)
     machine.reset()
 
 def publish_dead_letter(error, message):
     error_message = 'Error: ' + error + ' - Message: ' + message
     print('publish: '+ error_message +' to ' + mqtt_topic_deadletter)
+    logger.error('Message error', 'Error: ' + error + ' - Message: ' + message)
     client.publish(mqtt_topic_deadletter, error_message, retain=False)
     
 def publish(message):
@@ -151,6 +154,7 @@ while True:
             last_ack = time.ticks_ms()
     except Exception as e:        
         print('Error: '+ str(e))
+        logger.error('Error: during loop', str(e))
         restart_and_reconnect()
                 
     gc.collect()

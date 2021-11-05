@@ -1,7 +1,8 @@
 version: "3"
 services:
     hariadiagnostic:
-        build: ../HARIA/HARIA.Diagnostic
+        build: 
+          ../HARIA/HARIA.Diagnostic
         hostname: HARIA_Diagnostic
         container_name: HARIA_Diagnostic
         restart: always

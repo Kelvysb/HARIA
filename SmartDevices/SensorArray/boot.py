@@ -1,4 +1,5 @@
 from umqtt.simple import MQTTClient
+from log import Log
 import ubinascii
 import network
 import machine
@@ -28,7 +29,10 @@ mqtt_password = config['mqtt_password'].encode('utf-8')
 mqtt_server = config['mqtt_server'].encode('utf-8')
 mqtt_port = config['mqtt_port']
 mqtt_topic_state = 'devices/' + device_id + '/state'
+log_url = config['log_url']
 client_id = ubinascii.hexlify(machine.unique_id())
+
+logger = Log(log_url, device_id)
 
 station = network.WLAN(network.STA_IF)
 
@@ -38,8 +42,10 @@ station.connect(ssid, password)
 while station.isconnected() == False:
   pass
 
+logger.info('Initializing device', device_id)
 print('Connection successful')
 print(station.ifconfig())
+logger.info('Connection successful', station.ifconfig()[0])
 
 client = MQTTClient(client_id, mqtt_server, port=mqtt_port, user=mqtt_user, password=mqtt_password, keepalive=60)
 
@@ -62,12 +68,14 @@ print('current time: {:02d}-{:02d}-{:02d}T{:02d}:{:02d}:{:02d}:{:02d}'.format(t[
 adc = machine.ADC(0)
 
 d0 = machine.Pin(16, machine.Pin.IN, None)
-d1 = machine.Pin(5, machine.Pin.IN, machine.Pin.PULL_UP)
-d2 = machine.Pin(4, machine.Pin.IN, machine.Pin.PULL_UP)
-d3 = machine.Pin(0, machine.Pin.IN, machine.Pin.PULL_UP)
-d4 = machine.Pin(2, machine.Pin.IN, machine.Pin.PULL_UP)
-d5 = machine.Pin(14, machine.Pin.IN, machine.Pin.PULL_UP)
-d6 = machine.Pin(12, machine.Pin.IN, machine.Pin.PULL_UP)
-d7 = machine.Pin(13, machine.Pin.IN, machine.Pin.PULL_UP)
+d1 = machine.Pin(5, machine.Pin.IN, None)
+d2 = machine.Pin(4, machine.Pin.IN, None)
+d3 = machine.Pin(0, machine.Pin.IN, None)
+d4 = machine.Pin(2, machine.Pin.IN, None)
+d5 = machine.Pin(14, machine.Pin.IN, None)
+d6 = machine.Pin(12, machine.Pin.IN, None)
+d7 = machine.Pin(13, machine.Pin.IN, None)
 d8 = machine.Pin(15, machine.Pin.IN, None)
+
+logger.info('Device initialized', device_id)
 
