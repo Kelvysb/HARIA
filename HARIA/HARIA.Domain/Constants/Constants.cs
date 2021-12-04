@@ -15,4 +15,9 @@
 
         public static string KIOSK => "KIOSK";
     }
+
+    public static class Templates
+    {
+        public static string LOG_TEMPLATE => "{source};{message};{detail}";
+    }
 }

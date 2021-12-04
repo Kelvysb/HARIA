@@ -16,7 +16,7 @@ namespace HARIA.Services.DependencyInjection
                 {
                     DeviceId = config["MQTT_DEVICE_ID"],
                     Server = config["MQTT_SERVER"],
-                    Port = int.Parse(config["MQTT_PORT"]),
+                    Port = config["MQTT_PORT"] != null ? int.Parse(config["MQTT_PORT"]): 1883,
                     User = config["MQTT_USER"],
                     Password = config["MQTT_PASSWORD"],
                     TopicsPattern = config["MQTT_TOPICS_PATTERN"]

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace HARIA.Domain.Models
@@ -10,6 +11,18 @@ namespace HARIA.Domain.Models
 
         [JsonPropertyName("description")]
         public string Description { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return obj is DigitalElement element &&
+                   Value == element.Value &&
+                   Description == element.Description;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Value, Description);
+        }
     }
 
     public class AnalogElement
@@ -19,6 +32,18 @@ namespace HARIA.Domain.Models
 
         [JsonPropertyName("description")]
         public string Description { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return obj is AnalogElement element &&
+                   Value == element.Value &&
+                   Description == element.Description;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Value, Description);
+        }
     }
 
     public class IoGroup
@@ -52,6 +77,37 @@ namespace HARIA.Domain.Models
 
         [JsonPropertyName("a0")]
         public AnalogElement A0 { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return obj is IoGroup group &&
+                   EqualityComparer<DigitalElement>.Default.Equals(D0, group.D0) &&
+                   EqualityComparer<DigitalElement>.Default.Equals(D1, group.D1) &&
+                   EqualityComparer<DigitalElement>.Default.Equals(D2, group.D2) &&
+                   EqualityComparer<DigitalElement>.Default.Equals(D3, group.D3) &&
+                   EqualityComparer<DigitalElement>.Default.Equals(D4, group.D4) &&
+                   EqualityComparer<DigitalElement>.Default.Equals(D5, group.D5) &&
+                   EqualityComparer<DigitalElement>.Default.Equals(D6, group.D6) &&
+                   EqualityComparer<DigitalElement>.Default.Equals(D7, group.D7) &&
+                   EqualityComparer<DigitalElement>.Default.Equals(D8, group.D8) &&
+                   EqualityComparer<AnalogElement>.Default.Equals(A0, group.A0);
+        }
+
+        public override int GetHashCode()
+        {
+            HashCode hash = new HashCode();
+            hash.Add(D0);
+            hash.Add(D1);
+            hash.Add(D2);
+            hash.Add(D3);
+            hash.Add(D4);
+            hash.Add(D5);
+            hash.Add(D6);
+            hash.Add(D7);
+            hash.Add(D8);
+            hash.Add(A0);
+            return hash.ToHashCode();
+        }
     }
 
     public class DeviceData
@@ -70,5 +126,19 @@ namespace HARIA.Domain.Models
 
         [JsonPropertyName("datetime")]
         public DateTime Datetime { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return obj is DeviceData data &&
+                   DeviceId == data.DeviceId &&
+                   DeviceName == data.DeviceName &&
+                   EqualityComparer<IoGroup>.Default.Equals(Sensors, data.Sensors) &&
+                   EqualityComparer<IoGroup>.Default.Equals(Actuators, data.Actuators);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(DeviceId, DeviceName, Sensors, Actuators);
+        }
     }
 }

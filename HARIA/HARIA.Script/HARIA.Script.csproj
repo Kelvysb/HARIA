@@ -10,4 +10,8 @@
     <ProjectReference Include="..\HARIA.Domain\HARIA.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
+  </ItemGroup>
+
 </Project>

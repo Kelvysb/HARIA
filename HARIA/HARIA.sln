@@ -17,7 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HARIA.Script", "HARIA.Scrip
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2C2CE1FB-ACC3-480D-B2C4-BF47E9DC73E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HARIA.Script.Tests", "HARIA.Script.Tests\HARIA.Script.Tests.csproj", "{C62B7A21-0E24-473E-A4F6-962F9A1C0662}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HARIA.Script.Tests", "HARIA.Script.Tests\HARIA.Script.Tests.csproj", "{C62B7A21-0E24-473E-A4F6-962F9A1C0662}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HARIA.Integration", "HARIA.Integration\HARIA.Integration.csproj", "{52D951D9-81B9-478E-BAAF-96D221FDF95A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HARIA.StateKeeper", "HARIA.StateKeeper\HARIA.StateKeeper.csproj", "{0EFDABCA-C76F-4581-9A41-47C8AF80CA72}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +57,14 @@ Global
 		{C62B7A21-0E24-473E-A4F6-962F9A1C0662}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C62B7A21-0E24-473E-A4F6-962F9A1C0662}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C62B7A21-0E24-473E-A4F6-962F9A1C0662}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52D951D9-81B9-478E-BAAF-96D221FDF95A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52D951D9-81B9-478E-BAAF-96D221FDF95A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52D951D9-81B9-478E-BAAF-96D221FDF95A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52D951D9-81B9-478E-BAAF-96D221FDF95A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EFDABCA-C76F-4581-9A41-47C8AF80CA72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EFDABCA-C76F-4581-9A41-47C8AF80CA72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EFDABCA-C76F-4581-9A41-47C8AF80CA72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EFDABCA-C76F-4581-9A41-47C8AF80CA72}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

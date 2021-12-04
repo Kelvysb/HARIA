@@ -3,6 +3,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using HARIA.Domain.Abstractions.Services;
+using HARIA.Domain.Constants;
 using HARIA.Domain.Models;
 using MQTTnet;
 using MQTTnet.Client.Connecting;
@@ -12,6 +13,7 @@ using MQTTnet.Client.Receiving;
 using MQTTnet.Extensions.ManagedClient;
 using MQTTnet.Formatter;
 using MQTTnet.Protocol;
+using Serilog;
 
 namespace HARIA.Services
 {
@@ -88,29 +90,31 @@ namespace HARIA.Services
             }
         }
 
-        private static void OnSubscriberConnected(MqttClientConnectedEventArgs args)
+        private void OnSubscriberConnected(MqttClientConnectedEventArgs args)
         {
-            Console.WriteLine("MQTT subscriber connected");
+            Log.Logger.Debug(Templates.LOG_TEMPLATE, mqttConfig.DeviceId, "MQTT subscriber connected", "");
         }
 
-        private static void OnSubscriberDisconnected(MqttClientDisconnectedEventArgs args)
+        private void OnSubscriberDisconnected(MqttClientDisconnectedEventArgs args)
         {
-            Console.WriteLine("MQTT subscriber disconnected");
+            if (args.Exception != null)
+                Log.Logger.Error(args.Exception, Templates.LOG_TEMPLATE, mqttConfig.DeviceId, "MQTT subscriber disconnected", args.Exception.ToString());
         }
 
-        private static void OnPublisherConnected(MqttClientConnectedEventArgs x)
+        private void OnPublisherConnected(MqttClientConnectedEventArgs args)
         {
-            Console.WriteLine("MQTT publisher connected");
+            Log.Logger.Debug(Templates.LOG_TEMPLATE, mqttConfig.DeviceId, "MQTT publisher connected", "");
         }
 
-        private static void OnPublisherDisconnected(MqttClientDisconnectedEventArgs x)
-        {
-            Console.WriteLine("MQTT publisher disconnected");
+        private void OnPublisherDisconnected(MqttClientDisconnectedEventArgs args)
+        {                        
+            if (args.Exception != null)
+                Log.Logger.Error(args.Exception, Templates.LOG_TEMPLATE, mqttConfig.DeviceId, "MQTT publisher disconnected", args.Exception.ToString());
         }
 
         private void OnSubscriberMessageReceived(MqttApplicationMessageReceivedEventArgs args)
         {
-            Console.WriteLine($"MQTT message received {DateTime.Now}");
+            Log.Logger.Debug(Templates.LOG_TEMPLATE, mqttConfig.DeviceId, $"MQTT message received {DateTime.Now}", "");
             if (args.ApplicationMessage != null && args.ApplicationMessage.Payload != null)
             {
                 var message = Encoding.UTF8.GetString(args.ApplicationMessage.Payload);

@@ -48,7 +48,7 @@ namespace HARIA.Script.Tests
         [TestMethod]
         public void SimpleSet()
         {
-            string command = "SET Actuator.Hall: True";
+            string command = "SET Actuator.Hall: True;";
 
             var result = interpreter.Execute(command).Result;
 
@@ -87,7 +87,7 @@ namespace HARIA.Script.Tests
         public void MultipleStatement()
         {
             string command = @"VAR test = GET: Sensor.Hall;
-                               SET Actuator.Hall: test";
+                               SET Actuator.Hall: test;";
 
             var result = interpreter.Execute(command).Result;
 

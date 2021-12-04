@@ -15,7 +15,7 @@ namespace HARIA.Data.DependencyInjection
                 return new MongoDbConfig
                 {
                     ConnectionString = config["MONGODB_CONNECTION_STRING"],
-                    DatabaseName = config["MONGODB_DATABASE_NAME"]
+                    DatabaseName = config["MONGODB_DATABASE_NAME"] ?? "HARIA"
                 };
             });
 
