@@ -1,0 +1,2 @@
+ArduinoJson.h - https://arduinojson.org/?utm_source=meta&utm_medium=library.properties
+fauxmoESP.h" - https://github.com/vintlabs/fauxmoESP
